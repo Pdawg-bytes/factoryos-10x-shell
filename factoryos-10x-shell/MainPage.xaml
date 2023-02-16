@@ -1,0 +1,16 @@
+﻿<Page
+    x:Class="factoryos_10x_shell.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:factoryos_10x_shell"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    >
+
+    <Grid>
+        <Image x:Name="BackgroundWallpaper" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="ms-appx:///Assets/wallpaper_default.jpg" Stretch="Fill" Grid.Row="0"/>
+        <Frame x:Name="TaskbarFrame" MaxHeight="50" VerticalAlignment="Bottom"/>
+    </Grid>
+</Page>
