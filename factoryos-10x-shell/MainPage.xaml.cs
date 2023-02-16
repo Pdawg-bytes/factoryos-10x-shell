@@ -32,6 +32,9 @@ namespace factoryos_10x_shell
             ApplicationViewTitleBar titleBar =
             ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
+
+            // Init frame
+            TaskbarFrame.Navigate(typeof(Default10xBar));
         }
     }
 }
