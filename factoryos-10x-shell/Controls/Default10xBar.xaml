@@ -26,17 +26,42 @@
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal" Width="270" Height="48">
                                     <TextBlock Text="&#xE15D;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    <Slider x:Name="VolumeSlider" Width="195" VerticalAlignment="Center" Margin="10,0,0,0" CornerRadius="1"/>
+                                    <Slider x:Name="VolumeSlider" Width="195" VerticalAlignment="Center" Margin="10,0,0,0" CornerRadius="2"/>
                                     <Button x:Name="SoundSettings" Width="24" Height="24" CornerRadius="4" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,0,0" Padding="0" Style="{StaticResource TaskbarButtonStyle}">
                                         <Button.Content>
-                                         <TextBlock Text="&#xE00F;" FontFamily="Segoe MDL2 Assets" FontSize="12"/>
-                                     </Button.Content>
+                                            <TextBlock Text="&#xE00F;" FontFamily="Segoe MDL2 Assets" FontSize="12"/>
+                                        </Button.Content>
                                     </Button>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="&#xE706;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    <Slider x:Name="BrightnessSlider" Width="195" VerticalAlignment="Center" Margin="10,0,0,0" CornerRadius="1"/>
+                                    <Slider x:Name="BrightnessSlider" Width="195" VerticalAlignment="Center" Margin="10,0,0,0" CornerRadius="2"/>
                                 </StackPanel>
+                            </StackPanel>
+                            <StackPanel Width="270" Orientation="Vertical" Height="80">
+                                <StackPanel x:Name="FirstRowControls" Width="270" Orientation="Horizontal" Height="40" Margin="0,20,0,0">
+                                    <SplitButton x:Name="BluetoothButton" Width="76" Margin="12,0,0,0" Height="35" HorizontalAlignment="Left" Style="{StaticResource ActionCenterToggleStyle}"/>
+                                     <SplitButton x:Name="DisplayButton" Width="76" Margin="10,0,0,0" Height="35" HorizontalAlignment="Center" Style="{StaticResource ActionCenterToggleStyle}"/>
+                                    <SplitButton x:Name="ComposeButton" Width="76" Margin="10,0,0,0" Height="35" HorizontalAlignment="Right" Style="{StaticResource ActionCenterToggleStyle}"/>
+                                </StackPanel>
+                                <StackPanel x:Name="SecondRowControls" Width="270" Orientation="Horizontal" Height="40" Margin="0,20,0,0">
+                                    <SplitButton x:Name="RotationButton" Width="76" Margin="12,0,0,0" Height="35" HorizontalAlignment="Left" Style="{StaticResource ActionCenterToggleStyle}"/>
+                                    <SplitButton x:Name="DndButton" Width="76" Margin="10,0,0,0" Height="35" HorizontalAlignment="Center" Style="{StaticResource ActionCenterToggleStyle}"/>
+                                    <SplitButton x:Name="AirplaneButton" Width="76" Margin="10,0,0,0" Height="35" HorizontalAlignment="Right" Style="{StaticResource ActionCenterToggleStyle}"/>
+                                </StackPanel>
+                                <StackPanel x:Name="ThirdRowControls" Width="270" Orientation="Horizontal" Height="40" Margin="0,20,0,0">
+                                    <SplitButton x:Name="LocationButton" Width="76" Margin="12,0,0,0" Height="35" HorizontalAlignment="Left" Style="{StaticResource ActionCenterToggleStyle}"/>
+                                    <SplitButton x:Name="EOAButton" Width="76" Margin="10,0,0,0" Height="35" HorizontalAlignment="Center" Style="{StaticResource ActionCenterToggleStyle}"/>
+                                    <SplitButton x:Name="KbdLayoutButton" Width="76" Margin="10,0,0,0" Height="35" HorizontalAlignment="Right" Style="{StaticResource ActionCenterToggleStyle}"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Border Background="#434343" Height="1" Width="320" Margin="-60,0,-60,0" Opacity="0.5"/>
+                            <StackPanel Orientation="Horizontal" x:Name="BottomControlsCenter" Width="270" Height="38" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+                                <Ellipse Width="25" Height="25" HorizontalAlignment="Right">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="ms-appx:///Assets/test.jpg"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
@@ -44,7 +69,7 @@
             </Button.Flyout>
             <Button.Content>
                 <Grid Padding="0" Height="50" Width="75">
-                    <TextBlock Text="12:00" HorizontalAlignment="Right" Foreground="Gray" FontWeight="Medium" Margin="5,5,10,5" x:Name="ClockText" VerticalAlignment="Top"/>
+                    <TextBlock Text="00:00" HorizontalAlignment="Right" Foreground="Gray" FontWeight="Medium" Margin="5,5,10,5" x:Name="ClockText" VerticalAlignment="Top"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Text="&#xEBAA;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="BattStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,6"/>
                         <TextBlock Text="&#xE701;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="WifiStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,8"/>

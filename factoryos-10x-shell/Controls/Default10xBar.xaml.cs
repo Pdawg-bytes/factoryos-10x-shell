@@ -44,8 +44,8 @@ namespace factoryos_10x_shell.Controls
             internetUpdate.Interval = new TimeSpan(10000000);
             internetUpdate.Start();
         }
-        private string[] wifiIcons = {"\uE871", "\uE872", "\uE873", "\uE874", "\uE701"};
-        private string[] dataIcons = {"\uEC37", "\uEC38", "\uEC39", "\uEC3A", "\uEC3B"};
+        private string[] wifiIcons = { "\uE871", "\uE872", "\uE873", "\uE874", "\uE701" };
+        private string[] dataIcons = { "\uEC37", "\uEC38", "\uEC39", "\uEC3A", "\uEC3B" };
         private void ITUpdateMethod(object sender, object e)
         {
             if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
