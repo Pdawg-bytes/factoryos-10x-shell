@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Toolkit.Uwp.Connectivity;
+using Windows.Devices.Power;
+using Windows.System;
+using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -8,12 +11,15 @@ namespace factoryos_10x_shell.Controls
 {
     public sealed partial class Default10xBar : Page
     {
+        bool reportRequested = false;
         public Default10xBar()
         {
             this.InitializeComponent();
 
             // Init
             TimeAndDate();
+            InternetUpdate();
+            DetectBatteryPresence();
         }
 
         #region Clock
@@ -38,6 +44,8 @@ namespace factoryos_10x_shell.Controls
             internetUpdate.Interval = new TimeSpan(10000000);
             internetUpdate.Start();
         }
+        private string[] wifiIcons = {"\uE871", "\uE872", "\uE873", "\uE874", "\uE701"};
+        private string[] dataIcons = {"\uEC37", "\uEC38", "\uEC39", "\uEC3A", "\uEC3B"};
         private void ITUpdateMethod(object sender, object e)
         {
             if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
@@ -49,47 +57,11 @@ namespace factoryos_10x_shell.Controls
                         break;
                     case ConnectionType.WiFi:
                         int WifiSignalBars = NetworkHelper.Instance.ConnectionInformation.SignalStrength.GetValueOrDefault(0);
-                        switch (WifiSignalBars)
-                        {
-                            case 0:
-                            default:
-                                WifiStatus.Text = "\uE871";
-                                break;
-                            case 1:
-                                WifiStatus.Text = "\uE872";
-                                break;
-                            case 2:
-                                WifiStatus.Text = "\uE873";
-                                break;
-                            case 3:
-                                WifiStatus.Text = "\uE874";
-                                break;
-                            case 4:
-                                WifiStatus.Text = "\uE701";
-                                break;
-                        }
+                        WifiStatus.Text = wifiIcons[WifiSignalBars];
                         break;
                     case ConnectionType.Data:
                         int DataSignalBars = NetworkHelper.Instance.ConnectionInformation.SignalStrength.GetValueOrDefault(0);
-                        switch (DataSignalBars)
-                        {
-                            case 1:
-                            default:
-                                WifiStatus.Text = "\uEC37";
-                                break;
-                            case 2:
-                                WifiStatus.Text = "\uEC38";
-                                break;
-                            case 3:
-                                WifiStatus.Text = "\uEC39";
-                                break;
-                            case 4:
-                                WifiStatus.Text = "\uEC3A";
-                                break;
-                            case 5:
-                                WifiStatus.Text = "\uEC3B";
-                                break;
-                        }
+                        WifiStatus.Text = dataIcons[DataSignalBars];
                         break;
                     case ConnectionType.Unknown:
                     default:
@@ -99,7 +71,60 @@ namespace factoryos_10x_shell.Controls
             }
             else
             {
-                WifiStatus.Text = "\uF140";
+                WifiStatus.Text = "\uEB55";
+            }
+        }
+        #endregion
+
+        #region Battery
+        private void DetectBatteryPresence()
+        {
+            var aggDetectBattery = Battery.AggregateBattery;
+            var report = aggDetectBattery.GetReport();
+            string ReportResult = report.Status.ToString();
+            if (ReportResult == "NotPresent")
+            {
+                BattStatus.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                BattStatus.Visibility = Visibility.Visible;
+                reportRequested = true;
+                AggregateBattery();
+            }
+        }
+
+        string[] batteryIconsCharge = { "\uEBAE", "\uEBAC", "\uEBAD", "\uEBAE", "\uEBAF", "\uEBB0", "\uEBB1", "\uEBB2", "\uEBB3", "\uEBB4", "\uEBB5" };
+        string[] batteryIcons = { "\uEBA0", "\uEBA1", "\uEBA2", "\uEBA3", "\uEBA4", "\uEBA5", "\uEBA6", "\uEBA7", "\uEBA8", "\uEBA9", "\uEBAA" };
+        private void AggregateBattery()
+        {
+            var aggBattery = Battery.AggregateBattery;
+            var report = aggBattery.GetReport();
+            string charging = report.Status.ToString();
+            double fullCharge = Convert.ToDouble(report.FullChargeCapacityInMilliwattHours);
+            double currentCharge = Convert.ToDouble(report.RemainingCapacityInMilliwattHours);
+            double battLevel = Math.Ceiling((currentCharge / fullCharge) * 100);
+            if (charging == "Charging" || charging == "Idle")
+            {
+                int indexCharge = (int)Math.Floor(battLevel / 10);
+                BattStatus.Text = batteryIconsCharge[indexCharge];
+            }
+            else
+            {
+                int indexDischarge = (int)Math.Floor(battLevel / 10);
+                BattStatus.Text = batteryIcons[indexDischarge];
+            }
+        }
+
+        private void AggregateBattery_ReportUpdated(Battery sender, object args)
+        {
+            if (reportRequested)
+            {
+                var dispatcherQueue = CoreApplication.MainView.DispatcherQueue;
+                dispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, () =>
+                {
+                    AggregateBattery();
+                });
             }
         }
         #endregion

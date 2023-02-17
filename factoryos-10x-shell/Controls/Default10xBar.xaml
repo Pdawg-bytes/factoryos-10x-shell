@@ -9,11 +9,46 @@
     MaxHeight="50">
 
     <Grid x:Name="TaskbarGrid" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" Height="50" VerticalAlignment="Bottom">
-        <Button HorizontalAlignment="Right" Height="50" Padding="0" Width="75" Background="Transparent">
+        <Button HorizontalAlignment="Right" Height="50" Padding="0" Width="75" Style="{StaticResource TaskbarButtonStyle}" ToolTipService.ToolTip="Action Center">
+            <Button.Flyout>
+                <Flyout FlyoutPresenterStyle="{StaticResource ActionCenterFlyout}" Placement="BottomEdgeAlignedLeft">
+                    <Grid>
+                        <StackPanel Width="270">
+                            <StackPanel Orientation="Horizontal" Width="270" Height="36" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+                                <TextBlock Text="Quick Settings" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,150,0" FontSize="12"/>
+                                <Button x:Name="ExpnanderButton" CornerRadius="25" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" Padding="0" Margin="0,0,0,0">
+                                    <Button.Content>
+                                        <TextBlock Text="&#xE09C;" FontFamily="Segoe MDL2 Assets" FontSize="12"/>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                            <Border Background="#434343" Height="1" Width="320" Margin="-60,0,-60,0" Opacity="0.5"/>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Width="270" Height="48">
+                                    <TextBlock Text="&#xE15D;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    <Slider x:Name="VolumeSlider" Width="195" VerticalAlignment="Center" Margin="10,0,0,0" CornerRadius="1"/>
+                                    <Button x:Name="SoundSettings" Width="24" Height="24" CornerRadius="4" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,0,0" Padding="0" Style="{StaticResource TaskbarButtonStyle}">
+                                        <Button.Content>
+                                         <TextBlock Text="&#xE00F;" FontFamily="Segoe MDL2 Assets" FontSize="12"/>
+                                     </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="&#xE706;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    <Slider x:Name="BrightnessSlider" Width="195" VerticalAlignment="Center" Margin="10,0,0,0" CornerRadius="1"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Flyout>
+            </Button.Flyout>
             <Button.Content>
                 <Grid Padding="0" Height="50" Width="75">
-                    <TextBlock Text="12:00" HorizontalAlignment="Right" Foreground="Gray" FontWeight="Medium" Margin="5,4,10,5" x:Name="ClockText" VerticalAlignment="Top"/>
-                    <TextBlock Text="&#xE701;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="WifiStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10"/>
+                    <TextBlock Text="12:00" HorizontalAlignment="Right" Foreground="Gray" FontWeight="Medium" Margin="5,5,10,5" x:Name="ClockText" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="&#xEBAA;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="BattStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,6"/>
+                        <TextBlock Text="&#xE701;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="WifiStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,8"/>
+                    </StackPanel>
                 </Grid>
             </Button.Content>
         </Button>
