@@ -10,7 +10,7 @@
     >
 
     <Grid>
-        <Image x:Name="BackgroundWallpaper" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="ms-appx:///Assets/test.jpg" Stretch="Fill" Grid.Row="0"/>
+        <Image x:Name="BackgroundWallpaper" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="ms-appx:///Assets/wallpaper_default.jpg" Stretch="Fill" Grid.Row="0"/>
         <Frame x:Name="TaskbarFrame" MaxHeight="50" VerticalAlignment="Bottom"/>
     </Grid>
 </Page>

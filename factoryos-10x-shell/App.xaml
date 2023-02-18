@@ -6,13 +6,34 @@
 
     <Application.Resources>
         <ResourceDictionary>
+            <!--Resources-->
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="SplitButton" x:Key="ActionCenterToggleStyle">
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark">
+                    <AcrylicBrush x:Key="ElementAcrylicBrush"
+                          TintColor="Black"
+                          BackgroundSource="Backdrop"
+                          TintOpacity="0.2"
+                          FallbackColor="DimGray"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <AcrylicBrush x:Key="ElementAcrylicBrush"
+                          TintColor="White"
+                          BackgroundSource="Backdrop"
+                          TintOpacity="0.2"
+                          FallbackColor="DimGray"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            
+            <!--Control Center togglebutton style-->
+            <Style TargetType="ToggleButton" x:Key="ActionCenterToggleStyle">
                 <Setter Property="CornerRadius" Value="4"/>
                 <Setter Property="BorderThickness" Value="0"/>
             </Style>
+
+            <!--Taskbar button style-->
             <Style TargetType="Button" x:Key="TaskbarButtonStyle">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="BorderThickness" Value="0"/>
@@ -41,6 +62,8 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <!--Quick settings flyout style-->
             <Style TargetType="FlyoutPresenter" x:Key="ActionCenterFlyout">
                 <Setter Property="Background" Value="{ThemeResource SystemControlAcrylicElementMediumHighBrush}"/>
                 <Setter Property="CornerRadius" Value="4"/>

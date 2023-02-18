@@ -20,6 +20,7 @@ namespace factoryos_10x_shell.Controls
             TimeAndDate();
             InternetUpdate();
             DetectBatteryPresence();
+            Battery.AggregateBattery.ReportUpdated += AggregateBattery_ReportUpdated;
         }
 
         #region Clock
@@ -104,6 +105,7 @@ namespace factoryos_10x_shell.Controls
             double fullCharge = Convert.ToDouble(report.FullChargeCapacityInMilliwattHours);
             double currentCharge = Convert.ToDouble(report.RemainingCapacityInMilliwattHours);
             double battLevel = Math.Ceiling((currentCharge / fullCharge) * 100);
+            BatteryPercent.Text = Math.Floor(battLevel).ToString() + "%";
             if (charging == "Charging" || charging == "Idle")
             {
                 int indexCharge = (int)Math.Floor(battLevel / 10);
@@ -128,5 +130,12 @@ namespace factoryos_10x_shell.Controls
             }
         }
         #endregion
+
+        private async void PowerButton_Click(object sender, RoutedEventArgs e)
+        {
+            ActionCenterButton.Flyout.Hide();
+            ContentDialog powerDialog = new ShutdownDialog();
+            await powerDialog.ShowAsync();
+        }
     }
 }
