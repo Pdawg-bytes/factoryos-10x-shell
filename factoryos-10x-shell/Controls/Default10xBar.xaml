@@ -9,7 +9,7 @@
     MaxHeight="50">
 
     <Grid x:Name="TaskbarGrid" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" Height="50" VerticalAlignment="Bottom">
-        <Button HorizontalAlignment="Right" Height="50" Padding="0" Width="75" Style="{StaticResource TaskbarButtonStyle}" ToolTipService.ToolTip="Action Center">
+        <Button HorizontalAlignment="Right" Height="50" Padding="0" Width="75" Style="{StaticResource TaskbarButtonStyle}" ToolTipService.ToolTip="Action Center" x:Name="ActionCenterButton">
             <Button.Flyout>
                 <Flyout FlyoutPresenterStyle="{StaticResource ActionCenterFlyout}" Placement="BottomEdgeAlignedLeft">
                     <Grid>
@@ -59,7 +59,7 @@
                             <StackPanel Orientation="Horizontal" x:Name="BottomControlsCenter" Width="270" Height="38" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
                                 <Ellipse Width="25" Height="25" HorizontalAlignment="Right">
                                     <Ellipse.Fill>
-                                        <ImageBrush ImageSource="ms-appx:///Assets/test.jpg"/>
+                                        <ImageBrush ImageSource="ms-appx:///Assets/test.jpg" Stretch="UniformToFill"/>
                                     </Ellipse.Fill>
                                 </Ellipse>
                             </StackPanel>
