@@ -8,6 +8,12 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using factoryos_10x_shell.Controls.ActionCenterControls;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.Foundation.Metadata;
+using Windows.UI.Core;
+using Windows.UI.Notifications.Management;
+using Windows.UI.Notifications;
+using System.Collections;
 
 namespace factoryos_10x_shell.Controls
 {
@@ -25,6 +31,7 @@ namespace factoryos_10x_shell.Controls
             TimeAndDate();
             InternetUpdate();
             DetectBatteryPresence();
+            InitNotifcation();
             Battery.AggregateBattery.ReportUpdated += AggregateBattery_ReportUpdated;
         }
 
@@ -138,15 +145,72 @@ namespace factoryos_10x_shell.Controls
         }
         #endregion
 
+        #region Notifications
+        UserNotificationListener notifListener = UserNotificationListener.Current;
+        private void InitNotifcation()
+        {
+            notifListener.NotificationChanged += Listener_NotificationChanged;
+        }
+        private async void Listener_NotificationChanged(UserNotificationListener sender, UserNotificationChangedEventArgs args)
+        {
+            if (ApiInformation.IsTypePresent("Windows.UI.Notifications.Management.UserNotificationListener"))
+            {
+                UserNotificationListenerAccessStatus accessStatus = await notifListener.RequestAccessAsync();
+                ErrorDialog dialogT = new ErrorDialog("Notifcation access was denied. Please enable it in settings.");
+                await dialogT.ShowAsync();
+                switch (accessStatus)
+                {
+                    case UserNotificationListenerAccessStatus.Allowed:
+                        IReadOnlyList<UserNotification> notifsToast = await notifListener.GetNotificationsAsync(NotificationKinds.Toast);
+                        IReadOnlyList<UserNotification> notifsOther = await notifListener.GetNotificationsAsync(NotificationKinds.Unknown);
+                        if (notifsToast.Count > 0 || notifsOther.Count > 0)
+                        {
+                            /*.TryEnqueue((DispatcherQueuePriority)CoreDispatcherPriority.Normal, () =>
+                            {
+                                NotifStatus.Visibility = Visibility.Visible;
+                            });*/
+                        }
+                        else
+                        {
+                            /*.TryEnqueue((DispatcherQueuePriority)CoreDispatcherPriority.Normal, () =>
+                            {
+                                NotifStatus.Visibility = Visibility.Collapsed;
+                            });*/
+                        }
+                        break;
+                    case UserNotificationListenerAccessStatus.Denied:
+                        NotifStatus.Visibility = Visibility.Collapsed;
+                        ErrorDialog dialogD = new ErrorDialog("Notifcation access was denied. Please enable it in settings.");
+                        await dialogD.ShowAsync();
+                        break;
+                    case UserNotificationListenerAccessStatus.Unspecified:
+                        ErrorDialog dialogU = new ErrorDialog("Notifcation access was denied. Please enable it in settings.");
+                        await dialogU.ShowAsync();
+                        break;
+                }
+            }
+        }
+        #endregion
+
         #region Bar events
         private void ActionCenterButton_Click(object sender, RoutedEventArgs e)
         {
             ActionCenterFrame.Navigate(typeof(ActionCenterHome));
         }
 
+        private BitmapImage startColor = new BitmapImage(new Uri("ms-appx:///Assets/buttonIcons/startColor.png"));
+        private BitmapImage startNormal = new BitmapImage(new Uri("ms-appx:///Assets/buttonIcons/startNormal.png"));
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            startLaunched = !startLaunched;
+            if(startLaunched)
+            {
+                // open stuff and add shimmer
+            }
+            else
+            {
+                // dont do that
+            }
         }
         #endregion
     }
