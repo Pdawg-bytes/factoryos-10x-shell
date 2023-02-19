@@ -21,7 +21,14 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
         public ActionCenterHome()
         {
             this.InitializeComponent();
-            BatteryPercent.Text = Default10xBar.batteryActionCenter;
+            if(Default10xBar.batteryActionCenterEnabled == true)
+            {
+                BatteryPercent.Text = Default10xBar.batteryActionCenter;
+            }
+            else
+            {
+                BatteryPercent.Text = "";
+            }
         }
 
         #region Border events
@@ -47,7 +54,14 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
         #region Control events
         private void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            // TODO: Implement this
+            if(VolumeSlider.Value == 0)
+            {
+                SndStatus.Text = "\uE198";
+            }
+            else
+            {
+                SndStatus.Text = "\uE15D";
+            }
         }
 
         #endregion

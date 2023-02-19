@@ -9,6 +9,11 @@
     MaxHeight="50">
 
     <Grid x:Name="TaskbarGrid" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" Height="50" VerticalAlignment="Bottom">
+        <Button HorizontalAlignment="Center" Height="50" Padding="13" Width="50" ToolTipService.ToolTip="Start" x:Name="StartButton" CornerRadius="0" Background="Transparent" Click="StartButton_Click">
+                <Button.Content>
+                    <Image Source="ms-appx:///Assets/buttonIcons/startNormal.png"/>
+                </Button.Content>
+            </Button>
         <Button HorizontalAlignment="Right" Height="50" Padding="0" Width="75" Style="{StaticResource TaskbarButtonStyle}" ToolTipService.ToolTip="Action Center" x:Name="ActionCenterButton" Click="ActionCenterButton_Click">
             <Button.Flyout>
                 <Flyout FlyoutPresenterStyle="{StaticResource ActionCenterFlyout}" Placement="BottomEdgeAlignedLeft">

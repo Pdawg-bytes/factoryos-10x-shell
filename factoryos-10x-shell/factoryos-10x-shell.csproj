@@ -139,6 +139,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\buttonIcons\startColor.png" />
+    <Content Include="Assets\buttonIcons\startNormal.png" />
     <Content Include="Assets\test.jpg" />
     <Content Include="Assets\wallpaper_default.jpg" />
     <Content Include="Properties\Default.rd.xml" />

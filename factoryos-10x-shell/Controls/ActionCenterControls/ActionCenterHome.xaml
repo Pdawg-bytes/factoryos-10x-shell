@@ -21,7 +21,7 @@
             <Border Background="#434343" Height="1" Width="320" Margin="-60,0,-60,0" Opacity="0.5"/>
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Width="320" Height="48">
-                    <TextBlock Text="&#xE15D;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="14,0,0,0"/>
+                    <TextBlock Text="&#xE15D;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="14,0,0,0" x:Name="SndStatus"/>
                     <Slider x:Name="VolumeSlider" Width="240" VerticalAlignment="Center" Margin="10,0,0,0" CornerRadius="2" ValueChanged="VolumeSlider_ValueChanged"/>
                     <Button x:Name="SoundSettings" Width="24" Height="24" CornerRadius="4" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,0,0" Padding="0" Style="{StaticResource TaskbarButtonStyle}">
                         <Button.Content>
@@ -33,10 +33,10 @@
             <StackPanel Width="320" Orientation="Vertical" Height="80" x:Name="ControlPanel">
                 <StackPanel x:Name="FirstRowControls" Width="320" Orientation="Horizontal" Height="70" Margin="0,10,0,0">
                     <StackPanel Orientation="Vertical">
-                        <ToggleButton x:Name="BluetoothButton" Width="90" Margin="15,0,0,0" Height="36" HorizontalAlignment="Left" Style="{StaticResource ActionCenterToggleStyle}">
+                        <ToggleButton x:Name="InternetButton" Width="90" Margin="15,0,0,0" Height="36" HorizontalAlignment="Left" Style="{StaticResource ActionCenterToggleStyle}">
                             <ToggleButton.Content>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="&#xE702;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" FontSize="16"/>
+                                    <TextBlock Text="&#xE701;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" FontSize="16"/>
                                 </StackPanel>
                             </ToggleButton.Content>
                         </ToggleButton>
@@ -138,22 +138,22 @@
                     <TextBlock Text="0%" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" x:Name="BatteryPercent" Margin="12,0,0,0" Grid.Column="0"/>
                     <Grid HorizontalAlignment="Right" Grid.Column="1">
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="OSKButton" Height="28" Width="28" Margin="100,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent">
+                            <Button x:Name="OSKButton" Height="28" Width="28" Margin="100,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent" ToolTipService.ToolTip="Touch keyboard">
                                 <Button.Content>
                                     <TextBlock Text="&#xE144;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
                                 </Button.Content>
                             </Button>
-                            <Button x:Name="SettingsButton" Height="28" Width="28" Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent">
+                            <Button x:Name="SettingsButton" Height="28" Width="28" Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent" ToolTipService.ToolTip="All settings">
                                 <Button.Content>
                                     <TextBlock Text="&#xE115;" FontFamily="Segoe MDL2 Assets" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Button.Content>
                             </Button>
-                            <Button x:Name="PowerButton" Height="28" Width="28" Margin="5,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent" Click="PowerButton_Click">
+                            <Button x:Name="PowerButton" Height="28" Width="28" Margin="5,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent" Click="PowerButton_Click" ToolTipService.ToolTip="Power">
                                 <Button.Content>
                                     <TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
                                 </Button.Content>
                             </Button>
-                            <Ellipse Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Ellipse Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTipService.ToolTip="Lock your screen">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="ms-appx:///Assets/test.jpg" Stretch="UniformToFill"/>
                                 </Ellipse.Fill>

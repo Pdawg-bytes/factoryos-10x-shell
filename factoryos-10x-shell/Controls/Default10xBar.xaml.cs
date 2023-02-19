@@ -15,6 +15,8 @@ namespace factoryos_10x_shell.Controls
     {
         bool reportRequested = false;
         public static string batteryActionCenter;
+        public static bool batteryActionCenterEnabled;
+        public static bool startLaunched = false;
         public Default10xBar()
         {
             this.InitializeComponent();
@@ -89,10 +91,12 @@ namespace factoryos_10x_shell.Controls
             if (ReportResult == "NotPresent")
             {
                 BattStatus.Visibility = Visibility.Collapsed;
+                batteryActionCenterEnabled = false;
             }
             else
             {
                 BattStatus.Visibility = Visibility.Visible;
+                batteryActionCenterEnabled = true;
                 reportRequested = true;
                 AggregateBattery();
             }
@@ -134,9 +138,16 @@ namespace factoryos_10x_shell.Controls
         }
         #endregion
 
+        #region Bar events
         private void ActionCenterButton_Click(object sender, RoutedEventArgs e)
         {
-            ActionCenterFrame.Navigate(typeof(ActionCenterHome), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
+            ActionCenterFrame.Navigate(typeof(ActionCenterHome));
         }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        #endregion
     }
 }
