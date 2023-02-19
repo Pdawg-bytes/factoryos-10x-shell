@@ -6,12 +6,15 @@ using Windows.System;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using factoryos_10x_shell.Controls.ActionCenterControls;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace factoryos_10x_shell.Controls
 {
     public sealed partial class Default10xBar : Page
     {
         bool reportRequested = false;
+        public static string batteryActionCenter;
         public Default10xBar()
         {
             this.InitializeComponent();
@@ -105,7 +108,7 @@ namespace factoryos_10x_shell.Controls
             double fullCharge = Convert.ToDouble(report.FullChargeCapacityInMilliwattHours);
             double currentCharge = Convert.ToDouble(report.RemainingCapacityInMilliwattHours);
             double battLevel = Math.Ceiling((currentCharge / fullCharge) * 100);
-            BatteryPercent.Text = Math.Floor(battLevel).ToString() + "%";
+            batteryActionCenter = Math.Floor(battLevel).ToString() + "%";
             if (charging == "Charging" || charging == "Idle")
             {
                 int indexCharge = (int)Math.Floor(battLevel / 10);
@@ -131,11 +134,9 @@ namespace factoryos_10x_shell.Controls
         }
         #endregion
 
-        private async void PowerButton_Click(object sender, RoutedEventArgs e)
+        private void ActionCenterButton_Click(object sender, RoutedEventArgs e)
         {
-            ActionCenterButton.Flyout.Hide();
-            ContentDialog powerDialog = new ShutdownDialog();
-            await powerDialog.ShowAsync();
+            ActionCenterFrame.Navigate(typeof(ActionCenterHome), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
         }
     }
 }

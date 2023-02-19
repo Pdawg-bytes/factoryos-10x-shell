@@ -119,6 +119,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ActionCenterControls\ActionCenterHome.xaml.cs">
+      <DependentUpon>ActionCenterHome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Default10xBar.xaml.cs">
       <DependentUpon>Default10xBar.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ActionCenterControls\ActionCenterHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Default10xBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
