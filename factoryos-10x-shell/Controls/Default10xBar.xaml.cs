@@ -7,13 +7,10 @@ using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using factoryos_10x_shell.Controls.ActionCenterControls;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Foundation.Metadata;
-using Windows.UI.Core;
 using Windows.UI.Notifications.Management;
 using Windows.UI.Notifications;
-using System.Collections;
 
 namespace factoryos_10x_shell.Controls
 {
@@ -31,8 +28,8 @@ namespace factoryos_10x_shell.Controls
             TimeAndDate();
             InternetUpdate();
             DetectBatteryPresence();
-            InitNotifcation();
             Battery.AggregateBattery.ReportUpdated += AggregateBattery_ReportUpdated;
+            InitNotifcation();
         }
 
         #region Clock
@@ -149,15 +146,15 @@ namespace factoryos_10x_shell.Controls
         UserNotificationListener notifListener = UserNotificationListener.Current;
         private void InitNotifcation()
         {
-            notifListener.NotificationChanged += Listener_NotificationChanged;
+            // why wont this just lanunch?? the event wont subscribe.
+            // notifListener.NotificationChanged += NotifListener_NotificationChanged;
         }
-        private async void Listener_NotificationChanged(UserNotificationListener sender, UserNotificationChangedEventArgs args)
+
+        private async void NotifListener_NotificationChanged(UserNotificationListener sender, UserNotificationChangedEventArgs args)
         {
             if (ApiInformation.IsTypePresent("Windows.UI.Notifications.Management.UserNotificationListener"))
             {
                 UserNotificationListenerAccessStatus accessStatus = await notifListener.RequestAccessAsync();
-                ErrorDialog dialogT = new ErrorDialog("Notifcation access was denied. Please enable it in settings.");
-                await dialogT.ShowAsync();
                 switch (accessStatus)
                 {
                     case UserNotificationListenerAccessStatus.Allowed:
@@ -165,17 +162,17 @@ namespace factoryos_10x_shell.Controls
                         IReadOnlyList<UserNotification> notifsOther = await notifListener.GetNotificationsAsync(NotificationKinds.Unknown);
                         if (notifsToast.Count > 0 || notifsOther.Count > 0)
                         {
-                            /*.TryEnqueue((DispatcherQueuePriority)CoreDispatcherPriority.Normal, () =>
+                            DispatcherQueue.TryEnqueue((DispatcherQueuePriority)DispatcherQueuePriority.Normal, () =>
                             {
                                 NotifStatus.Visibility = Visibility.Visible;
-                            });*/
+                            });
                         }
                         else
                         {
-                            /*.TryEnqueue((DispatcherQueuePriority)CoreDispatcherPriority.Normal, () =>
+                            DispatcherQueue.TryEnqueue((DispatcherQueuePriority)DispatcherQueuePriority.Normal, () =>
                             {
                                 NotifStatus.Visibility = Visibility.Collapsed;
-                            });*/
+                            });
                         }
                         break;
                     case UserNotificationListenerAccessStatus.Denied:
@@ -206,10 +203,26 @@ namespace factoryos_10x_shell.Controls
             if(startLaunched)
             {
                 // open stuff and add shimmer
+                ColorTopLeft.Opacity = 1;
+                ColorTopRight.Opacity = 1;
+                ColorBottomLeft.Opacity = 1;
+                ColorBottomRight.Opacity = 1;
+                NormalTopLeft.Opacity = 0;
+                NormalTopRight.Opacity = 0;
+                NormalBottomLeft.Opacity = 0;
+                NormalBottomRight.Opacity = 0;
             }
             else
             {
                 // dont do that
+                ColorTopLeft.Opacity = 0;
+                ColorTopRight.Opacity = 0;
+                ColorBottomLeft.Opacity = 0;
+                ColorBottomRight.Opacity = 0;
+                NormalTopLeft.Opacity = 1;
+                NormalTopRight.Opacity = 1;
+                NormalBottomLeft.Opacity = 1;
+                NormalBottomRight.Opacity = 1;
             }
         }
         #endregion

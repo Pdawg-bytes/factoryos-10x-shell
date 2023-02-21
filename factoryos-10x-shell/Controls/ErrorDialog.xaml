@@ -9,18 +9,17 @@
     Title="Oops! An error occured."
     CornerRadius="8"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    Background="{ThemeResource SystemControlAcrylicElementBrush}">
+    Background="{ThemeResource ElementAcrylicBrush}">
 
     <Grid>
         <StackPanel>
-            <TextBlock Text="10x Shell has encountered a problem." FontWeight="Medium" Margin="2,0,0,0"/>
-            <TextBlock Text="If you keep seeing this, contact the developers." TextWrapping="WrapWholeWords" Width="300" Margin="0,5,0,10"/>
-            <StackPanel CornerRadius="8" Background="{ThemeResource ElementAcrylicBrush}">
+            <TextBlock Text="If you keep seeing this, contact the developers." TextWrapping="WrapWholeWords" Width="300" Margin="0,5,0,15"/>
+            <StackPanel CornerRadius="4" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="&#xEA39;" FontFamily="Segoe MDL2 Assets" Margin="0,3,5,0"/>
                     <TextBlock Text="Error content" FontWeight="Medium"/>
                 </StackPanel>
-                <TextBlock x:Name="ErrorText" TextWrapping="WrapWholeWords" Margin="5,0,0,0" Width="300"/>
+                <TextBlock x:Name="ErrorText" TextWrapping="WrapWholeWords" Margin="5,0,0,5" Width="300"/>
             </StackPanel>
             <Button x:Name="CloseButton" Content="Close" Style="{ThemeResource AccentButtonStyle}" Width="300" Margin="0,10,0,0" Click="CloseButton_Click"/>
         </StackPanel>
