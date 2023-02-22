@@ -162,17 +162,18 @@ namespace factoryos_10x_shell.Controls
                         IReadOnlyList<UserNotification> notifsOther = await notifListener.GetNotificationsAsync(NotificationKinds.Unknown);
                         if (notifsToast.Count > 0 || notifsOther.Count > 0)
                         {
-                            DispatcherQueue.TryEnqueue((DispatcherQueuePriority)DispatcherQueuePriority.Normal, () =>
+                            // dont mind this
+                            /*DispatcherQueue.TryEnqueue((DispatcherQueuePriority)DispatcherQueuePriority.Normal, () =>
                             {
                                 NotifStatus.Visibility = Visibility.Visible;
-                            });
+                            });*/
                         }
                         else
                         {
-                            DispatcherQueue.TryEnqueue((DispatcherQueuePriority)DispatcherQueuePriority.Normal, () =>
+                            /*DispatcherQueue.TryEnqueue((DispatcherQueuePriority)DispatcherQueuePriority.Normal, () =>
                             {
                                 NotifStatus.Visibility = Visibility.Collapsed;
-                            });
+                            });*/
                         }
                         break;
                     case UserNotificationListenerAccessStatus.Denied:
