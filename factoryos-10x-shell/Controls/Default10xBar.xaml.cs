@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.Foundation.Metadata;
 using Windows.UI.Notifications.Management;
 using Windows.UI.Notifications;
+using Windows.UI.Core;
 
 namespace factoryos_10x_shell.Controls
 {
@@ -147,7 +148,14 @@ namespace factoryos_10x_shell.Controls
         private void InitNotifcation()
         {
             // why wont this just lanunch?? the event wont subscribe.
-            // notifListener.NotificationChanged += NotifListener_NotificationChanged;
+            try
+            {
+                notifListener.NotificationChanged += NotifListener_NotificationChanged;
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
         }
 
         private async void NotifListener_NotificationChanged(UserNotificationListener sender, UserNotificationChangedEventArgs args)
@@ -162,18 +170,17 @@ namespace factoryos_10x_shell.Controls
                         IReadOnlyList<UserNotification> notifsOther = await notifListener.GetNotificationsAsync(NotificationKinds.Unknown);
                         if (notifsToast.Count > 0 || notifsOther.Count > 0)
                         {
-                            // dont mind this
-                            /*DispatcherQueue.TryEnqueue((DispatcherQueuePriority)DispatcherQueuePriority.Normal, () =>
+                            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
                                 NotifStatus.Visibility = Visibility.Visible;
-                            });*/
+                            });
                         }
                         else
                         {
-                            /*DispatcherQueue.TryEnqueue((DispatcherQueuePriority)DispatcherQueuePriority.Normal, () =>
+                            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
                                 NotifStatus.Visibility = Visibility.Collapsed;
-                            });*/
+                            });
                         }
                         break;
                     case UserNotificationListenerAccessStatus.Denied:
