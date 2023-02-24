@@ -12,6 +12,7 @@ using Windows.Foundation.Metadata;
 using Windows.UI.Notifications.Management;
 using Windows.UI.Notifications;
 using Windows.UI.Core;
+using Windows.Networking.Connectivity;
 
 namespace factoryos_10x_shell.Controls
 {
@@ -19,16 +20,21 @@ namespace factoryos_10x_shell.Controls
     {
         bool reportRequested = false;
         public static string batteryActionCenter;
+
         public static bool batteryActionCenterEnabled;
         public static bool startLaunched = false;
+
+        public static int connectionStatus;
+
         public Default10xBar()
         {
             this.InitializeComponent();
 
             // Init
             TimeAndDate();
-            InternetUpdate();
             DetectBatteryPresence();
+            NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
+            UpdateNetworkStatus();
             Battery.AggregateBattery.ReportUpdated += AggregateBattery_ReportUpdated;
             InitNotifcation();
         }
@@ -48,16 +54,16 @@ namespace factoryos_10x_shell.Controls
         #endregion
 
         #region Internet
-        private void InternetUpdate()
+        private async void NetworkInformation_NetworkStatusChanged(object sender)
         {
-            DispatcherTimer internetUpdate = new DispatcherTimer();
-            internetUpdate.Tick += ITUpdateMethod;
-            internetUpdate.Interval = new TimeSpan(10000000);
-            internetUpdate.Start();
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                UpdateNetworkStatus();
+            });
         }
         private string[] wifiIcons = { "\uE871", "\uE872", "\uE873", "\uE874", "\uE701" };
         private string[] dataIcons = { "\uEC37", "\uEC38", "\uEC39", "\uEC3A", "\uEC3B" };
-        private void ITUpdateMethod(object sender, object e)
+        private void UpdateNetworkStatus()
         {
             if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
             {
@@ -65,24 +71,31 @@ namespace factoryos_10x_shell.Controls
                 {
                     case ConnectionType.Ethernet:
                         WifiStatus.Text = "\uE839";
+                        connectionStatus = 1;
                         break;
                     case ConnectionType.WiFi:
                         int WifiSignalBars = NetworkHelper.Instance.ConnectionInformation.SignalStrength.GetValueOrDefault(0);
                         WifiStatus.Text = wifiIcons[WifiSignalBars];
+                        connectionStatus = 2;
                         break;
                     case ConnectionType.Data:
                         int DataSignalBars = NetworkHelper.Instance.ConnectionInformation.SignalStrength.GetValueOrDefault(0);
                         WifiStatus.Text = dataIcons[DataSignalBars];
+                        connectionStatus = 2;
                         break;
                     case ConnectionType.Unknown:
                     default:
                         WifiStatus.Text = "\uE774";
+                        connectionStatus = 3;
                         break;
                 }
+                ActionCenterHome.connected = true;
             }
             else
             {
                 WifiStatus.Text = "\uEB55";
+                connectionStatus = 0;
+                ActionCenterHome.connected = false;
             }
         }
         #endregion
@@ -145,17 +158,10 @@ namespace factoryos_10x_shell.Controls
 
         #region Notifications
         UserNotificationListener notifListener = UserNotificationListener.Current;
-        private void InitNotifcation()
+        private async void InitNotifcation()
         {
-            // why wont this just lanunch?? the event wont subscribe.
-            try
-            {
-                notifListener.NotificationChanged += NotifListener_NotificationChanged;
-            }
-            catch(Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
+            await notifListener.RequestAccessAsync();
+            notifListener.NotificationChanged += NotifListener_NotificationChanged;
         }
 
         private async void NotifListener_NotificationChanged(UserNotificationListener sender, UserNotificationChangedEventArgs args)
@@ -210,7 +216,6 @@ namespace factoryos_10x_shell.Controls
             startLaunched = !startLaunched;
             if(startLaunched)
             {
-                // open stuff and add shimmer
                 ColorTopLeft.Opacity = 1;
                 ColorTopRight.Opacity = 1;
                 ColorBottomLeft.Opacity = 1;
@@ -222,7 +227,6 @@ namespace factoryos_10x_shell.Controls
             }
             else
             {
-                // dont do that
                 ColorTopLeft.Opacity = 0;
                 ColorTopRight.Opacity = 0;
                 ColorBottomLeft.Opacity = 0;

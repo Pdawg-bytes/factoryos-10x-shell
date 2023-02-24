@@ -49,7 +49,7 @@
             <Button HorizontalAlignment="Center" Height="50" Padding="13" Width="50" ToolTipService.ToolTip="Start" x:Name="StartButton" CornerRadius="0" Background="Transparent" Click="StartButton_Click">
                 <Button.Content>
                     <Viewbox>
-                        <Canvas Height="1024" Width="1024">
+                        <Canvas Height="1024" Width="1024" x:Name="StartCanvas">
                             <Path Data="M427.866 95.189V495.289H16.0659L16.0659 150.5C16.0659 150.5 9.79999 150.8 62 145C114.2 139.2 427.866 95.189 427.866 95.189Z" Fill="#A7A6A6" x:Name="NormalTopLeft">
                                 <Path.OpacityTransition>
                                     <ScalarTransition Duration="0:0:0.15" />
@@ -77,7 +77,7 @@
                             </Path>
                             <Path Data="M427.866 929.589V529.489H16.0659L16.0659 874.5C16.0659 874.5 12.1659 874.489 64.3659 880.289C116.666 886.089 427.866 929.589 427.866 929.589Z" Fill="{StaticResource BottomLeftStartCorner}" x:Name="ColorBottomLeft" Opacity="0">
                                 <Path.OpacityTransition>
-                                    <ScalarTransition Duration="0:0:0.15" />
+                                    <ScalarTransition Duration="0:0:0.20" />
                                 </Path.OpacityTransition>
                             </Path>
                             <Path Data="M461.966 91.289V495.289H1007.07L1005.5 12.5C1005.5 12.5 1003.17 13.089 947.166 20.789C891.166 28.489 461.966 91.289 461.966 91.289Z" Fill="{StaticResource TopRightStartCorner}" x:Name="ColorTopRight" Opacity="0">
@@ -108,7 +108,7 @@
                     <Grid Padding="0" Height="50" Width="75">
                         <TextBlock Text="00:00" HorizontalAlignment="Right" Foreground="Gray" FontWeight="Medium" Margin="5,5,10,5" x:Name="ClockText" VerticalAlignment="Top"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBlock Text="&#xEC42;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="NotifStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,7"/>
+                            <TextBlock Text="&#xEC42;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="NotifStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,7" Visibility="Collapsed"/>
                             <TextBlock Text="&#xEBAA;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="BattStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,6"/>
                             <TextBlock Text="&#xE701;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="WifiStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,8"/>
                         </StackPanel>

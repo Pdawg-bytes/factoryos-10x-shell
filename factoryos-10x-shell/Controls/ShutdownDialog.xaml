@@ -17,8 +17,8 @@
     <Grid>
         <StackPanel>
             <TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="60" Foreground="White"/>
-            <Button x:Name="ShutdownButton" Content="Shut down" Style="{ThemeResource AccentButtonStyle}" CornerRadius="4" Width="300" Height="70" FontSize="18" Margin="0,30,0,0"/>
-            <Button x:Name="RestartButton" Content="Restart" CornerRadius="4" Width="300" Height="70" FontSize="18" Margin="0,15,0,0"/>
+            <Button x:Name="ShutdownButton" Content="Shut down" Style="{ThemeResource AccentButtonStyle}" CornerRadius="4" Width="300" Height="70" FontSize="18" Margin="0,30,0,0" Click="ShutdownButton_Click"/>
+            <Button x:Name="RestartButton" Content="Restart" CornerRadius="4" Width="300" Height="70" FontSize="18" Margin="0,15,0,0" Click="RestartButton_Click"/>
             <Button x:Name="CancelButton" Content="Cancel" CornerRadius="4" Width="300" Height="70" FontSize="18" Margin="0,40,0,0" Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>

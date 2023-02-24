@@ -131,6 +131,7 @@
     <Compile Include="Controls\ShutdownDialog.xaml.cs">
       <DependentUpon>ShutdownDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ProcessStart.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

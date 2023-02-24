@@ -36,11 +36,11 @@
                         <ToggleButton x:Name="InternetButton" Width="90" Margin="15,0,0,0" Height="36" HorizontalAlignment="Left" Style="{StaticResource ActionCenterToggleStyle}">
                             <ToggleButton.Content>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="&#xE701;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" FontSize="16"/>
+                                    <TextBlock Text="&#xE774;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" FontSize="16" x:Name="NetworkStatusIcon"/>
                                 </StackPanel>
                             </ToggleButton.Content>
                         </ToggleButton>
-                        <TextBlock Text="Not connected" FontSize="11" HorizontalAlignment="Center" Margin="14,3,0,0" FontFamily="Segoe UI Variable"/>
+                        <TextBlock Text="Not connected" FontSize="11" HorizontalAlignment="Center" Margin="14,3,0,0" FontFamily="Segoe UI Variable" x:Name="NetworkStatus"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <ToggleButton x:Name="DisplayButton" Width="90" Margin="10,0,0,0" Height="36" HorizontalAlignment="Center" Style="{StaticResource ActionCenterToggleStyle}">
@@ -138,12 +138,12 @@
                     <TextBlock Text="0%" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" x:Name="BatteryPercent" Margin="12,0,0,0" Grid.Column="0"/>
                     <Grid HorizontalAlignment="Right" Grid.Column="1">
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="OSKButton" Height="28" Width="28" Margin="100,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent" ToolTipService.ToolTip="Touch keyboard">
+                            <Button x:Name="OSKButton" Height="28" Width="28" Margin="100,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent" Click="OSKButton_Click" ToolTipService.ToolTip="Touch keyboard">
                                 <Button.Content>
                                     <TextBlock Text="&#xE144;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
                                 </Button.Content>
                             </Button>
-                            <Button x:Name="SettingsButton" Height="28" Width="28" Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent" ToolTipService.ToolTip="All settings">
+                            <Button x:Name="SettingsButton" Height="28" Width="28" Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent" Click="SettingsButton_Click" ToolTipService.ToolTip="All settings">
                                 <Button.Content>
                                     <TextBlock Text="&#xE115;" FontFamily="Segoe MDL2 Assets" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Button.Content>
