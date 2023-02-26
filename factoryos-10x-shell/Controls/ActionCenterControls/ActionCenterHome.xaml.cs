@@ -18,7 +18,12 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
         {
             this.InitializeComponent();
             InternetInit();
+            Init();
+        }
 
+        #region Init
+        private void Init()
+        {
             if (Default10xBar.batteryActionCenterEnabled == true)
             {
                 BatteryPercent.Text = Default10xBar.batteryActionCenter;
@@ -27,7 +32,18 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
             {
                 BatteryPercent.Text = "";
             }
+
+            if (Default10xBar.notifcationCount > 0)
+            {
+                NotifCount.Text = Default10xBar.notifcationCount.ToString();
+                NotifRootPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                NotifRootPanel.Visibility = Visibility.Collapsed;
+            }
         }
+        #endregion
 
         #region Border events
         private async void PowerButton_Click(object sender, RoutedEventArgs e)
@@ -46,6 +62,27 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
         {
             ControlPanel.Height = 80;
             ExpanderIcon.Text = "\uE09C";
+        }
+
+        private async void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("ms-settings:"));
+        }
+
+        private void OSKButton_Click(object sender, RoutedEventArgs e)
+        {
+            InputPane inputPane = InputPane.GetForCurrentView();
+
+            if (!inputPane.Visible)
+            {
+                inputPane.TryShow();
+            }
+        }
+        private void ClearNotifs_Click(object sender, RoutedEventArgs e)
+        {
+            Default10xBar.notifListener.ClearNotifications();
+            NotifCount.Text = "0";
+            NotifRootPanel.Visibility = Visibility.Collapsed;
         }
         #endregion
 
@@ -75,20 +112,5 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
         }
 
         #endregion
-
-        private async void SettingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("ms-settings:"));
-        }
-
-        private void OSKButton_Click(object sender, RoutedEventArgs e)
-        {
-            InputPane inputPane = InputPane.GetForCurrentView();
-
-            if (!inputPane.Visible)
-            {
-                inputPane.TryShow();
-            }
-        }
     }
 }

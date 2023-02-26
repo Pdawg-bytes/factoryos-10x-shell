@@ -14,8 +14,21 @@
     BorderThickness="0"
     >
 
+    <ContentDialog.Resources>
+        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Key="PowerGradient">
+            <GradientStop Color="#fefffe" Offset="0.0" />
+            <GradientStop Color="#d5d9de" Offset="0.55" />
+            <GradientStop Color="#b4bcc8" Offset="0.70"/>
+            <GradientStop Color="#96a3b0" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentDialog.Resources>
+    
     <Grid>
         <StackPanel>
+            <TextBlock Text="Shutting down" FontWeight="Normal" FontFamily="Segoe UI Variable" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,20"/>
+            <ProgressBar IsIndeterminate="True" Value="100" CornerRadius="3" Height="8" Foreground="{StaticResource PowerGradient}" Width="350"/>
+        </StackPanel>
+        <StackPanel Visibility="Collapsed">
             <TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="60" Foreground="White"/>
             <Button x:Name="ShutdownButton" Content="Shut down" Style="{ThemeResource AccentButtonStyle}" CornerRadius="4" Width="300" Height="70" FontSize="18" Margin="0,30,0,0" Click="ShutdownButton_Click"/>
             <Button x:Name="RestartButton" Content="Restart" CornerRadius="4" Width="300" Height="70" FontSize="18" Margin="0,15,0,0" Click="RestartButton_Click"/>

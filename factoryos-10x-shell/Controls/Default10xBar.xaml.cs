@@ -25,6 +25,7 @@ namespace factoryos_10x_shell.Controls
         public static bool startLaunched = false;
 
         public static int connectionStatus;
+        public static int notifcationCount;
 
         public Default10xBar()
         {
@@ -157,7 +158,7 @@ namespace factoryos_10x_shell.Controls
         #endregion
 
         #region Notifications
-        UserNotificationListener notifListener = UserNotificationListener.Current;
+        public static UserNotificationListener notifListener = UserNotificationListener.Current;
         private async void InitNotifcation()
         {
             await notifListener.RequestAccessAsync();
@@ -176,6 +177,7 @@ namespace factoryos_10x_shell.Controls
                         IReadOnlyList<UserNotification> notifsOther = await notifListener.GetNotificationsAsync(NotificationKinds.Unknown);
                         if (notifsToast.Count > 0 || notifsOther.Count > 0)
                         {
+                            notifcationCount = notifsToast.Count;
                             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
                                 NotifStatus.Visibility = Visibility.Visible;
@@ -183,6 +185,7 @@ namespace factoryos_10x_shell.Controls
                         }
                         else
                         {
+                            notifcationCount = 0;
                             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
                                 NotifStatus.Visibility = Visibility.Collapsed;
