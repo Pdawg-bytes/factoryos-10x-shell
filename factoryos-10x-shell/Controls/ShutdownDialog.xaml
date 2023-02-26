@@ -26,7 +26,7 @@
     <Grid>
         <StackPanel>
             <TextBlock Text="Shutting down" FontWeight="Normal" FontFamily="Segoe UI Variable" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,20"/>
-            <ProgressBar IsIndeterminate="True" Value="100" CornerRadius="3" Height="8" Foreground="{StaticResource PowerGradient}" Width="350"/>
+            <ProgressBar IsIndeterminate="True" CornerRadius="3" Height="8" Foreground="{StaticResource PowerGradient}" Width="350" Style="{StaticResource ModernProgressBarStyle}"/>
         </StackPanel>
         <StackPanel Visibility="Collapsed">
             <TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="60" Foreground="White"/>

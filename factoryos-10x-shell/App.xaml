@@ -34,6 +34,46 @@
                 <Setter Property="Background" Value="#99505050"/>
             </Style>
 
+            <!--Modern progress bar style-->
+            <Style x:Key="ModernProgressBarStyle" TargetType="ProgressBar">
+                <Setter Property="Foreground" Value="{ThemeResource SystemControlHighlightAccentBrush}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ProgressBar">
+                            <Grid x:Name="Root" Background="{TemplateBinding Background}" CornerRadius="3">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Determinate" />
+                                        <VisualState x:Name="Indeterminate">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ProgressBarIndeterminate" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1" />
+                                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.6" Value="0" />
+                                                    <DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames RepeatBehavior="Forever" Storyboard.TargetName="ProgressBarIndeterminate" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0" Value="-500" />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:1" Value="600"  />
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:2" Value="-600" />
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid>
+                                    <Border x:Name="ProgressBarIndicator" Background="#aa303030" CornerRadius="3"/>
+                                    <Border x:Name="ProgressBarIndeterminate" Background="{TemplateBinding Foreground}" Opacity="0" CornerRadius="3">
+                                        <Border.RenderTransform>
+                                            <TranslateTransform X="-20" />
+                                        </Border.RenderTransform>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <!--Taskbar button style-->
             <Style TargetType="Button" x:Key="TaskbarButtonStyle">
                 <Setter Property="Background" Value="Transparent"/>
