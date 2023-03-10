@@ -109,7 +109,7 @@
                         <TextBlock Text="00:00" HorizontalAlignment="Right" Foreground="Gray" FontWeight="Medium" Margin="5,5,10,5" x:Name="ClockText" VerticalAlignment="Top"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="&#xEC42;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="NotifStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,7" Visibility="Collapsed"/>
-                            <TextBlock Text="&#xEBAA;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="BattStatus" FontSize="12" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,1,6"/>
+                            <TextBlock Text="&#xEBAA;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="BattStatus" FontSize="12" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,4,6"/>
                             <TextBlock Text="&#xE701;" FontFamily="Segoe MDL2 Assets" Foreground="Gray" x:Name="WifiStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,8"/>
                         </StackPanel>
                     </Grid>

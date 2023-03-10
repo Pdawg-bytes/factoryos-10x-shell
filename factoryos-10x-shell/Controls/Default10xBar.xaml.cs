@@ -181,6 +181,14 @@ namespace factoryos_10x_shell.Controls
                             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
                                 NotifStatus.Visibility = Visibility.Visible;
+                                foreach (UserNotification notifcation in notifsToast)
+                                {
+                                    System.Diagnostics.Debug.WriteLine(notifcation.AppInfo.DisplayInfo.DisplayName);
+                                    System.Diagnostics.Debug.WriteLine(notifcation.Notification);
+                                    System.Diagnostics.Debug.WriteLine(notifcation.CreationTime); 
+                                    System.Diagnostics.Debug.WriteLine(notifcation.Id);
+                                    System.Diagnostics.Debug.WriteLine("----------------");
+                                };
                             });
                         }
                         else

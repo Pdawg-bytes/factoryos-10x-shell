@@ -21,7 +21,9 @@
                 </StackPanel>
                 <Border Background="#434343" Height="1" Width="320" Margin="-60,0,-60,0" Opacity="0.5"/>
                 <StackPanel Width="320" Height="100" Background="Transparent">
-
+                    <GridView >
+                        
+                    </GridView>
                 </StackPanel>
             </StackPanel>
             <StackPanel Width="320" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" CornerRadius="4">
