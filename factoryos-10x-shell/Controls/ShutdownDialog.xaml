@@ -24,11 +24,15 @@
     </ContentDialog.Resources>
     
     <Grid>
-        <StackPanel>
+        <StackPanel Visibility="Collapsed" x:Name="ShutdownAnimation">
             <TextBlock Text="Shutting down" FontWeight="Normal" FontFamily="Segoe UI Variable" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,20"/>
             <ProgressBar IsIndeterminate="True" CornerRadius="3" Height="8" Foreground="{StaticResource PowerGradient}" Width="350" Style="{StaticResource ModernProgressBarStyle}"/>
         </StackPanel>
-        <StackPanel Visibility="Collapsed">
+        <StackPanel Visibility="Collapsed" x:Name="RestartAnimation">
+            <TextBlock Text="Restarting" FontWeight="Normal" FontFamily="Segoe UI Variable" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,20"/>
+            <ProgressBar IsIndeterminate="True" CornerRadius="3" Height="8" Foreground="{StaticResource PowerGradient}" Width="350" Style="{StaticResource ModernProgressBarStyle}"/>
+        </StackPanel>
+        <StackPanel Visibility="Visible" x:Name="MainDialog">
             <TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="60" Foreground="White"/>
             <Button x:Name="ShutdownButton" Content="Shut down" Style="{ThemeResource AccentButtonStyle}" CornerRadius="4" Width="300" Height="70" FontSize="18" Margin="0,30,0,0" Click="ShutdownButton_Click"/>
             <Button x:Name="RestartButton" Content="Restart" CornerRadius="4" Width="300" Height="70" FontSize="18" Margin="0,15,0,0" Click="RestartButton_Click"/>

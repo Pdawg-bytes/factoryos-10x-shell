@@ -13,6 +13,7 @@ using Windows.UI.Notifications.Management;
 using Windows.UI.Notifications;
 using Windows.UI.Core;
 using Windows.Networking.Connectivity;
+using System.Linq;
 
 namespace factoryos_10x_shell.Controls
 {
@@ -181,12 +182,20 @@ namespace factoryos_10x_shell.Controls
                             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
                                 NotifStatus.Visibility = Visibility.Visible;
-                                foreach (UserNotification notifcation in notifsToast)
+                                foreach (UserNotification notification in notifsToast)
                                 {
-                                    System.Diagnostics.Debug.WriteLine(notifcation.AppInfo.DisplayInfo.DisplayName);
-                                    System.Diagnostics.Debug.WriteLine(notifcation.Notification);
-                                    System.Diagnostics.Debug.WriteLine(notifcation.CreationTime); 
-                                    System.Diagnostics.Debug.WriteLine(notifcation.Id);
+                                    System.Diagnostics.Debug.WriteLine(notification.AppInfo.DisplayInfo.DisplayName);
+                                    NotificationBinding toastBinding = notification.Notification.Visual.GetBinding(KnownNotificationBindings.ToastGeneric);
+                                    if (toastBinding != null)
+                                    {
+                                        IReadOnlyList<AdaptiveNotificationText> textElements = toastBinding.GetTextElements();
+                                        string titleText = textElements.FirstOrDefault()?.Text;
+                                        System.Diagnostics.Debug.WriteLine(titleText);
+                                        string bodyText = string.Join("\n", textElements.Skip(1).Select(t => t.Text));
+                                        System.Diagnostics.Debug.WriteLine(bodyText);
+                                    }
+                                    System.Diagnostics.Debug.WriteLine(notification.CreationTime.ToString("g")); 
+                                    System.Diagnostics.Debug.WriteLine(notification.Id);
                                     System.Diagnostics.Debug.WriteLine("----------------");
                                 };
                             });
@@ -220,8 +229,6 @@ namespace factoryos_10x_shell.Controls
             ActionCenterFrame.Navigate(typeof(ActionCenterHome));
         }
 
-        private BitmapImage startColor = new BitmapImage(new Uri("ms-appx:///Assets/buttonIcons/startColor.png"));
-        private BitmapImage startNormal = new BitmapImage(new Uri("ms-appx:///Assets/buttonIcons/startNormal.png"));
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             startLaunched = !startLaunched;

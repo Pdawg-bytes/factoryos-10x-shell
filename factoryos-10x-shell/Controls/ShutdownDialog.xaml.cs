@@ -22,7 +22,8 @@ namespace factoryos_10x_shell.Controls
         {
             try
             {
-                // TODO: implement shutdown
+                MainDialog.Visibility = Visibility.Collapsed;
+                ShutdownAnimation.Visibility = Visibility.Visible;
             }
             catch(Exception shutdown)
             {
@@ -36,7 +37,8 @@ namespace factoryos_10x_shell.Controls
         {
             try
             {
-                // TODO: implement restart
+                MainDialog.Visibility = Visibility.Collapsed;
+                RestartAnimation.Visibility = Visibility.Visible;
             }
             catch (Exception restart)
             {

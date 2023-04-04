@@ -21,7 +21,7 @@
                 </StackPanel>
                 <TextBlock x:Name="ErrorText" TextWrapping="Wrap" Margin="5,0,5,5" Width="300"/>
             </StackPanel>
-            <Button x:Name="CloseButton" Content="Close" Style="{ThemeResource AccentButtonStyle}" Width="305" Margin="0,10,0,0" Click="CloseButton_Click"/>
+            <Button x:Name="CloseButton" Content="Close" Style="{ThemeResource AccentButtonStyle}" HorizontalAlignment="Stretch" Margin="0,10,0,0" Click="CloseButton_Click"/>
         </StackPanel>
     </Grid>
 </ContentDialog>

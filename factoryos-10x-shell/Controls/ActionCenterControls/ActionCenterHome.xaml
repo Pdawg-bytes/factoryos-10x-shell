@@ -156,29 +156,35 @@
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="0%" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" x:Name="BatteryPercent" Margin="12,0,0,0" Grid.Column="0"/>
+                        <Button x:Name="BatteryButton" CornerRadius="0" Padding="0" Background="Transparent" Height="42" Click="BatteryButton_Click" ToolTipService.ToolTip="Battery">
+                            <TextBlock Text="0%" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" x:Name="BatteryPercent" Margin="12,0,12,0" Grid.Column="0"/>
+                        </Button>
                         <Grid HorizontalAlignment="Right" Grid.Column="1">
                             <StackPanel Orientation="Horizontal">
-                                <Button x:Name="OSKButton" Height="28" Width="28" Margin="100,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent" Click="OSKButton_Click" ToolTipService.ToolTip="Touch keyboard">
+                                <Button x:Name="OSKButton" Height="42" Width="42" Margin="72,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="0" Padding="0" Background="Transparent" Click="OSKButton_Click" ToolTipService.ToolTip="Touch keyboard">
                                     <Button.Content>
                                         <TextBlock Text="&#xE144;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
                                     </Button.Content>
                                 </Button>
-                                <Button x:Name="SettingsButton" Height="28" Width="28" Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent" Click="SettingsButton_Click" ToolTipService.ToolTip="All settings">
+                                <Button x:Name="SettingsButton" Height="42" Width="42" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="0" Padding="0" Background="Transparent" Click="SettingsButton_Click" ToolTipService.ToolTip="All settings">
                                     <Button.Content>
                                         <TextBlock Text="&#xE115;" FontFamily="Segoe MDL2 Assets" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Button.Content>
                                 </Button>
-                                <Button x:Name="PowerButton" Height="28" Width="28" Margin="5,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="50" Padding="0" Background="Transparent" Click="PowerButton_Click" ToolTipService.ToolTip="Power">
+                                <Button x:Name="PowerButton" Height="42" Width="42" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="0" Padding="0" Background="Transparent" Click="PowerButton_Click" ToolTipService.ToolTip="Power">
                                     <Button.Content>
                                         <TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
                                     </Button.Content>
                                 </Button>
-                                <Ellipse Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTipService.ToolTip="Lock your screen">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="ms-appx:///Assets/test.jpg" Stretch="UniformToFill"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
+                                <Button x:Name="LockButton" Height="42" Width="42" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Right" Background="Transparent" CornerRadius="0" Padding="0" ToolTipService.ToolTip="Lock your screen" Click="LockButton_Click">
+                                    <Button.Content>
+                                        <Ellipse Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTipService.ToolTip="Lock your screen">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="ms-appx:///Assets/defaultUser.png" Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                    </Button.Content>
+                                </Button>
                             </StackPanel>
                         </Grid>
                     </Grid>

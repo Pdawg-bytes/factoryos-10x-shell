@@ -63,20 +63,24 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
             ControlPanel.Height = 80;
             ExpanderIcon.Text = "\uE09C";
         }
+        private async void BatteryButton_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("ms-settings:batterysaver"));
+        }
+        private async void LockButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog lockDialog = new LockDialog();
+            await lockDialog.ShowAsync();
+        }
 
         private async void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             await Launcher.LaunchUriAsync(new Uri("ms-settings:"));
         }
 
-        private void OSKButton_Click(object sender, RoutedEventArgs e)
+        private async void OSKButton_Click(object sender, RoutedEventArgs e)
         {
-            InputPane inputPane = InputPane.GetForCurrentView();
-
-            if (!inputPane.Visible)
-            {
-                inputPane.TryShow();
-            }
+            // todo: IMPLEMENT OPENING OSK
         }
         private void ClearNotifs_Click(object sender, RoutedEventArgs e)
         {
