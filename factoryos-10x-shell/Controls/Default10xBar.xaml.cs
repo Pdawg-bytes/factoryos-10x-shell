@@ -7,26 +7,33 @@ using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using factoryos_10x_shell.Controls.ActionCenterControls;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.Foundation.Metadata;
+using Microsoft.Toolkit.Uwp.UI;
 using Windows.UI.Notifications.Management;
 using Windows.UI.Notifications;
 using Windows.UI.Core;
 using Windows.Networking.Connectivity;
 using System.Linq;
+using Microsoft.Toolkit.Uwp.UI.Helpers;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 namespace factoryos_10x_shell.Controls
 {
     public sealed partial class Default10xBar : Page
     {
-        bool reportRequested = false;
         public static string batteryActionCenter;
 
+        bool reportRequested = false;
         public static bool batteryActionCenterEnabled;
         public static bool startLaunched = false;
 
         public static int connectionStatus;
         public static int notifcationCount;
+
+        private ThemeListener themeListener;
+        private SolidColorBrush lightBrush;
+        private SolidColorBrush darkBrush;
 
         public Default10xBar()
         {
@@ -39,6 +46,13 @@ namespace factoryos_10x_shell.Controls
             UpdateNetworkStatus();
             Battery.AggregateBattery.ReportUpdated += AggregateBattery_ReportUpdated;
             InitNotifcation();
+
+            lightBrush = new SolidColorBrush(Color.FromArgb(255, 99, 99, 98));
+            darkBrush = new SolidColorBrush(Color.FromArgb(255, 120, 124, 126));
+
+            themeListener = new ThemeListener();
+            themeListener.ThemeChanged += ThemeListener_ThemeChanged;
+            ThemeListener_ThemeChanged(themeListener);
         }
 
         #region Clock
@@ -163,7 +177,15 @@ namespace factoryos_10x_shell.Controls
         private async void InitNotifcation()
         {
             await notifListener.RequestAccessAsync();
-            notifListener.NotificationChanged += NotifListener_NotificationChanged;
+            try
+            {
+                notifListener.NotificationChanged += NotifListener_NotificationChanged;
+            }
+            catch (Exception exCreate)
+            {
+                ErrorDialog dialogC = new ErrorDialog("Notifcation access was denied. Please enable it in settings.\n" + exCreate);
+                await dialogC.ShowAsync();
+            }
         }
 
         private async void NotifListener_NotificationChanged(UserNotificationListener sender, UserNotificationChangedEventArgs args)
@@ -253,6 +275,37 @@ namespace factoryos_10x_shell.Controls
                 NormalTopRight.Opacity = 1;
                 NormalBottomLeft.Opacity = 1;
                 NormalBottomRight.Opacity = 1;
+            }
+        }
+        #endregion
+
+        #region Theming
+        private void ThemeListener_ThemeChanged(ThemeListener sender)
+        {
+            var theme = sender.CurrentTheme;
+            switch(theme)
+            {
+                case ApplicationTheme.Light:
+                    NormalTopLeft.Fill = lightBrush;
+                    NormalTopRight.Fill = lightBrush;
+                    NormalBottomLeft.Fill = lightBrush;
+                    NormalBottomRight.Fill = lightBrush;
+                    ClockText.Foreground = lightBrush;
+                    NotifStatus.Foreground = lightBrush;
+                    BattStatus.Foreground = lightBrush;
+                    WifiStatus.Foreground = lightBrush;
+                    break;
+                case ApplicationTheme.Dark:
+                default:
+                    NormalTopLeft.Fill = darkBrush;
+                    NormalTopRight.Fill = darkBrush;
+                    NormalBottomLeft.Fill = darkBrush;
+                    NormalBottomRight.Fill = darkBrush;
+                    ClockText.Foreground = darkBrush;
+                    NotifStatus.Foreground = darkBrush;
+                    BattStatus.Foreground = darkBrush;
+                    WifiStatus.Foreground = darkBrush;
+                    break;
             }
         }
         #endregion
