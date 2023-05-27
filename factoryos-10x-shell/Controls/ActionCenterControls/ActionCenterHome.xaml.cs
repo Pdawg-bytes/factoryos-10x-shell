@@ -14,6 +14,7 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
     public sealed partial class ActionCenterHome : Page
     {
         public static bool connected;
+        private bool isExpaneded = false;
         public ActionCenterHome()
         {
             this.InitializeComponent();
@@ -52,17 +53,21 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
             await powerDialog.ShowAsync();
         }
 
-        private void ExpnanderControlButton_Checked(object sender, RoutedEventArgs e)
+        private void ExpnanderControlButton_Click(object sender, RoutedEventArgs e)
         {
-            ControlPanel.Height = 250;
-            ExpanderIcon.Text = "\uE09D";
+            isExpaneded = !isExpaneded;
+            if(isExpaneded)
+            {
+                ControlPanel.Height = 250;
+                ExpanderIcon.Text = "\uE09D";
+            }
+            else
+            {
+                ControlPanel.Height = 80;
+                ExpanderIcon.Text = "\uE09C";
+            }
         }
 
-        private void ExpnanderControlButton_Unchecked(object sender, RoutedEventArgs e)
-        {
-            ControlPanel.Height = 80;
-            ExpanderIcon.Text = "\uE09C";
-        }
         private async void BatteryButton_Click(object sender, RoutedEventArgs e)
         {
             await Launcher.LaunchUriAsync(new Uri("ms-settings:batterysaver"));

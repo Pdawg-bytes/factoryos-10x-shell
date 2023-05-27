@@ -21,7 +21,7 @@
                 </StackPanel>
                 <Border Background="#434343" Height="1" Width="320" Margin="-60,0,-60,0" Opacity="0.5"/>
                 <StackPanel Width="320" Height="100" Background="Transparent">
-                    <GridView >
+                    <GridView>
                         
                     </GridView>
                 </StackPanel>
@@ -29,11 +29,11 @@
             <StackPanel Width="320" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" CornerRadius="4">
                 <StackPanel Orientation="Horizontal" Width="320" Height="36" Background="{ThemeResource ElementAcrylicBrush}">
                     <TextBlock Text="Quick Settings" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,200,0" FontSize="12"/>
-                    <ToggleButton x:Name="ExpnanderControlButton" CornerRadius="25" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" Padding="0" Margin="0,0,0,0" Checked="ExpnanderControlButton_Checked" Unchecked="ExpnanderControlButton_Unchecked">
-                        <ToggleButton.Content>
+                    <Button x:Name="ExpnanderControlButton" CornerRadius="25" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" Padding="0" Margin="0,0,0,0" Click="ExpnanderControlButton_Click">
+                        <Button.Content>
                             <TextBlock Text="&#xE09C;" FontFamily="Segoe MDL2 Assets" FontSize="12" x:Name="ExpanderIcon"/>
-                        </ToggleButton.Content>
-                    </ToggleButton>
+                        </Button.Content>
+                    </Button>
                 </StackPanel>
                 <Border Background="#434343" Height="1" Width="320" Margin="-60,0,-60,0" Opacity="0.5"/>
                 <StackPanel>
