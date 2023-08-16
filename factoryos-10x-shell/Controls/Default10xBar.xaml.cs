@@ -183,7 +183,7 @@ namespace factoryos_10x_shell.Controls
             }
             catch (Exception exCreate)
             {
-                ErrorDialog dialogC = new ErrorDialog("Notifcation access was denied. Please enable it in settings.\n" + exCreate);
+                ErrorDialog dialogC = new ErrorDialog("Notifcation access was denied. Please enable it in settings.\n" + exCreate.Message);
                 await dialogC.ShowAsync();
             }
         }
