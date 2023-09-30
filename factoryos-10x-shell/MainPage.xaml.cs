@@ -4,11 +4,14 @@ using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using factoryos_10x_shell.Controls;
 using System;
+using factoryos_10x_shell.Controls.DesktopControls;
 
 namespace factoryos_10x_shell
 {
     public sealed partial class MainPage : Page
     {
+        public static Frame DesktopFrameP { get; private set; }
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -20,7 +23,8 @@ namespace factoryos_10x_shell
             titleBar.ButtonBackgroundColor = Colors.Transparent;
 
             // Init frame
-            TaskbarFrame.Navigate(typeof(Default10xBar));
+            DesktopFrameP = DesktopFrame;
+            DesktopFrameP.Navigate(typeof(MainDesktop));
         }
     }
 }

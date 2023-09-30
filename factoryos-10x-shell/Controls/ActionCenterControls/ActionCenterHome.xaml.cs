@@ -49,7 +49,7 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
         #region Border events
         private async void PowerButton_Click(object sender, RoutedEventArgs e)
         {
-            ContentDialog powerDialog = new ShutdownDialog();
+            ContentDialog powerDialog = new PowerDialog();
             await powerDialog.ShowAsync();
         }
 

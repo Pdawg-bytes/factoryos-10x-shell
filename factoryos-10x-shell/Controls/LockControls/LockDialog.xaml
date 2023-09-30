@@ -20,7 +20,7 @@
                     <ImageBrush ImageSource="ms-appx:///Assets/defaultUser.png" Stretch="UniformToFill"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <TextBlock Text="[REDACTED] 10x User" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,20" FontSize="20"/>
+            <TextBlock Text="FactoryOS User" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,15,0,20" FontSize="20"/>
             <Button x:Name="LockButton" Content="Lock" Style="{ThemeResource AccentButtonStyle}" CornerRadius="4" Width="200" HorizontalAlignment="Center" Height="60" FontSize="16" Margin="0,10,0,0" Click="LockButton_Click"/>
             <Button x:Name="CancelButton" Content="Cancel" CornerRadius="4" Width="200" HorizontalAlignment="Center" Height="60" FontSize="16" Margin="0,10,0,0" Click="CancelButton_Click"/>
         </StackPanel>

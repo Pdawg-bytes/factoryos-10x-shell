@@ -6,9 +6,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace factoryos_10x_shell.Controls
 {
-    public sealed partial class ShutdownDialog : ContentDialog
+    public sealed partial class PowerDialog : ContentDialog
     {
-        public ShutdownDialog()
+        public PowerDialog()
         {
             this.InitializeComponent();
         }

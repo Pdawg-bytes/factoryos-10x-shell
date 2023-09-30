@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using factoryos_10x_shell.Controls.LockControls;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace factoryos_10x_shell.Controls
@@ -17,7 +18,8 @@ namespace factoryos_10x_shell.Controls
 
         private void LockButton_Click(object sender, RoutedEventArgs e)
         {
-            // todo: IMPLEMENT LOCK PAGE
+            MainPage.DesktopFrameP.Navigate(typeof(LockScreen));
+            this.Hide();
         }
     }
 }
