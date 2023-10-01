@@ -12,7 +12,7 @@
     <Grid>
         <Image x:Name="BackgroundWallpaper" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="ms-appx:///Assets/wallpaper_default.jpg" Stretch="Fill" Grid.Row="0" GotFocus="OtherObject_GotFocus"/>
         <Rectangle Opacity="0.5" Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GotFocus="OtherObject_GotFocus"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" GotFocus="OtherObject_GotFocus">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel MaxWidth="200">
                 <Ellipse Width="180" Height="180" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Ellipse.Fill>
@@ -22,31 +22,31 @@
                 <TextBlock Text="FactoryOS User" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,30" FontSize="24" FontWeight="SemiBold"/>
                 <Grid>
                     <Border Background="Gray" Opacity="0.4" HorizontalAlignment="Stretch" Height="40" CornerRadius="3" GotFocus="OtherObject_GotFocus" MaxWidth="200"/>
-                    <TextBox Opacity="0" x:Name="InputBox" TextChanging="InputBox_TextChanging" IsTabStop="True" MaxWidth="200"/>
                     <TextBlock Text="PIN" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PinLabel"/>
+                    <TextBox Opacity="0" x:Name="InputBox" TextChanging="InputBox_TextChanging" IsTabStop="True" MaxWidth="200"/>
                 </Grid>
             </StackPanel>
-            
+
             <StackPanel Margin="0,20,0,0">
                 <StackPanel Orientation="Horizontal">
-                    <Button Width="60" Height="60" Content="1" FontSize="25" Background="Transparent"/>
-                    <Button Width="60" Height="60" Content="2" FontSize="25" Background="Transparent"/>
-                    <Button Width="60" Height="60" Content="3" FontSize="25" Background="Transparent"/>
+                    <Button Width="60" Height="60" Content="1" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
+                    <Button Width="60" Height="60" Content="2" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
+                    <Button Width="60" Height="60" Content="3" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Width="60" Height="60" Content="4" FontSize="25" Background="Transparent"/>
-                    <Button Width="60" Height="60" Content="5" FontSize="25" Background="Transparent"/>
-                    <Button Width="60" Height="60" Content="6" FontSize="25" Background="Transparent"/>
+                    <Button Width="60" Height="60" Content="4" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
+                    <Button Width="60" Height="60" Content="5" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
+                    <Button Width="60" Height="60" Content="6" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Width="60" Height="60" Content="7" FontSize="25" Background="Transparent"/>
-                    <Button Width="60" Height="60" Content="8" FontSize="25" Background="Transparent"/>
-                    <Button Width="60" Height="60" Content="9" FontSize="25" Background="Transparent"/>
+                    <Button Width="60" Height="60" Content="7" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
+                    <Button Width="60" Height="60" Content="8" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
+                    <Button Width="60" Height="60" Content="9" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button Width="60" Height="60" Opacity="0" FontSize="25" Background="Transparent"/>
-                    <Button Width="60" Height="60" Content="0" FontSize="25" Background="Transparent"/>
-                    <Button Width="60" Height="60" Content="back" FontSize="25" Background="Transparent"/>
+                    <Button Width="60" Height="60" Content="0" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
+                    <Button Width="60" Height="60" Content="&#xE750;" FontFamily="Segoe MDL2 Assets" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
