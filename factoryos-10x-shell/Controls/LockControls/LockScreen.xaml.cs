@@ -17,7 +17,7 @@ namespace factoryos_10x_shell.Controls.LockControls
             this.InitializeComponent();
 
             machineName = Environment.MachineName;
-            PinSecurityManager.SetEncryptedPin(new int[4] { 1, 2, 3, 4 }, machineName);
+            //PinSecurityManager.SetEncryptedPin(new int[4] { 1, 2, 3, 4 }, machineName);
 
             InputBox.Focus(FocusState.Keyboard);
         }
@@ -38,13 +38,15 @@ namespace factoryos_10x_shell.Controls.LockControls
             }
             catch
             {
-                InputBox.Text = InputBox.Text.Substring(0, InputBox.Text.Length - 1);
+                InputBox.Text = String.Empty;
+                PinLabel.Text = "PIN";
             }
+
             if (isCorrect && InputBox.Text.Length == 4)
             {
                 MainPage.DesktopFrameP.Navigate(typeof(MainDesktop));
             }
-            else if (InputBox.Text.Length == 4 || InputBox.Text.Length == 0)
+            else if (InputBox.Text.Length == 0)
             {
                 InputBox.Text = String.Empty;
                 PinLabel.Text = "PIN";

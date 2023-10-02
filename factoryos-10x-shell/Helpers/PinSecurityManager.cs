@@ -19,30 +19,29 @@ namespace factoryos_10x_shell.Helpers
     {
         public static void SetEncryptedPin(int[] pin, string machineName)
         {
-            try
-            {
-                string pinHash = CalculatePinHash(pin);
-                string encryptionKey = machineName + pinHash;
+            string pinHash = CalculatePinHash(pin);
+            byte[] encryptionKey = DeriveKeyFromPin(pinHash, machineName);
 
-                byte[] encryptedPin = EncryptArray(pin, encryptionKey);
-                ApplicationData.Current.LocalSettings.Values["EncryptedPIN"] = Convert.ToBase64String(encryptedPin);
-            }
-            catch(Exception ex) { Debug.WriteLine(ex.Message); }
+            byte[] encryptedPin = EncryptArray(pin, encryptionKey);
+            ApplicationData.Current.LocalSettings.Values["EncryptedPIN"] = Convert.ToBase64String(encryptedPin);
         }
 
         public static bool CheckPin(int[] enteredPin, string machineName)
         {
             if (ApplicationData.Current.LocalSettings.Values.TryGetValue("EncryptedPIN", out object encryptedPinObj))
             {
-                string encryptedPinString = encryptedPinObj as string;
-                byte[] encryptedPin = Convert.FromBase64String(encryptedPinString);
+                if (enteredPin.Length == 4)
+                {
+                    string encryptedPinString = encryptedPinObj as string;
+                    byte[] encryptedPin = Convert.FromBase64String(encryptedPinString);
 
-                string pinHash = CalculatePinHash(enteredPin);
-                string encryptionKey = machineName + pinHash;
+                    string pinHash = CalculatePinHash(enteredPin);
+                    byte[] encryptionKey = DeriveKeyFromPin(pinHash, machineName);
 
-                int[] decryptedPin = DecryptArray(encryptedPin, encryptionKey);
+                    int[] decryptedPin = DecryptArray(encryptedPin, encryptionKey);
 
-                return ArraysEqual(decryptedPin, enteredPin);
+                    return ArraysEqual(decryptedPin, enteredPin);
+                }
             }
             return false;
         }
@@ -57,11 +56,30 @@ namespace factoryos_10x_shell.Helpers
             }
         }
 
-        private static byte[] EncryptArray(int[] data, string key)
+        private static byte[] DeriveKeyFromPin(string pinHash, string machineName)
+        {
+            byte[] machineSalt = Encoding.UTF8.GetBytes(machineName);
+            if (machineSalt.Length < 8)
+            {
+                for (int i = machineSalt.Length; i < 8; i++)
+                {
+                    byte[] originalArray = machineSalt;
+                    byte[] dataToAppend = BitConverter.GetBytes(i);
+
+                    machineSalt = originalArray.Concat(dataToAppend).ToArray();
+                }
+            }
+            using (Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(pinHash, machineSalt, 10000, HashAlgorithmName.SHA256))
+            {
+                return pbkdf2.GetBytes(32);
+            }
+        }
+
+        private static byte[] EncryptArray(int[] data, byte[] key)
         {
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = Encoding.UTF8.GetBytes(key);
+                aesAlg.Key = key;
                 aesAlg.GenerateIV();
 
                 using (ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV))
@@ -80,11 +98,11 @@ namespace factoryos_10x_shell.Helpers
             }
         }
 
-        private static int[] DecryptArray(byte[] encryptedData, string key)
+        private static int[] DecryptArray(byte[] encryptedData, byte[] key)
         {
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = Encoding.UTF8.GetBytes(key);
+                aesAlg.Key = key;
                 byte[] iv = encryptedData.Take(16).ToArray();
                 byte[] cipherText = encryptedData.Skip(16).ToArray();
 
@@ -94,10 +112,17 @@ namespace factoryos_10x_shell.Helpers
                     {
                         using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                         {
-                            byte[] decryptedBytes = new byte[cipherText.Length];
-                            csDecrypt.Read(decryptedBytes, 0, decryptedBytes.Length);
-                            string decryptedDataString = Encoding.UTF8.GetString(decryptedBytes);
-                            return Array.ConvertAll(decryptedDataString.Split(','), int.Parse);
+                            try
+                            {
+                                byte[] decryptedBytes = new byte[cipherText.Length];
+                                csDecrypt.Read(decryptedBytes, 0, decryptedBytes.Length);
+                                string decryptedDataString = Encoding.UTF8.GetString(decryptedBytes);
+                                return Array.ConvertAll(decryptedDataString.Split(','), int.Parse);
+                            }
+                            catch 
+                            {
+                                return null;
+                            }
                         }
                     }
                 }
