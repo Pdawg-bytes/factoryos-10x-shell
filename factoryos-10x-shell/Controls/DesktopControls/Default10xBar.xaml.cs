@@ -17,6 +17,8 @@ using System.Linq;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
+using factoryos_10x_shell.Controls.DesktopControls;
 
 namespace factoryos_10x_shell.Controls
 {
@@ -256,6 +258,7 @@ namespace factoryos_10x_shell.Controls
             startLaunched = !startLaunched;
             if(startLaunched)
             {
+                MainDesktop.OpenStartStoryboard.Begin();
                 ColorTopLeft.Opacity = 1;
                 ColorTopRight.Opacity = 1;
                 ColorBottomLeft.Opacity = 1;
@@ -267,6 +270,7 @@ namespace factoryos_10x_shell.Controls
             }
             else
             {
+                MainDesktop.CloseStartStoryboard.Begin();
                 ColorTopLeft.Opacity = 0;
                 ColorTopRight.Opacity = 0;
                 ColorBottomLeft.Opacity = 0;

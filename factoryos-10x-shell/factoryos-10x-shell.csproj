@@ -122,11 +122,14 @@
     <Compile Include="Controls\ActionCenterControls\ActionCenterHome.xaml.cs">
       <DependentUpon>ActionCenterHome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Default10xBar.xaml.cs">
+    <Compile Include="Controls\DesktopControls\Default10xBar.xaml.cs">
       <DependentUpon>Default10xBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DesktopControls\MainDesktop.xaml.cs">
       <DependentUpon>MainDesktop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DesktopControls\StartMenu.xaml.cs">
+      <DependentUpon>StartMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ErrorDialog.xaml.cs">
       <DependentUpon>ErrorDialog.xaml</DependentUpon>
@@ -173,11 +176,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Default10xBar.xaml">
+    <Page Include="Controls\DesktopControls\Default10xBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\DesktopControls\MainDesktop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DesktopControls\StartMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

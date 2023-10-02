@@ -100,7 +100,7 @@
                 <Button.Flyout>
                     <Flyout FlyoutPresenterStyle="{StaticResource ActionCenterFlyout}" Placement="BottomEdgeAlignedLeft">
                         <Grid>
-                            <Frame x:Name="ActionCenterFrame" Width="320" MinHeight="50" MaxHeight="500"/>
+                            <Frame x:Name="ActionCenterFrame" Width="320" MinHeight="50"/>
                         </Grid>
                     </Flyout>
                 </Button.Flyout>
