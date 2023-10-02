@@ -10,73 +10,110 @@ using Windows.Security.Cryptography;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.Security.Cryptography.Core;
+using System.IO;
+using System.Diagnostics;
 
 namespace factoryos_10x_shell.Helpers
 {
     internal class PinSecurityManager
     {
-        public static bool SetPin(int[] pin)
+        public static void SetEncryptedPin(int[] pin, string machineName)
         {
             try
             {
-                string machineName = Environment.MachineName;
-                string salt = GenerateSalt();
-                string pinHash = HashPin(pin, salt);
+                string pinHash = CalculatePinHash(pin);
+                string encryptionKey = machineName + pinHash;
 
-                ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-                localSettings.Values["PinHashKey"] = pinHash;
-                localSettings.Values["SaltKey"] = salt;
-                localSettings.Values["MachineNameKey"] = machineName;
-
-                return true;
+                byte[] encryptedPin = EncryptArray(pin, encryptionKey);
+                ApplicationData.Current.LocalSettings.Values["EncryptedPIN"] = Convert.ToBase64String(encryptedPin);
             }
-            catch
-            {
-                return false;
-            }
+            catch(Exception ex) { Debug.WriteLine(ex.Message); }
         }
 
-        public static bool CheckPin(int[] enteredPin)
+        public static bool CheckPin(int[] enteredPin, string machineName)
         {
-            try
+            if (ApplicationData.Current.LocalSettings.Values.TryGetValue("EncryptedPIN", out object encryptedPinObj))
             {
-                ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-                string storedPinHash = localSettings.Values["PinHashKey"] as string;
-                string storedSalt = localSettings.Values["SaltKey"] as string;
-                string storedMachineName = localSettings.Values["MachineNameKey"] as string;
+                string encryptedPinString = encryptedPinObj as string;
+                byte[] encryptedPin = Convert.FromBase64String(encryptedPinString);
 
-                if (storedPinHash != null && storedSalt != null && storedMachineName != null)
-                {
-                    string enteredPinHash = HashPin(enteredPin, storedSalt);
-                    return enteredPinHash == storedPinHash && Environment.MachineName == storedMachineName;
-                }
-                else
-                {
-                    return false;
-                }
+                string pinHash = CalculatePinHash(enteredPin);
+                string encryptionKey = machineName + pinHash;
+
+                int[] decryptedPin = DecryptArray(encryptedPin, encryptionKey);
+
+                return ArraysEqual(decryptedPin, enteredPin);
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
 
-        private static string GenerateSalt()
+        private static string CalculatePinHash(int[] pin)
         {
-            return Guid.NewGuid().ToString();
-        }
-
-        private static string HashPin(int[] pin, string salt)
-        {
-            string pinAsString = string.Join("", pin);
-            string dataToHash = pinAsString + salt;
-            byte[] dataBytes = Encoding.UTF8.GetBytes(dataToHash);
-
-            using (var sha256 = System.Security.Cryptography.SHA256.Create())
+            using (SHA256 sha256 = SHA256.Create())
             {
-                byte[] hashBytes = sha256.ComputeHash(dataBytes);
+                byte[] pinBytes = Encoding.UTF8.GetBytes(string.Join(",", pin));
+                byte[] hashBytes = sha256.ComputeHash(pinBytes);
                 return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
             }
+        }
+
+        private static byte[] EncryptArray(int[] data, string key)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = Encoding.UTF8.GetBytes(key);
+                aesAlg.GenerateIV();
+
+                using (ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV))
+                {
+                    byte[] plaintextBytes = Encoding.UTF8.GetBytes(string.Join(",", data));
+                    using (MemoryStream msEncrypt = new MemoryStream())
+                    {
+                        using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                        {
+                            csEncrypt.Write(plaintextBytes, 0, plaintextBytes.Length);
+                            csEncrypt.FlushFinalBlock();
+                            return aesAlg.IV.Concat(msEncrypt.ToArray()).ToArray();
+                        }
+                    }
+                }
+            }
+        }
+
+        private static int[] DecryptArray(byte[] encryptedData, string key)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = Encoding.UTF8.GetBytes(key);
+                byte[] iv = encryptedData.Take(16).ToArray();
+                byte[] cipherText = encryptedData.Skip(16).ToArray();
+
+                using (ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, iv))
+                {
+                    using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                    {
+                        using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        {
+                            byte[] decryptedBytes = new byte[cipherText.Length];
+                            csDecrypt.Read(decryptedBytes, 0, decryptedBytes.Length);
+                            string decryptedDataString = Encoding.UTF8.GetString(decryptedBytes);
+                            return Array.ConvertAll(decryptedDataString.Split(','), int.Parse);
+                        }
+                    }
+                }
+            }
+        }
+
+        private static bool ArraysEqual(int[] arr1, int[] arr2)
+        {
+            if (arr1.Length != arr2.Length)
+                return false;
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                if (arr1[i] != arr2[i])
+                    return false;
+            }
+            return true;
         }
     }
 }

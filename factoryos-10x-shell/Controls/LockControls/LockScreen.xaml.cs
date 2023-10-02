@@ -11,11 +11,13 @@ namespace factoryos_10x_shell.Controls.LockControls
 {
     public sealed partial class LockScreen : Page
     {
+        private static string machineName;
         public LockScreen()
         {
             this.InitializeComponent();
 
-            PinSecurityManager.SetPin(new int[4] { 8, 7, 9, 0});
+            machineName = Environment.MachineName;
+            PinSecurityManager.SetEncryptedPin(new int[4] { 1, 2, 3, 4 }, machineName);
 
             InputBox.Focus(FocusState.Keyboard);
         }
@@ -29,15 +31,13 @@ namespace factoryos_10x_shell.Controls.LockControls
             }
             PinLabel.Text = labelText;
             bool isCorrect = false;
-            // Try to parse the entered text as an integer array
             try
             {
                 int[] enteredPin = InputBox.Text.Select(c => int.Parse(c.ToString())).ToArray();
-                isCorrect = PinSecurityManager.CheckPin(enteredPin);
+                isCorrect = PinSecurityManager.CheckPin(enteredPin, machineName);
             }
             catch
             {
-                // Handle non-digit input here, such as removing the last character
                 InputBox.Text = InputBox.Text.Substring(0, InputBox.Text.Length - 1);
             }
             if (isCorrect && InputBox.Text.Length == 4)
