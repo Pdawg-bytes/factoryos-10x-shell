@@ -158,6 +158,7 @@
   <ItemGroup>
     <Content Include="Assets\defaultUser.png" />
     <Content Include="Assets\wallpaper_default.jpg" />
+    <Content Include="Assets\waves.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

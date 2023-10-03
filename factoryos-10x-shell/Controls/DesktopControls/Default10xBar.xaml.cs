@@ -19,6 +19,7 @@ using Windows.UI;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using factoryos_10x_shell.Controls.DesktopControls;
+using Windows.UI.Xaml.Shapes;
 
 namespace factoryos_10x_shell.Controls
 {
@@ -29,17 +30,39 @@ namespace factoryos_10x_shell.Controls
         bool reportRequested = false;
         public static bool batteryActionCenterEnabled;
         public static bool startLaunched = false;
+        public static bool extStartLaunchFlag = false;
 
         public static int connectionStatus;
         public static int notifcationCount;
 
         private ThemeListener themeListener;
+
         private SolidColorBrush lightBrush;
         private SolidColorBrush darkBrush;
+
+        public static Path ColorTopLeftP { get; private set; }
+        public static Path ColorTopRightP { get; private set; }
+        public static Path ColorBottomLeftP { get; private set; }
+        public static Path ColorBottomRightP { get; private set; }
+        public static Path NormalTopLeftP { get; private set; }
+        public static Path NormalTopRightP { get; private set; }
+        public static Path NormalBottomLeftP { get; private set; }
+        public static Path NormalBottomRightP { get; private set; }
+
+        public static Button StartButtonP { get; private set; }
 
         public Default10xBar()
         {
             this.InitializeComponent();
+            ColorTopLeftP = ColorTopLeft;
+            ColorTopRightP = ColorTopRight;
+            ColorBottomLeftP = ColorBottomLeft;
+            ColorBottomRightP = ColorBottomRight;
+            NormalTopLeftP = NormalTopLeft;
+            NormalTopRightP = NormalTopRight;
+            NormalBottomLeftP = NormalBottomLeft;
+            NormalBottomRightP = NormalBottomRight;
+            StartButtonP = StartButton;
 
             // Init
             TimeAndDate();
@@ -256,29 +279,41 @@ namespace factoryos_10x_shell.Controls
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             startLaunched = !startLaunched;
-            if(startLaunched)
+            SetStartColorOpacity();
+
+            if (startLaunched)
             {
                 MainDesktop.OpenStartStoryboard.Begin();
-                ColorTopLeft.Opacity = 1;
-                ColorTopRight.Opacity = 1;
-                ColorBottomLeft.Opacity = 1;
-                ColorBottomRight.Opacity = 1;
-                NormalTopLeft.Opacity = 0;
-                NormalTopRight.Opacity = 0;
-                NormalBottomLeft.Opacity = 0;
-                NormalBottomRight.Opacity = 0;
             }
             else
             {
                 MainDesktop.CloseStartStoryboard.Begin();
-                ColorTopLeft.Opacity = 0;
-                ColorTopRight.Opacity = 0;
-                ColorBottomLeft.Opacity = 0;
-                ColorBottomRight.Opacity = 0;
-                NormalTopLeft.Opacity = 1;
-                NormalTopRight.Opacity = 1;
-                NormalBottomLeft.Opacity = 1;
-                NormalBottomRight.Opacity = 1;
+            }
+        }
+
+        public static void SetStartColorOpacity()
+        {
+            if (startLaunched)
+            {
+                ColorTopLeftP.Opacity = 1;
+                ColorTopRightP.Opacity = 1;
+                ColorBottomLeftP.Opacity = 1;
+                ColorBottomRightP.Opacity = 1;
+                NormalTopLeftP.Opacity = 0;
+                NormalTopRightP.Opacity = 0;
+                NormalBottomLeftP.Opacity = 0;
+                NormalBottomRightP.Opacity = 0;
+            }
+            else
+            {
+                ColorTopLeftP.Opacity = 0;
+                ColorTopRightP.Opacity = 0;
+                ColorBottomLeftP.Opacity = 0;
+                ColorBottomRightP.Opacity = 0;
+                NormalTopLeftP.Opacity = 1;
+                NormalTopRightP.Opacity = 1;
+                NormalBottomLeftP.Opacity = 1;
+                NormalBottomRightP.Opacity = 1;
             }
         }
         #endregion

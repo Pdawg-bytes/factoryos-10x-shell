@@ -26,7 +26,7 @@
                           FallbackColor="DimGray"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
-            
+
             <!--Control Center togglebutton style-->
             <Style TargetType="ToggleButton" x:Key="ActionCenterToggleStyle">
                 <Setter Property="CornerRadius" Value="4"/>

@@ -8,6 +8,6 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Rectangle Height="300" Width="600" Fill="Transparent"/>
+        <Border Height="600" MaxWidth="800" MinWidth="480" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" CornerRadius="4"/>
     </Grid>
 </Page>

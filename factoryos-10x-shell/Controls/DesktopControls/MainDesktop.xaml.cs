@@ -63,7 +63,7 @@ namespace factoryos_10x_shell.Controls.DesktopControls
         {
             DoubleAnimation slideOutAnimation = new DoubleAnimation
             {
-                To = 400,
+                To = 800,
                 Duration = new Duration(TimeSpan.FromSeconds(0.15)),
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
             };
