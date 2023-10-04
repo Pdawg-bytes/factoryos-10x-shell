@@ -67,7 +67,7 @@
                             </Path>
                             <Path Data="M461.966 933.489V529.489H1007.07V1011.5C1007.07 1011.5 1003.17 1011.79 947.166 1004.09C891.166 996.289 461.966 933.489 461.966 933.489Z" Fill="#636362" x:Name="NormalBottomRight">
                                 <Path.OpacityTransition>
-                                    <ScalarTransition Duration="0:0:0.25" />
+                                    <ScalarTransition Duration="0:0:0.30" />
                                 </Path.OpacityTransition>
                             </Path>
                             <Path Data="M427.866 95.189V495.289H16.0659L16.0659 150.5C16.0659 150.5 9.79999 150.8 62 145C114.2 139.2 427.866 95.189 427.866 95.189Z" Fill="{StaticResource TopLeftStartCorner}" x:Name="ColorTopLeft" Opacity="0">
@@ -87,7 +87,7 @@
                             </Path>
                             <Path Data="M461.966 933.489V529.489H1007.07V1011.5C1007.07 1011.5 1003.17 1011.79 947.166 1004.09C891.166 996.289 461.966 933.489 461.966 933.489Z" Fill="{StaticResource BottomRightStartCorner}" x:Name="ColorBottomRight" Opacity="0">
                                 <Path.OpacityTransition>
-                                    <ScalarTransition Duration="0:0:0.25" />
+                                    <ScalarTransition Duration="0:0:0.30" />
                                 </Path.OpacityTransition>
                             </Path>
                         </Canvas>

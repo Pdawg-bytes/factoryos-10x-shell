@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <Border Height="600" MaxWidth="800" MinWidth="480" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" CornerRadius="4"/>
+    <Grid Height="600"  >
+        <Border Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" CornerRadius="4"/>
     </Grid>
 </Page>

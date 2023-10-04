@@ -48,7 +48,7 @@ namespace factoryos_10x_shell.Controls.DesktopControls
             DoubleAnimation slideInAnimation = new DoubleAnimation
             {
                 To = 0,
-                Duration = new Duration(TimeSpan.FromSeconds(0.15)),
+                Duration = new Duration(TimeSpan.FromSeconds(0.2)),
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
             };
 
@@ -64,7 +64,7 @@ namespace factoryos_10x_shell.Controls.DesktopControls
             DoubleAnimation slideOutAnimation = new DoubleAnimation
             {
                 To = 800,
-                Duration = new Duration(TimeSpan.FromSeconds(0.15)),
+                Duration = new Duration(TimeSpan.FromSeconds(0.20)),
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
             };
 
