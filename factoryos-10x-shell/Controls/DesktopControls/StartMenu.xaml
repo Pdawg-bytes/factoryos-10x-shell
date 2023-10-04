@@ -7,7 +7,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Height="600"  >
-        <Border Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" CornerRadius="4"/>
+    <Page.Resources>
+        <SolidColorBrush x:Key="WhiteTintBrushStrong" Color="Gray" Opacity="0.15" />
+        <SolidColorBrush x:Key="WhiteTintBrushNormal" Color="Gray" Opacity="0.1" />
+    </Page.Resources>
+    
+    <Grid Height="685" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Border Background="{ThemeResource WhiteTintBrushStrong}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="48" MaxWidth="640" CornerRadius="3">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="17,0,0,0">
+                    <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets" FontSize="16" Margin="0,7,0,0" Opacity="0.8"/>
+                    <TextBox Margin="10,0,0,0" Style="{ThemeResource TextBoxStyleBlack}" PlaceholderText="Search the web or your devices" HorizontalAlignment="Stretch" Width="590"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="1" Background="{ThemeResource WhiteTintBrushNormal}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
 </Page>
