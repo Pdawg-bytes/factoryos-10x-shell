@@ -113,10 +113,11 @@
                 <Setter Property="Padding" Value="0"/>
             </Style>
 
+            <!-- Transparent text box style-->
             <Style x:Key="TextBoxStyleBlack" TargetType="TextBox">
                 <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
                 <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}"/>
-                <Setter Property="Foreground" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="BorderBrush" Value="Transparent"/>
                 <Setter Property="SelectionHighlightColor" Value="{ThemeResource SystemControlHighlightAccentBrush}"/>
