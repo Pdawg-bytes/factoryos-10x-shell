@@ -8,6 +8,11 @@
     mc:Ignorable="d"
     Background="Transparent">
 
+    <Page.Resources>
+        <SolidColorBrush x:Key="WhiteTintBrushNormal" Color="Gray" Opacity="0.06" />
+        <SolidColorBrush x:Key="WhiteTintBrushStrong" Color="Gray" Opacity="0.15" />
+    </Page.Resources>
+    
     <Grid>
         <StackPanel>
             <StackPanel Width="320" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:Name="NotifRootPanel" Margin="0,0,0,20" CornerRadius="4" Visibility="Collapsed">
@@ -15,19 +20,18 @@
                     <TextBlock Text="Notifications" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="12"/>
                     <Grid Margin="8,0,145,0">
                         <Ellipse Height="24" Width="24" Fill="#aa505050" Margin="0,0,0,0"/>
-                        <TextBlock Text="22" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="NotifCount" Margin="0,0,0,0"/>
+                        <TextBlock Text="0" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="NotifCount" Margin="0,0,0,0"/>
                     </Grid>
                     <Button CornerRadius="12" Content="Clear all" FontSize="10" Height="26" Background="#aa505050" x:Name="ClearNotifs" Click="ClearNotifs_Click"/>
                 </StackPanel>
-                <Border Background="#434343" Height="1" Width="320" Margin="-60,0,-60,0" Opacity="0.5"/>
-                <StackPanel Width="320" Height="100" Background="Transparent">
+                <StackPanel Width="320" Height="100" Background="{ThemeResource WhiteTintBrushNormal}">
                     <GridView>
                         
                     </GridView>
                 </StackPanel>
             </StackPanel>
             <StackPanel Width="320" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" CornerRadius="4">
-                <StackPanel Orientation="Horizontal" Width="320" Height="36" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}">
+                <StackPanel Orientation="Horizontal" Width="320" Height="36" Background="Transparent">
                     <TextBlock Text="Quick Settings" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,200,0" FontSize="12"/>
                     <Button x:Name="ExpnanderControlButton" CornerRadius="25" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" Padding="0" Margin="0,0,0,0" Click="ExpnanderControlButton_Click">
                         <Button.Content>
@@ -35,8 +39,7 @@
                         </Button.Content>
                     </Button>
                 </StackPanel>
-                <Border Background="#434343" Height="1" Width="320" Margin="-60,0,-60,0" Opacity="0.5"/>
-                <StackPanel>
+                <StackPanel Background="{ThemeResource WhiteTintBrushNormal}">
                     <StackPanel Orientation="Horizontal" Width="320" Height="48">
                         <TextBlock Text="&#xE15D;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="14,0,0,0" x:Name="SndStatus"/>
                         <Slider x:Name="VolumeSlider" Width="240" VerticalAlignment="Center" Margin="10,0,0,0" CornerRadius="2" ValueChanged="VolumeSlider_ValueChanged"/>
@@ -47,7 +50,7 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Width="320" Orientation="Vertical" Height="80" x:Name="ControlPanel">
+                <StackPanel Width="320" Orientation="Vertical" Height="80" x:Name="ControlPanel" Background="{ThemeResource WhiteTintBrushNormal}">
                     <ScrollViewer>
                         <StackPanel>
                             <StackPanel x:Name="FirstRowControls" Width="320" Orientation="Horizontal" Height="70" Margin="0,10,0,0">
@@ -149,8 +152,8 @@
                         </StackPanel>
                     </ScrollViewer>
                 </StackPanel>
-                <Border Background="#434343" Height="1" Width="320" Margin="-60,0,-60,0" Opacity="0.5"/>
-                <StackPanel Orientation="Horizontal" x:Name="BottomControlsCenter" Width="320" Height="42" Background="{ThemeResource ElementAcrylicBrush}" HorizontalAlignment="Right">
+                <Border Background="{ThemeResource WhiteTintBrushStrong}" Height="1" Width="320" Margin="-60,0,-60,0" Opacity="1"/>
+                <StackPanel Background="{ThemeResource WhiteTintBrushNormal}" Orientation="Horizontal" x:Name="BottomControlsCenter" Width="320" Height="42" HorizontalAlignment="Right">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80"/>

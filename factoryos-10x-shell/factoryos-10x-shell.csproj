@@ -157,6 +157,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\defaultUser.png" />
+    <Content Include="Assets\Sounds\AlertCharging.wav" />
+    <Content Include="Assets\Sounds\BootUp.wav" />
+    <Content Include="Assets\Sounds\CalendarReminder.wav" />
+    <Content Include="Assets\Sounds\Default.wav" />
+    <Content Include="Assets\Sounds\DeviceConnect.wav" />
+    <Content Include="Assets\Sounds\DeviceConnectionError.wav" />
+    <Content Include="Assets\Sounds\DeviceDisconnect.wav" />
+    <Content Include="Assets\Sounds\KbdPenCharging.wav" />
+    <Content Include="Assets\Sounds\KbdPenDisconnect.wav" />
+    <Content Include="Assets\Sounds\LowCriticalBatteryAlert.wav" />
+    <Content Include="Assets\Sounds\MessageNudge.wav" />
+    <Content Include="Assets\Sounds\NewMessageNotification.wav" />
+    <Content Include="Assets\Sounds\NotificationMail.wav" />
+    <Content Include="Assets\Sounds\NotificationToast.wav" />
+    <Content Include="Assets\Sounds\UserAccountControl.wav" />
     <Content Include="Assets\wallpaper_default.jpg" />
     <Content Include="Assets\waves.jpg" />
     <Content Include="Properties\Default.rd.xml" />

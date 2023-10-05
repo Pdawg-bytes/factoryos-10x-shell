@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Playback;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -20,11 +21,14 @@ namespace factoryos_10x_shell
 {
     sealed partial class App : Application
     {
+        public static MediaPlayer MediaPlayer;
         public App()
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
+
+            MediaPlayer = BackgroundMediaPlayer.Current;
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)

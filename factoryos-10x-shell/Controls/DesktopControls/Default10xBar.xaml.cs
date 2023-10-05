@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using factoryos_10x_shell.Controls.DesktopControls;
 using Windows.UI.Xaml.Shapes;
+using Windows.Media.Core;
 
 namespace factoryos_10x_shell.Controls
 {
@@ -165,22 +166,32 @@ namespace factoryos_10x_shell.Controls
         string[] batteryIcons = { "\uEBA0", "\uEBA1", "\uEBA2", "\uEBA3", "\uEBA4", "\uEBA5", "\uEBA6", "\uEBA7", "\uEBA8", "\uEBA9", "\uEBAA" };
         private void AggregateBattery()
         {
-            var aggBattery = Battery.AggregateBattery;
-            var report = aggBattery.GetReport();
+            Battery aggBattery = Battery.AggregateBattery;
+            BatteryReport report = aggBattery.GetReport();
             string charging = report.Status.ToString();
             double fullCharge = Convert.ToDouble(report.FullChargeCapacityInMilliwattHours);
             double currentCharge = Convert.ToDouble(report.RemainingCapacityInMilliwattHours);
             double battLevel = Math.Ceiling((currentCharge / fullCharge) * 100);
             batteryActionCenter = Math.Floor(battLevel).ToString() + "%";
+
             if (charging == "Charging" || charging == "Idle")
             {
                 int indexCharge = (int)Math.Floor(battLevel / 10);
                 BattStatus.Text = batteryIconsCharge[indexCharge];
+
+                App.MediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/AlertCharging.wav"));
+                App.MediaPlayer.Play();
             }
             else
             {
                 int indexDischarge = (int)Math.Floor(battLevel / 10);
                 BattStatus.Text = batteryIcons[indexDischarge];
+
+                if (battLevel <= 20)
+                {
+                    App.MediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/LowCriticalBatteryAlert.wav"));
+                    App.MediaPlayer.Play();
+                }
             }
         }
 
@@ -225,6 +236,8 @@ namespace factoryos_10x_shell.Controls
                         IReadOnlyList<UserNotification> notifsOther = await notifListener.GetNotificationsAsync(NotificationKinds.Unknown);
                         if (notifsToast.Count > 0 || notifsOther.Count > 0)
                         {
+                            App.MediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/NotificationToast.wav"));
+                            App.MediaPlayer.Play();
                             notifcationCount = notifsToast.Count;
                             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
