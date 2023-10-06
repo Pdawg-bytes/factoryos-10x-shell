@@ -9,7 +9,7 @@
 
     <Grid>
         <Image x:Name="BackgroundWallpaper" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="ms-appx:///Assets/waves.jpg" Stretch="Fill" Grid.Row="0"/>
-        <Frame x:Name="StartMenuFrame" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" MaxWidth="810" MaxHeight="685" Margin="6,6,6,60" Background="Transparent" CornerRadius="4">
+        <Frame x:Name="StartMenuFrame" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" MaxWidth="810" MaxHeight="685" Margin="10,10,10,60" Background="Transparent" CornerRadius="4">
             <Frame.RenderTransform>
                 <TranslateTransform Y="800" x:Name="StartMenuTransform"/>
             </Frame.RenderTransform>

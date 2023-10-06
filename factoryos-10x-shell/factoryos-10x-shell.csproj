@@ -143,8 +143,10 @@
     <Compile Include="Controls\PowerDialog.xaml.cs">
       <DependentUpon>PowerDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Models\StartIconModel.cs" />
     <Compile Include="Helpers\PinSecurityManager.cs" />
     <Compile Include="Helpers\ProcessStart.cs" />
+    <Compile Include="Helpers\VisualHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
