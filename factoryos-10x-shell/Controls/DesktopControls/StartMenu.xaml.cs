@@ -21,6 +21,9 @@ using factoryos_10x_shell.Helpers.Models;
 using System.Collections.ObjectModel;
 
 using static factoryos_10x_shell.Helpers.VisualHelper;
+using Windows.Storage.Streams;
+using static System.Net.Mime.MediaTypeNames;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace factoryos_10x_shell.Controls.DesktopControls
 {
@@ -28,51 +31,18 @@ namespace factoryos_10x_shell.Controls.DesktopControls
     {
         private bool _appListExpanded;
 
-        public ObservableCollection<StartIconModel> StartIconCollection;
+        private ObservableCollection<StartIconModel> StartIconCollection;
+
         public StartMenu()
         {
             this.InitializeComponent();
 
             StartIconCollection = new ObservableCollection<StartIconModel>();
+            StartIconCollection = App.StartIcons;
 
-            try
-            {
-                PackageManager packageManager = new PackageManager();
-                IEnumerable<Package> packages = packageManager.FindPackagesForUser("");
-                string iconPath;
-                string iconName;
-                foreach (Package package in packages)
-                {
-                    if (!package.IsFramework && !package.IsResourcePackage && !package.IsStub)
-                    {
-                        try
-                        {
-                            /*using (FileStream stream = new FileStream(iconPath, FileMode.Open, FileAccess.Read))
-                            {
-                            }*/
-                            iconPath = string.Empty;
-                            iconPath = Uri.UnescapeDataString(Uri.UnescapeDataString(package.Logo.AbsolutePath)).Replace("/", "\\");
-
-                            iconName = string.Empty;
-                            iconName = package.DisplayName;
-                            StartIconCollection.Add(new StartIconModel { IconName = iconName, AppId = package.Id.FamilyName, IconPath = iconPath });
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine($"Error accessing logo for package {package.Id.FullName}: {ex.Message}");
-                        }
-                    }
-                }
-                ObservableCollection<StartIconModel> sortedPackageInfos = new ObservableCollection<StartIconModel>(StartIconCollection.OrderBy(info => info.IconName));
-                StartIconCollection = sortedPackageInfos;
-                Debug.WriteLine("t");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("LoadBitmapFromUwpIcon => Get: " + ex.Message);
-            }
+            AppListGrid.ItemsSource = StartIconCollection;
         }
-
+       
         private void AppListShow_Click(object sender, RoutedEventArgs e)
         {
             _appListExpanded = !_appListExpanded;

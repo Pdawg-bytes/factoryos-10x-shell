@@ -49,12 +49,12 @@
                         <Button Content="Show all" Grid.Column="1" CornerRadius="12" Width="80" Padding="3" FontSize="13" Background="{ThemeResource WhiteTintBrushStrong}" HorizontalAlignment="Right" Margin="10,0,0,0" x:Name="AppListShow" Click="AppListShow_Click"/>
                     </Grid>
                 </Grid>
-                <GridView ItemsSource="{x:Bind StartIconCollection}" x:Name="AppListGrid" MaxWidth="640" Padding="0" SelectionMode="Single" HorizontalAlignment="Center" Height="310" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="10,20,10,0">
+                <GridView ItemsSource="{x:Bind StartIconCollection}" x:Name="AppListGrid" Width="640" Padding="0" SelectionMode="Single" HorizontalAlignment="Center" Height="310" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="10,20,10,0">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Padding="0" Margin="30,15,30,15">
-                                <Image Source="{Binding IconPath}" Height="50" Width="50" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding IconName}" HorizontalAlignment="Center"/>
+                            <StackPanel Padding="0" Width="120" Height="110">
+                                <Image Source="{Binding IconSource}" Height="50" Width="50" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding IconName}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" FontSize="12"/>
                             </StackPanel>
                         </DataTemplate>
                     </GridView.ItemTemplate>
@@ -88,7 +88,7 @@
                                                     </VisualState>
                                                 </VisualStateGroup>
                                             </VisualStateManager.VisualStateGroups>
-                                            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Background="Transparent" CornerRadius="4" Margin="0,0,0,0" ToolTipService.ToolTip="{Binding IconName}" Padding="0"/>
+                                            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Background="Transparent" CornerRadius="4" ToolTipService.ToolTip="{Binding IconName}" Padding="0"/>
                                         </Grid>
                                     </ControlTemplate>
                                 </Setter.Value>

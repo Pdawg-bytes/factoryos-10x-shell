@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace factoryos_10x_shell.Helpers.Models
 {
@@ -24,15 +25,15 @@ namespace factoryos_10x_shell.Helpers.Models
             }
         }
 
-        private string _iconPath;
-        public string IconPath
+        private BitmapImage _iconSource;
+        public BitmapImage IconSource
         {
-            get { return _iconPath; }
+            get { return _iconSource; }
             set
             {
-                if (_iconPath != value)
+                if (_iconSource != value)
                 {
-                    _iconPath = value;
+                    _iconSource = value;
                     OnPropertyChanged();
                 }
             }
