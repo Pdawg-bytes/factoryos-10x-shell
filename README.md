@@ -38,7 +38,7 @@ To install the shell independently, download the [latest release](https://github
 <br/>
 
 ## 🤝 Contributing
-To contribute to 10X shell, create an issue describing your suggesting, then you'll be given the green light to continue and make a PR. All contributions are appreciated!
+To contribute to 10X shell, create an issue describing your suggestion, then you'll be given the green light to continue and make a PR. All contributions are appreciated!
 
 ## :balance_scale: License
 10X shell is licensed under the **MIT License**, found [here](https://github.com/Pdawg-bytes/factoryos-10x-shell/blob/main/LICENSE).
