@@ -52,7 +52,7 @@
                 <GridView ItemsSource="{x:Bind StartIconCollection}" x:Name="AppListGrid" Width="640" Padding="0" SelectionMode="Single" HorizontalAlignment="Center" Height="310" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="10,20,10,0">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Padding="0" Width="120" Height="110">
+                            <StackPanel Padding="0" Width="110" Height="110">
                                 <Image Source="{Binding IconSource}" Height="50" Width="50" HorizontalAlignment="Center"/>
                                 <TextBlock Text="{Binding IconName}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" FontSize="12"/>
                             </StackPanel>

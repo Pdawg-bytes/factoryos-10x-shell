@@ -9,8 +9,10 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Imaging;
 using Windows.Management.Deployment;
 using Windows.Media.Playback;
 using Windows.Storage.Streams;
@@ -95,11 +97,13 @@ namespace factoryos_10x_shell
                             logoData = null;
                             logoData = package.GetLogoAsRandomAccessStreamReference(_logoSize);
 
+                            AppListEntry entry = package.GetAppListEntries().FirstOrDefault();
+
                             IRandomAccessStreamWithContentType stream = await logoData.OpenReadAsync();
                             BitmapImage bitmapImage = new BitmapImage();
                             await bitmapImage.SetSourceAsync(stream);
 
-                            _icons.Add(new StartIconModel { IconName = package.DisplayName, AppId = package.Id.FamilyName, IconSource = bitmapImage });
+                            _icons.Add(new StartIconModel { IconName = entry.DisplayInfo.DisplayName, AppId = package.Id.FamilyName, IconSource = bitmapImage });
                         }
                         catch (Exception ex)
                         {
