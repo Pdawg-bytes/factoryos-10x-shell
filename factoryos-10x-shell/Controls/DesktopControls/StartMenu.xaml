@@ -11,8 +11,8 @@
         <SolidColorBrush x:Key="WhiteTintBrushStrong" Color="Gray" Opacity="0.15" />
         <SolidColorBrush x:Key="WhiteTintBrushNormal" Color="Gray" Opacity="0.1" />
     </Page.Resources>
-    
-    <Grid Height="685" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}">
+
+    <Grid Height="685" Background="{ThemeResource TaskbarAcrylicBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>

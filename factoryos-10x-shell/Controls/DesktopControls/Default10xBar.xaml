@@ -44,7 +44,7 @@
         </LinearGradientBrush>
     </Page.Resources>
 
-    <Grid x:Name="TaskbarGrid" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" Height="50" VerticalAlignment="Bottom">
+    <Grid x:Name="TaskbarGrid" Background="{ThemeResource TaskbarAcrylicBrush}" Height="50" VerticalAlignment="Bottom">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button HorizontalAlignment="Center" Height="50" Padding="13" Width="50" ToolTipService.ToolTip="Start" x:Name="StartButton" CornerRadius="0" Background="Transparent" Click="StartButton_Click">
                 <Button.Content>

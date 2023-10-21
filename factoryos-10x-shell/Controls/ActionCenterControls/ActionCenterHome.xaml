@@ -15,7 +15,7 @@
     
     <Grid>
         <StackPanel>
-            <StackPanel Width="320" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:Name="NotifRootPanel" Margin="0,0,0,20" CornerRadius="4" Visibility="Collapsed">
+            <StackPanel Width="320" Background="{ThemeResource TaskbarAcrylicBrush}" x:Name="NotifRootPanel" Margin="0,0,0,20" CornerRadius="4" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" Width="320" Height="36">
                     <TextBlock Text="Notifications" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="12"/>
                     <Grid Margin="8,0,145,0">
@@ -30,7 +30,7 @@
                     </GridView>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Width="320" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" CornerRadius="4">
+            <StackPanel Width="320" Background="{ThemeResource TaskbarAcrylicBrush}" CornerRadius="4">
                 <StackPanel Orientation="Horizontal" Width="320" Height="36" Background="Transparent">
                     <TextBlock Text="Quick Settings" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,200,0" FontSize="12"/>
                     <Button x:Name="ExpnanderControlButton" CornerRadius="25" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" Padding="0" Margin="0,0,0,0" Click="ExpnanderControlButton_Click">

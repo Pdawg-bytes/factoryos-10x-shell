@@ -17,6 +17,12 @@
                           BackgroundSource="Backdrop"
                           TintOpacity="0.2"
                           FallbackColor="DimGray"/>
+                    <AcrylicBrush x:Key="TaskbarAcrylicBrush"
+                          TintColor="#FF202020"
+                          BackgroundSource="Backdrop"
+                          TintOpacity="0"
+                          TintLuminosityOpacity="0.95"
+                          FallbackColor="#FF242424"/>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Light">
                     <AcrylicBrush x:Key="ElementAcrylicBrush"
@@ -24,6 +30,20 @@
                           BackgroundSource="Backdrop"
                           TintOpacity="0.2"
                           FallbackColor="DimGray"/>
+                    <AcrylicBrush x:Key="TaskbarAcrylicBrush"
+                          TintColor="#FFEDEDED"
+                          BackgroundSource="Backdrop"
+                          TintOpacity="0.5838"
+                          TintLuminosityOpacity="0.9"
+                          FallbackColor="#FFEDEDED"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <AcrylicBrush x:Key="TaskbarAcrylicBrush"
+                          TintColor="#00FFFFFF"
+                          BackgroundSource="Backdrop"
+                          TintOpacity="1"
+                          TintLuminosityOpacity="1"
+                          FallbackColor="#00FFFFFF"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 
