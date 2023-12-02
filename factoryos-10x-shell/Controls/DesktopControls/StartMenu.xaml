@@ -49,12 +49,12 @@
                         <Button Content="Show all" Grid.Column="1" CornerRadius="12" Width="80" Padding="3" FontSize="13" Background="{ThemeResource WhiteTintBrushStrong}" HorizontalAlignment="Right" Margin="10,0,0,0" x:Name="AppListShow" Click="AppListShow_Click"/>
                     </Grid>
                 </Grid>
-                <GridView ItemsSource="{x:Bind StartIconCollection}" x:Name="AppListGrid" Width="640" Padding="0" SelectionMode="Single" HorizontalAlignment="Center" Height="310" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="10,20,10,0">
+                <GridView ItemsSource="{x:Bind StartIconCollection}" ReorderMode="Enabled" x:Name="AppListGrid" Padding="0" SelectionMode="Single" HorizontalAlignment="Center" Height="310" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="10,20,10,0">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Padding="0" Width="110" Height="110">
+                            <StackPanel Padding="0" Width="90" Height="90" VerticalAlignment="Center">
                                 <Image Source="{Binding IconSource}" Height="50" Width="50" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding IconName}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" FontSize="12"/>
+                                <TextBlock Text="{Binding IconName}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" FontSize="12" MaxLines="1"/>
                             </StackPanel>
                         </DataTemplate>
                     </GridView.ItemTemplate>
@@ -62,6 +62,7 @@
                         <Style TargetType="GridViewItem">
                             <Setter Property="FocusVisualMargin" Value="0" />
                             <Setter Property="IsHitTestVisible" Value="True"/>
+                            <Setter Property="Margin" Value="28,8,28,8"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="GridViewItem">
