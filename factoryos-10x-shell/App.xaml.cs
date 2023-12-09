@@ -94,16 +94,18 @@ namespace factoryos_10x_shell
                     {
                         try
                         {
-                            logoData = null;
-                            logoData = package.GetLogoAsRandomAccessStreamReference(_logoSize);
+                            IReadOnlyList<AppListEntry> entries = package.GetAppListEntries();
+                            foreach (AppListEntry entry in entries)
+                            {
+                                logoData = null;
+                                logoData = package.GetLogoAsRandomAccessStreamReference(_logoSize);
 
-                            AppListEntry entry = package.GetAppListEntries().FirstOrDefault();
+                                IRandomAccessStreamWithContentType stream = await logoData.OpenReadAsync();
+                                BitmapImage bitmapImage = new BitmapImage();
+                                await bitmapImage.SetSourceAsync(stream);
 
-                            IRandomAccessStreamWithContentType stream = await logoData.OpenReadAsync();
-                            BitmapImage bitmapImage = new BitmapImage();
-                            await bitmapImage.SetSourceAsync(stream);
-
-                            _icons.Add(new StartIconModel { IconName = entry.DisplayInfo.DisplayName, AppId = package.Id.FamilyName, IconSource = bitmapImage });
+                                _icons.Add(new StartIconModel { IconName = entry.DisplayInfo.DisplayName, AppId = entry.AppUserModelId, IconSource = bitmapImage });
+                            }
                         }
                         catch (Exception ex)
                         {

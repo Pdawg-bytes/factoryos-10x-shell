@@ -53,8 +53,8 @@ namespace factoryos_10x_shell.Controls.DesktopControls
             DoubleAnimation slideInAnimation = new DoubleAnimation
             {
                 To = 0,
-                Duration = new Duration(TimeSpan.FromSeconds(0.2)),
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
+                Duration = new Duration(TimeSpan.FromSeconds(0.3)),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
 
             Storyboard.SetTarget(slideInAnimation, StartTransform);

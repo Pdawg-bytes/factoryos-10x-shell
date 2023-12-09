@@ -24,6 +24,7 @@ using static factoryos_10x_shell.Helpers.VisualHelper;
 using Windows.Storage.Streams;
 using static System.Net.Mime.MediaTypeNames;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.System;
 
 namespace factoryos_10x_shell.Controls.DesktopControls
 {
@@ -56,7 +57,7 @@ namespace factoryos_10x_shell.Controls.DesktopControls
             }
 
             AppListShow.Content = _appListExpanded ? "Show less" : "Show all";
-            if (_appListExpanded )
+            if (_appListExpanded)
             {
                 AppListGrid.Height = 480;
                 gridScrollViewer.VerticalScrollMode = ScrollMode.Enabled;
