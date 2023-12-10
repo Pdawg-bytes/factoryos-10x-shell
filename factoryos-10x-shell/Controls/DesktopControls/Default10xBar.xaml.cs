@@ -29,19 +29,13 @@ namespace factoryos_10x_shell.Controls
     public sealed partial class Default10xBar : Page
     {
         public static string batteryActionCenter;
-
-        bool reportRequested = false;
         public static bool batteryActionCenterEnabled;
+
         public static bool startLaunched = false;
         public static bool extStartLaunchFlag = false;
 
         public static int connectionStatus;
         public static int notifcationCount;
-
-        private ThemeListener themeListener;
-
-        private SolidColorBrush lightBrush;
-        private SolidColorBrush darkBrush;
 
         public static Path ColorTopLeftP { get; private set; }
         public static Path ColorTopRightP { get; private set; }
@@ -69,94 +63,9 @@ namespace factoryos_10x_shell.Controls
             NormalBottomLeftP = NormalBottomLeft;
             NormalBottomRightP = NormalBottomRight;
             StartButtonP = StartButton;
-
-            // Init
-            InitNotifcation();
-
-            lightBrush = new SolidColorBrush(Color.FromArgb(255, 99, 99, 98));
-            darkBrush = new SolidColorBrush(Color.FromArgb(255, 166, 166, 166));
-
-            themeListener = new ThemeListener();
-            themeListener.ThemeChanged += ThemeListener_ThemeChanged;
-            ThemeListener_ThemeChanged(themeListener);
         }
 
         public Default10xBarViewModel ViewModel => (Default10xBarViewModel)this.DataContext;
-
-        #region Notifications
-        public static UserNotificationListener notifListener = UserNotificationListener.Current;
-        private async void InitNotifcation()
-        {
-            await notifListener.RequestAccessAsync();
-            try
-            {
-                notifListener.NotificationChanged += NotifListener_NotificationChanged;
-            }
-            catch (Exception exCreate)
-            {
-                ErrorDialog dialogC = new ErrorDialog("Notifcation access was denied. Please enable it in settings.\n" + exCreate.Message);
-                await dialogC.ShowAsync();
-            }
-        }
-
-        private async void NotifListener_NotificationChanged(UserNotificationListener sender, UserNotificationChangedEventArgs args)
-        {
-            if (ApiInformation.IsTypePresent("Windows.UI.Notifications.Management.UserNotificationListener"))
-            {
-                UserNotificationListenerAccessStatus accessStatus = await notifListener.RequestAccessAsync();
-                switch (accessStatus)
-                {
-                    case UserNotificationListenerAccessStatus.Allowed:
-                        IReadOnlyList<UserNotification> notifsToast = await notifListener.GetNotificationsAsync(NotificationKinds.Toast);
-                        IReadOnlyList<UserNotification> notifsOther = await notifListener.GetNotificationsAsync(NotificationKinds.Unknown);
-                        if (notifsToast.Count > 0 || notifsOther.Count > 0)
-                        {
-                            App.MediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/NotificationToast.wav"));
-                            App.MediaPlayer.Play();
-                            notifcationCount = notifsToast.Count;
-                            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                            {
-                                NotifStatus.Visibility = Visibility.Visible;
-                                foreach (UserNotification notification in notifsToast)
-                                {
-                                    System.Diagnostics.Debug.WriteLine(notification.AppInfo.DisplayInfo.DisplayName);
-                                    NotificationBinding toastBinding = notification.Notification.Visual.GetBinding(KnownNotificationBindings.ToastGeneric);
-                                    if (toastBinding != null)
-                                    {
-                                        IReadOnlyList<AdaptiveNotificationText> textElements = toastBinding.GetTextElements();
-                                        string titleText = textElements.FirstOrDefault()?.Text;
-                                        System.Diagnostics.Debug.WriteLine(titleText);
-                                        string bodyText = string.Join("\n", textElements.Skip(1).Select(t => t.Text));
-                                        System.Diagnostics.Debug.WriteLine(bodyText);
-                                    }
-                                    System.Diagnostics.Debug.WriteLine(notification.CreationTime.ToString("g")); 
-                                    System.Diagnostics.Debug.WriteLine(notification.Id);
-                                    System.Diagnostics.Debug.WriteLine("----------------");
-                                };
-                            });
-                        }
-                        else
-                        {
-                            notifcationCount = 0;
-                            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                            {
-                                NotifStatus.Visibility = Visibility.Collapsed;
-                            });
-                        }
-                        break;
-                    case UserNotificationListenerAccessStatus.Denied:
-                        NotifStatus.Visibility = Visibility.Collapsed;
-                        ErrorDialog dialogD = new ErrorDialog("Notifcation access was denied. Please enable it in settings.");
-                        await dialogD.ShowAsync();
-                        break;
-                    case UserNotificationListenerAccessStatus.Unspecified:
-                        ErrorDialog dialogU = new ErrorDialog("Notifcation access was denied. Please enable it in settings.");
-                        await dialogU.ShowAsync();
-                        break;
-                }
-            }
-        }
-        #endregion
 
         #region Bar events
         private void ActionCenterButton_Click(object sender, RoutedEventArgs e)
@@ -202,37 +111,6 @@ namespace factoryos_10x_shell.Controls
                 NormalTopRightP.Opacity = 1;
                 NormalBottomLeftP.Opacity = 1;
                 NormalBottomRightP.Opacity = 1;
-            }
-        }
-        #endregion
-
-        #region Theming
-        private void ThemeListener_ThemeChanged(ThemeListener sender)
-        {
-            var theme = sender.CurrentTheme;
-            switch(theme)
-            {
-                case ApplicationTheme.Light:
-                    NormalTopLeft.Fill = lightBrush;
-                    NormalTopRight.Fill = lightBrush;
-                    NormalBottomLeft.Fill = lightBrush;
-                    NormalBottomRight.Fill = lightBrush;
-                    ClockText.Foreground = lightBrush;
-                    NotifStatus.Foreground = lightBrush;
-                    BattStatus.Foreground = lightBrush;
-                    WifiStatus.Foreground = lightBrush;
-                    break;
-                case ApplicationTheme.Dark:
-                default:
-                    NormalTopLeft.Fill = darkBrush;
-                    NormalTopRight.Fill = darkBrush;
-                    NormalBottomLeft.Fill = darkBrush;
-                    NormalBottomRight.Fill = darkBrush;
-                    ClockText.Foreground = darkBrush;
-                    NotifStatus.Foreground = darkBrush;
-                    BattStatus.Foreground = darkBrush;
-                    WifiStatus.Foreground = darkBrush;
-                    break;
             }
         }
         #endregion

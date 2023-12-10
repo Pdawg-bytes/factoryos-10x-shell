@@ -1,4 +1,6 @@
-﻿using System;
+﻿using factoryos_10x_shell.Library.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,6 +34,8 @@ namespace factoryos_10x_shell.Controls.DesktopControls
         {
             this.InitializeComponent();
 
+            DataContext = App.ServiceProvider.GetRequiredService<MainDesktopViewModel>();
+
             // Frame init
             TaskbarFrameP = TaskbarFrame;
             TaskbarFrameP.Navigate(typeof(Default10xBar));
@@ -47,6 +51,8 @@ namespace factoryos_10x_shell.Controls.DesktopControls
             App.MediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/BootUp.wav"));
             App.MediaPlayer.Play();
         }
+
+        public MainDesktopViewModel ViewModel => (MainDesktopViewModel)this.DataContext;
 
         private static void InitOpenBoard()
         {

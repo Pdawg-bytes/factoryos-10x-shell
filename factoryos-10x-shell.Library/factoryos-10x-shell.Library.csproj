@@ -125,10 +125,14 @@
     <Compile Include="Models\Hardware\BatteryReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Environment\IDispatcherService.cs" />
+    <Compile Include="Services\Environment\IThemeService.cs" />
     <Compile Include="Services\Environment\ITimeService.cs" />
     <Compile Include="Services\Hardware\IBatteryService.cs" />
     <Compile Include="Services\Hardware\INetworkService.cs" />
+    <Compile Include="Services\Managers\INotificationManager.cs" />
+    <Compile Include="Services\Managers\IStartManagerService.cs" />
     <Compile Include="ViewModels\Default10xBarViewModel.cs" />
+    <Compile Include="ViewModels\MainDesktopViewModel.cs" />
     <EmbeddedResource Include="Properties\factoryos_10x_shell.Library.rd.xml" />
   </ItemGroup>
   <ItemGroup>

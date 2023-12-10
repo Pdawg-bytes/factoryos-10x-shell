@@ -89,7 +89,6 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
         }
         private void ClearNotifs_Click(object sender, RoutedEventArgs e)
         {
-            Default10xBar.notifListener.ClearNotifications();
             NotifCount.Text = "0";
             NotifRootPanel.Visibility = Visibility.Collapsed;
         }

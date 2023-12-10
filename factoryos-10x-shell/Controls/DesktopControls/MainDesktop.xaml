@@ -4,15 +4,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:factoryos_10x_shell.Controls.DesktopControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:converters="using:factoryos_10x_shell.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core" 
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <CubicEase x:Key="CubicEaseInOut" EasingMode="EaseInOut" />
+        <QuadraticEase x:Key="QuadraticEaseInOut" EasingMode="EaseInOut" />
+    </Page.Resources>
+    
     <Grid>
         <Image x:Name="BackgroundWallpaper" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="ms-appx:///Assets/waves.jpg" Stretch="Fill" Grid.Row="0"/>
         <Frame x:Name="StartMenuFrame" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" MaxWidth="810" MaxHeight="685" Margin="10,10,10,60" Background="Transparent" CornerRadius="4">
             <Frame.RenderTransform>
                 <TranslateTransform Y="800" x:Name="StartMenuTransform"/>
             </Frame.RenderTransform>
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="SizeChanged">
+                    <Core:InvokeCommandAction Command="{x:Bind ViewModel.StartMenuSizeChangedCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=StartMenuFrame, Converter=converters:SizeChangedEventConverter}"/>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
         </Frame>
         <Frame x:Name="TaskbarFrame" MaxHeight="50" VerticalAlignment="Bottom"/>
     </Grid>

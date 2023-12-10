@@ -152,6 +152,7 @@
     <Compile Include="Controls\PowerDialog.xaml.cs">
       <DependentUpon>PowerDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\SizeChangedEventConverter.cs" />
     <Compile Include="Helpers\Models\StartIconModel.cs" />
     <Compile Include="Helpers\PinSecurityManager.cs" />
     <Compile Include="Helpers\ProcessStart.cs" />
@@ -161,9 +162,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Environment\DispatcherService.cs" />
+    <Compile Include="Services\Environment\ThemeService.cs" />
     <Compile Include="Services\Environment\TimeService.cs" />
     <Compile Include="Services\Hardware\BatteryService.cs" />
     <Compile Include="Services\Hardware\NetworkService.cs" />
+    <Compile Include="Services\Managers\NotificationManager.cs" />
+    <Compile Include="Services\Managers\StartManagerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -258,6 +262,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

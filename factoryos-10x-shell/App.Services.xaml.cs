@@ -9,6 +9,8 @@ using factoryos_10x_shell.Services.Environment;
 using factoryos_10x_shell.Library.ViewModels;
 using factoryos_10x_shell.Library.Services.Hardware;
 using factoryos_10x_shell.Services.Hardware;
+using factoryos_10x_shell.Library.Services.Managers;
+using factoryos_10x_shell.Services.Managers;
 
 namespace factoryos_10x_shell
 {
@@ -33,14 +35,18 @@ namespace factoryos_10x_shell
                 .AddSingleton<IDispatcherService, DispatcherService>()
                 .AddSingleton<IBatteryService, BatteryService>()
                 .AddSingleton<INetworkService, NetworkService>()
-                .AddTransient<Default10xBarViewModel>();
+                .AddSingleton<INotificationManager, NotificationManager>()
+                .AddSingleton<IThemeService, ThemeService>()
+                .AddSingleton<IStartManagerService, StartManagerService>()
+                .AddTransient<Default10xBarViewModel>()
+                .AddTransient<MainDesktopViewModel>();
 
             m_serviceProvider = collection.BuildServiceProvider(true);
         }
 
         private void PreloadServices()
         {
-
+            _ = m_serviceProvider.GetRequiredService<IDispatcherService>();
         }
     }
 }
