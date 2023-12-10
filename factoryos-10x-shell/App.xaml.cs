@@ -45,11 +45,15 @@ namespace factoryos_10x_shell
             MediaPlayer = BackgroundMediaPlayer.Current;
 
             _icons = new List<StartIconModel>();
-            _logoSize = new Size(50, 50);
+            _logoSize = new Size(48, 48);
         }
 
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            ConfigureServices();
+            PreloadServices();
+
+
             await LoadAppsAsync();
             List<StartIconModel> sortedIcons = new List<StartIconModel>(_icons.OrderBy(icon => icon.IconName));
             StartIcons = new ObservableCollection<StartIconModel>(sortedIcons);
