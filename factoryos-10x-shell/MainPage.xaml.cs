@@ -10,12 +10,15 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Input;
 using Windows.UI.Xaml.Media;
+using factoryos_10x_shell.Library.Services.Managers;
 
 namespace factoryos_10x_shell
 {
     public sealed partial class MainPage : Page
     {
         public static Frame DesktopFrameP { get; private set; }
+
+        private readonly IStartManagerService m_startManager;
 
         public MainPage()
         {
@@ -41,6 +44,7 @@ namespace factoryos_10x_shell
             {
                 PointerPoint point = args.CurrentPoint;
 
+                // maybe we can get the X and Y of the FE using the converter?? idk. try tmrw.
                 Rect startMenuBounds = MainDesktop.StartFrameP.TransformToVisual(null).TransformBounds(new Rect(0, 0, MainDesktop.StartFrameP.ActualWidth, MainDesktop.StartFrameP.ActualHeight));
 
                 if (!startMenuBounds.Contains(point.Position))

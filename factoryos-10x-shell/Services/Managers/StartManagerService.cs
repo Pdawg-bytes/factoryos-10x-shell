@@ -28,8 +28,12 @@ namespace factoryos_10x_shell.Services.Managers
         }
 
         public event EventHandler StartVisibilityChanged;
-        public event EventHandler StartBoundsRequested;
 
-        public Rect CurrentStartBounds { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private Rect _currentStartBounds;
+        public Rect CurrentStartBounds 
+        {
+            get => _currentStartBounds;
+            set => _currentStartBounds = value;
+        }
     }
 }

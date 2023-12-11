@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
 
 namespace factoryos_10x_shell.Converters
 {
-    internal class SizeChangedEventConverter
+    public class SizeChangedEventConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language) => value is FrameworkElement fe ? (fe.ActualSize) : new System.Numerics.Vector2(0,0);
 

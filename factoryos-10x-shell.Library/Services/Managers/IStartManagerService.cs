@@ -33,10 +33,5 @@ namespace factoryos_10x_shell.Library.Services.Managers
         /// The current bounds of the Start Menu's frame.
         /// </summary>
         public Rect CurrentStartBounds { get; set; }
-
-        /// <summary>
-        /// An event that is raised when the Start Menu's bounds are requested.
-        /// </summary>
-        public event EventHandler StartBoundsRequested;
     }
 }

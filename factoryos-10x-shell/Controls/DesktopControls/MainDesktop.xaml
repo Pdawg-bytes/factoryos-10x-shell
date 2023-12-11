@@ -23,7 +23,15 @@
             </Frame.RenderTransform>
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior EventName="SizeChanged">
-                    <Core:InvokeCommandAction Command="{x:Bind ViewModel.StartMenuSizeChangedCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=StartMenuFrame, Converter=converters:SizeChangedEventConverter}"/>
+                    <Core:InvokeCommandAction Command="{x:Bind ViewModel.StartMenuSizeChangedCommand, Mode=OneWay}">
+                        <Core:InvokeCommandAction.CommandParameter>
+                            <Binding ElementName="StartMenuFrame">
+                                <Binding.Converter>
+                                    <converters:SizeChangedEventConverter/>
+                                </Binding.Converter>
+                            </Binding>
+                        </Core:InvokeCommandAction.CommandParameter>
+                    </Core:InvokeCommandAction>
                 </Core:EventTriggerBehavior>
             </Interactivity:Interaction.Behaviors>
         </Frame>
