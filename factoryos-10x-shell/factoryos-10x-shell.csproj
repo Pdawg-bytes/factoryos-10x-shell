@@ -152,7 +152,7 @@
     <Compile Include="Controls\PowerDialog.xaml.cs">
       <DependentUpon>PowerDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\SizeChangedEventConverter.cs" />
+    <Compile Include="Converters\BoundsChangedEventConverter.cs" />
     <Compile Include="Helpers\Models\StartIconModel.cs" />
     <Compile Include="Helpers\PinSecurityManager.cs" />
     <Compile Include="Helpers\ProcessStart.cs" />

@@ -23,12 +23,5 @@ namespace factoryos_10x_shell.Library.ViewModels
         {
             m_startManager = startManager;
         }
-
-
-        [RelayCommand]
-        private void StartMenuSizeChanged(Vector2 size)
-        {
-            m_startManager.CurrentStartBounds = new Rect(0, 0, size.X, size.Y);
-        }
     }
 }

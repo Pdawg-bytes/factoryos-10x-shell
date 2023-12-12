@@ -23,7 +23,6 @@ namespace factoryos_10x_shell.Controls.DesktopControls
     public sealed partial class MainDesktop : Page
     {
         public static Frame TaskbarFrameP { get; private set; }
-        public static Frame StartFrameP { get; private set; }
 
         public static Storyboard OpenStartStoryboard { get; private set; }
         public static Storyboard CloseStartStoryboard { get; private set; }
@@ -40,8 +39,7 @@ namespace factoryos_10x_shell.Controls.DesktopControls
             TaskbarFrameP = TaskbarFrame;
             TaskbarFrameP.Navigate(typeof(Default10xBar));
 
-            StartFrameP = StartMenuFrame;
-            StartFrameP.Navigate(typeof(StartMenu));
+            StartMenuFrame.Navigate(typeof(StartMenu));
 
             StartTransform = StartMenuTransform;
 

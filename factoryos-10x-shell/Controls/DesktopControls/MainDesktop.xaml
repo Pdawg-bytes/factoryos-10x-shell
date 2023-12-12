@@ -21,19 +21,6 @@
             <Frame.RenderTransform>
                 <TranslateTransform Y="800" x:Name="StartMenuTransform"/>
             </Frame.RenderTransform>
-            <Interactivity:Interaction.Behaviors>
-                <Core:EventTriggerBehavior EventName="SizeChanged">
-                    <Core:InvokeCommandAction Command="{x:Bind ViewModel.StartMenuSizeChangedCommand, Mode=OneWay}">
-                        <Core:InvokeCommandAction.CommandParameter>
-                            <Binding ElementName="StartMenuFrame">
-                                <Binding.Converter>
-                                    <converters:SizeChangedEventConverter/>
-                                </Binding.Converter>
-                            </Binding>
-                        </Core:InvokeCommandAction.CommandParameter>
-                    </Core:InvokeCommandAction>
-                </Core:EventTriggerBehavior>
-            </Interactivity:Interaction.Behaviors>
         </Frame>
         <Frame x:Name="TaskbarFrame" MaxHeight="50" VerticalAlignment="Bottom"/>
     </Grid>

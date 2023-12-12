@@ -133,6 +133,7 @@
     <Compile Include="Services\Managers\IStartManagerService.cs" />
     <Compile Include="ViewModels\Default10xBarViewModel.cs" />
     <Compile Include="ViewModels\MainDesktopViewModel.cs" />
+    <Compile Include="ViewModels\StartMenuViewModel.cs" />
     <EmbeddedResource Include="Properties\factoryos_10x_shell.Library.rd.xml" />
   </ItemGroup>
   <ItemGroup>

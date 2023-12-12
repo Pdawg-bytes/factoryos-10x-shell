@@ -25,6 +25,8 @@ using Windows.Storage.Streams;
 using static System.Net.Mime.MediaTypeNames;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.System;
+using Microsoft.Extensions.DependencyInjection;
+using factoryos_10x_shell.Library.ViewModels;
 
 namespace factoryos_10x_shell.Controls.DesktopControls
 {
@@ -38,11 +40,15 @@ namespace factoryos_10x_shell.Controls.DesktopControls
         {
             this.InitializeComponent();
 
+            DataContext = App.ServiceProvider.GetRequiredService<StartMenuViewModel>();
+
             StartIconCollection = new ObservableCollection<StartIconModel>();
             StartIconCollection = App.StartIcons;
 
             AppListGrid.ItemsSource = StartIconCollection;
         }
+
+        public StartMenuViewModel ViewModel => (StartMenuViewModel)this.DataContext;
        
         private void AppListShow_Click(object sender, RoutedEventArgs e)
         {

@@ -13,9 +13,14 @@ namespace factoryos_10x_shell.Library.Services.Managers
     public interface IStartManagerService
     {
         /// <summary>
-        /// Checks if the Start Menu is open or not.
+        /// If the Start Menu is open or not.
         /// </summary>
         public bool IsStartOpen { get; set; }
+
+        /// <summary>
+        /// If the app list is expanded or not.
+        /// </summary>
+        public bool IsAppsListExpanded { get; set; }
 
         /// <summary>
         /// Requests the visibility of the Start Menu to change.
@@ -28,10 +33,5 @@ namespace factoryos_10x_shell.Library.Services.Managers
         /// An event that is raised when the Start Menu's visibility changes.
         /// </summary>
         public event EventHandler StartVisibilityChanged;
-
-        /// <summary>
-        /// The current bounds of the Start Menu's frame.
-        /// </summary>
-        public Rect CurrentStartBounds { get; set; }
     }
 }

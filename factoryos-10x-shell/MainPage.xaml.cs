@@ -11,6 +11,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Input;
 using Windows.UI.Xaml.Media;
 using factoryos_10x_shell.Library.Services.Managers;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace factoryos_10x_shell
 {
@@ -24,6 +25,8 @@ namespace factoryos_10x_shell
         {
             this.InitializeComponent();
 
+            m_startManager = App.ServiceProvider.GetRequiredService<IStartManagerService>();
+
             // Titlebar Stuff
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
@@ -34,36 +37,7 @@ namespace factoryos_10x_shell
             DesktopFrameP = DesktopFrame;
             DesktopFrameP.Navigate(typeof(MainDesktop));
 
-            CoreApplication.GetCurrentView().CoreWindow.PointerPressed += MainPage_PointerPressed;
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
-        }
-
-        private void MainPage_PointerPressed(CoreWindow sender, PointerEventArgs args)
-        {
-            if (Default10xBar.startLaunched)
-            {
-                PointerPoint point = args.CurrentPoint;
-
-                // maybe we can get the X and Y of the FE using the converter?? idk. try tmrw.
-                Rect startMenuBounds = MainDesktop.StartFrameP.TransformToVisual(null).TransformBounds(new Rect(0, 0, MainDesktop.StartFrameP.ActualWidth, MainDesktop.StartFrameP.ActualHeight));
-
-                if (!startMenuBounds.Contains(point.Position))
-                {
-                    if (!IsStartButtonPressed(point.Position))
-                    {
-                        Default10xBar.startLaunched = false;
-                        Default10xBar.SetStartColorOpacity();
-                        MainDesktop.CloseStartStoryboard.Begin();
-                    }
-                }
-            }
-        }
-
-        private bool IsStartButtonPressed(Point point)
-        {
-            GeneralTransform transform = Default10xBar.StartButtonP.TransformToVisual(null);
-            Rect startButtonBounds = transform.TransformBounds(new Rect(0, 0, Default10xBar.StartButtonP.ActualWidth, Default10xBar.StartButtonP.ActualHeight));
-            return startButtonBounds.Contains(point);
         }
 
         private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs args)

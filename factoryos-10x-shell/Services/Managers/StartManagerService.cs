@@ -22,18 +22,19 @@ namespace factoryos_10x_shell.Services.Managers
             set => _isStartOpen = value; 
         }
 
+        private bool _isAppsListExpanded;
+        public bool IsAppsListExpanded
+        {
+            get => _isAppsListExpanded;
+            set => _isAppsListExpanded = value;
+        }
+
+
         public void RequestStartVisibilityChange(bool visible)
         {
             IsStartOpen = visible;
         }
 
         public event EventHandler StartVisibilityChanged;
-
-        private Rect _currentStartBounds;
-        public Rect CurrentStartBounds 
-        {
-            get => _currentStartBounds;
-            set => _currentStartBounds = value;
-        }
     }
 }
