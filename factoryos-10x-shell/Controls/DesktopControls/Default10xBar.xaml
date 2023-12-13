@@ -46,46 +46,46 @@
 
     <Grid x:Name="TaskbarGrid" Background="{ThemeResource TaskbarAcrylicBrush}" Height="50" VerticalAlignment="Bottom">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button HorizontalAlignment="Center" Height="50" Padding="13" Width="50" ToolTipService.ToolTip="Start" x:Name="StartButton" CornerRadius="0" Background="Transparent" Click="StartButton_Click">
+            <Button HorizontalAlignment="Center" Height="50" Padding="13" Width="50" ToolTipService.ToolTip="Start" x:Name="StartButton" CornerRadius="0" Background="Transparent" Command="{x:Bind ViewModel.StartButtonClickedCommand, Mode=OneWay}">
                 <Button.Content>
                     <Viewbox>
                         <Canvas Height="1024" Width="1024" x:Name="StartCanvas">
-                            <Path Data="M427.866 95.189V495.289H16.0659L16.0659 150.5C16.0659 150.5 9.79999 150.8 62 145C114.2 139.2 427.866 95.189 427.866 95.189Z" Fill="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="NormalTopLeft">
+                            <Path Data="M427.866 95.189V495.289H16.0659L16.0659 150.5C16.0659 150.5 9.79999 150.8 62 145C114.2 139.2 427.866 95.189 427.866 95.189Z" Fill="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="NormalTopLeft" Opacity="{x:Bind ViewModel.StartNormalOpacity, Mode=OneWay}">
                                 <Path.OpacityTransition>
                                     <ScalarTransition Duration="0:0:0.15" />
                                 </Path.OpacityTransition>
                             </Path>
-                            <Path Data="M427.866 929.589V529.489H16.0659L16.0659 874.5C16.0659 874.5 12.1659 874.489 64.3659 880.289C116.666 886.089 427.866 929.589 427.866 929.589Z" Fill="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="NormalBottomLeft">
+                            <Path Data="M427.866 929.589V529.489H16.0659L16.0659 874.5C16.0659 874.5 12.1659 874.489 64.3659 880.289C116.666 886.089 427.866 929.589 427.866 929.589Z" Fill="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="NormalBottomLeft" Opacity="{x:Bind ViewModel.StartNormalOpacity, Mode=OneWay}">
                                 <Path.OpacityTransition>
                                     <ScalarTransition Duration="0:0:0.15" />
                                 </Path.OpacityTransition>
                             </Path>
-                            <Path Data="M461.966 91.289V495.289H1007.07L1005.5 12.5C1005.5 12.5 1003.17 13.089 947.166 20.789C891.166 28.489 461.966 91.289 461.966 91.289Z" Fill="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="NormalTopRight">
+                            <Path Data="M461.966 91.289V495.289H1007.07L1005.5 12.5C1005.5 12.5 1003.17 13.089 947.166 20.789C891.166 28.489 461.966 91.289 461.966 91.289Z" Fill="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="NormalTopRight" Opacity="{x:Bind ViewModel.StartNormalOpacity, Mode=OneWay}">
                                 <Path.OpacityTransition>
                                     <ScalarTransition Duration="0:0:0.25" />
                                 </Path.OpacityTransition>
                             </Path>
-                            <Path Data="M461.966 933.489V529.489H1007.07V1011.5C1007.07 1011.5 1003.17 1011.79 947.166 1004.09C891.166 996.289 461.966 933.489 461.966 933.489Z" Fill="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="NormalBottomRight">
+                            <Path Data="M461.966 933.489V529.489H1007.07V1011.5C1007.07 1011.5 1003.17 1011.79 947.166 1004.09C891.166 996.289 461.966 933.489 461.966 933.489Z" Fill="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="NormalBottomRight" Opacity="{x:Bind ViewModel.StartNormalOpacity, Mode=OneWay}">
                                 <Path.OpacityTransition>
                                     <ScalarTransition Duration="0:0:0.30" />
                                 </Path.OpacityTransition>
                             </Path>
-                            <Path Data="M427.866 95.189V495.289H16.0659L16.0659 150.5C16.0659 150.5 9.79999 150.8 62 145C114.2 139.2 427.866 95.189 427.866 95.189Z" Fill="{StaticResource TopLeftStartCorner}" x:Name="ColorTopLeft" Opacity="0">
+                            <Path Data="M427.866 95.189V495.289H16.0659L16.0659 150.5C16.0659 150.5 9.79999 150.8 62 145C114.2 139.2 427.866 95.189 427.866 95.189Z" Fill="{StaticResource TopLeftStartCorner}" x:Name="ColorTopLeft" Opacity="{x:Bind ViewModel.StartColorOpacity, Mode=OneWay}">
                                 <Path.OpacityTransition>
                                     <ScalarTransition Duration="0:0:0.15" />
                                 </Path.OpacityTransition>
                             </Path>
-                            <Path Data="M427.866 929.589V529.489H16.0659L16.0659 874.5C16.0659 874.5 12.1659 874.489 64.3659 880.289C116.666 886.089 427.866 929.589 427.866 929.589Z" Fill="{StaticResource BottomLeftStartCorner}" x:Name="ColorBottomLeft" Opacity="0">
+                            <Path Data="M427.866 929.589V529.489H16.0659L16.0659 874.5C16.0659 874.5 12.1659 874.489 64.3659 880.289C116.666 886.089 427.866 929.589 427.866 929.589Z" Fill="{StaticResource BottomLeftStartCorner}" x:Name="ColorBottomLeft" Opacity="{x:Bind ViewModel.StartColorOpacity, Mode=OneWay}">
                                 <Path.OpacityTransition>
                                     <ScalarTransition Duration="0:0:0.20" />
                                 </Path.OpacityTransition>
                             </Path>
-                            <Path Data="M461.966 91.289V495.289H1007.07L1005.5 12.5C1005.5 12.5 1003.17 13.089 947.166 20.789C891.166 28.489 461.966 91.289 461.966 91.289Z" Fill="{StaticResource TopRightStartCorner}" x:Name="ColorTopRight" Opacity="0">
+                            <Path Data="M461.966 91.289V495.289H1007.07L1005.5 12.5C1005.5 12.5 1003.17 13.089 947.166 20.789C891.166 28.489 461.966 91.289 461.966 91.289Z" Fill="{StaticResource TopRightStartCorner}" x:Name="ColorTopRight" Opacity="{x:Bind ViewModel.StartColorOpacity, Mode=OneWay}">
                                 <Path.OpacityTransition>
                                     <ScalarTransition Duration="0:0:0.25" />
                                 </Path.OpacityTransition>
                             </Path>
-                            <Path Data="M461.966 933.489V529.489H1007.07V1011.5C1007.07 1011.5 1003.17 1011.79 947.166 1004.09C891.166 996.289 461.966 933.489 461.966 933.489Z" Fill="{StaticResource BottomRightStartCorner}" x:Name="ColorBottomRight" Opacity="0">
+                            <Path Data="M461.966 933.489V529.489H1007.07V1011.5C1007.07 1011.5 1003.17 1011.79 947.166 1004.09C891.166 996.289 461.966 933.489 461.966 933.489Z" Fill="{StaticResource BottomRightStartCorner}" x:Name="ColorBottomRight" Opacity="{x:Bind ViewModel.StartColorOpacity, Mode=OneWay}">
                                 <Path.OpacityTransition>
                                     <ScalarTransition Duration="0:0:0.30" />
                                 </Path.OpacityTransition>
