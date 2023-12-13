@@ -47,10 +47,14 @@
                             <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
                                 <TextBlock Text="My apps and websites" FontWeight="SemiBold" Margin="0,0,10,0" VerticalAlignment="Top"/>
                             </StackPanel>
-                            <Button Content="Show all" Grid.Column="1" CornerRadius="12" Width="80" Padding="3" FontSize="13" Background="{ThemeResource WhiteTintBrushStrong}" HorizontalAlignment="Right" Margin="10,0,0,0" x:Name="AppListShow" Click="AppListShow_Click"/>
+                            <Button Content="{x:Bind ViewModel.AppsListToggleContent, Mode=OneWay}" Grid.Column="1" CornerRadius="12" Width="80" Padding="3" FontSize="13" Background="{ThemeResource WhiteTintBrushStrong}" HorizontalAlignment="Right" Margin="10,0,0,0" x:Name="AppListShow" Command="{x:Bind ViewModel.AppsListToggleClickedCommand, Mode=OneWay}"/>
                         </Grid>
                     </Grid>
-                    <GridView ItemContainerStyle="{StaticResource AppsListGridItemStyle}" ItemsSource="{x:Bind StartIconCollection}" ReorderMode="Enabled" x:Name="AppListGrid" Padding="0" SelectionMode="None" HorizontalAlignment="Center" Height="310" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="5,20,5,0">
+                    <GridView ItemContainerStyle="{StaticResource AppsListGridItemStyle}" ItemsSource="{x:Bind StartIconCollection}" 
+                              ReorderMode="Enabled" x:Name="AppListGrid" Padding="0" SelectionMode="None" 
+                              HorizontalAlignment="Center" Height="{x:Bind ViewModel.AppsListGridHeight, Mode=OneWay}" 
+                              ScrollViewer.VerticalScrollMode="{x:Bind ViewModel.AppGridViewVerticalScrollMode, Mode=OneWay}" ScrollViewer.HorizontalScrollMode="{x:Bind ViewModel.AppGridViewHorizontalScrollMode, Mode=OneWay}" ScrollViewer.VerticalScrollBarVisibility="{x:Bind ViewModel.AppGridViewScrollVisibility, Mode=OneWay}" 
+                              Margin="5,20,5,4">
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>

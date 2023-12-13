@@ -1,4 +1,5 @@
-﻿using factoryos_10x_shell.Library.ViewModels;
+﻿using factoryos_10x_shell.Library.Services.Managers;
+using factoryos_10x_shell.Library.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -22,12 +23,10 @@ namespace factoryos_10x_shell.Controls.DesktopControls
 {
     public sealed partial class MainDesktop : Page
     {
-        public static Frame TaskbarFrameP { get; private set; }
-
         public static Storyboard OpenStartStoryboard { get; private set; }
         public static Storyboard CloseStartStoryboard { get; private set; }
 
-        public static TranslateTransform StartTransform { get; private set; }
+        private readonly IStartManagerService m_startManager;
 
         public MainDesktop()
         {
@@ -35,13 +34,11 @@ namespace factoryos_10x_shell.Controls.DesktopControls
 
             DataContext = App.ServiceProvider.GetRequiredService<MainDesktopViewModel>();
 
-            // Frame init
-            TaskbarFrameP = TaskbarFrame;
-            TaskbarFrameP.Navigate(typeof(Default10xBar));
+            m_startManager = App.ServiceProvider.GetRequiredService<IStartManagerService>();
+            m_startManager.StartVisibilityChanged += StartManager_StartVisibilityChanged;
 
+            TaskbarFrame.Navigate(typeof(Default10xBar));
             StartMenuFrame.Navigate(typeof(StartMenu));
-
-            StartTransform = StartMenuTransform;
 
             InitOpenBoard();
             InitCloseBoard();
@@ -52,7 +49,7 @@ namespace factoryos_10x_shell.Controls.DesktopControls
 
         public MainDesktopViewModel ViewModel => (MainDesktopViewModel)this.DataContext;
 
-        private static void InitOpenBoard()
+        private void InitOpenBoard()
         {
             DoubleAnimation slideInAnimation = new DoubleAnimation
             {
@@ -62,14 +59,14 @@ namespace factoryos_10x_shell.Controls.DesktopControls
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
 
-            Storyboard.SetTarget(slideInAnimation, StartTransform);
+            Storyboard.SetTarget(slideInAnimation, StartMenuTransform);
             Storyboard.SetTargetProperty(slideInAnimation, "Y");
 
             OpenStartStoryboard = new Storyboard();
             OpenStartStoryboard.Children.Add(slideInAnimation);
         }
 
-        private static void InitCloseBoard()
+        private void InitCloseBoard()
         {
             DoubleAnimation slideOutAnimation = new DoubleAnimation
             {
@@ -79,11 +76,18 @@ namespace factoryos_10x_shell.Controls.DesktopControls
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
             };
 
-            Storyboard.SetTarget(slideOutAnimation, StartTransform);
+            Storyboard.SetTarget(slideOutAnimation, StartMenuTransform);
             Storyboard.SetTargetProperty(slideOutAnimation, "Y");
 
             CloseStartStoryboard = new Storyboard();
             CloseStartStoryboard.Children.Add(slideOutAnimation);
+        }
+
+
+        private void StartManager_StartVisibilityChanged(object sender, Library.Events.StartVisibilityChangedEventArgs e)
+        {
+            if (e.CurrentVisibility) { OpenStartStoryboard.Begin(); }
+            else { CloseStartStoryboard.Begin(); }
         }
     }
 }

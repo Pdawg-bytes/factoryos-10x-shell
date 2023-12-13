@@ -42,39 +42,24 @@ namespace factoryos_10x_shell.Controls.DesktopControls
 
             DataContext = App.ServiceProvider.GetRequiredService<StartMenuViewModel>();
 
+            ViewModel.ScrollAppsToTopRequested += ViewModel_ScrollAppsToTopRequested;
+
             StartIconCollection = new ObservableCollection<StartIconModel>();
             StartIconCollection = App.StartIcons;
 
             AppListGrid.ItemsSource = StartIconCollection;
         }
 
-        public StartMenuViewModel ViewModel => (StartMenuViewModel)this.DataContext;
-       
-        private void AppListShow_Click(object sender, RoutedEventArgs e)
+        private async void ViewModel_ScrollAppsToTopRequested(object sender, EventArgs e)
         {
-            _appListExpanded = !_appListExpanded;
-
-            ScrollViewer gridScrollViewer = FindVisualChild<ScrollViewer>(AppListGrid);
-
-            if (gridScrollViewer != null)
+            await Dispatcher.TryRunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
-                gridScrollViewer.VerticalScrollMode = ScrollMode.Disabled;
-                gridScrollViewer.HorizontalScrollMode = ScrollMode.Disabled;
-            }
-
-            AppListShow.Content = _appListExpanded ? "Show less" : "Show all";
-            if (_appListExpanded)
-            {
-                AppListGrid.Height = 480;
-                gridScrollViewer.VerticalScrollMode = ScrollMode.Enabled;
-                gridScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-            }
-            else
-            {
-                AppListGrid.Height = 310;
-                gridScrollViewer.VerticalScrollMode = ScrollMode.Disabled;
-                gridScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-            }
+                ScrollViewer scroll = FindVisualChild<ScrollViewer>(AppListGrid);
+                scroll.ChangeView(null, 0, null);
+            });
         }
+
+        public StartMenuViewModel ViewModel => (StartMenuViewModel)this.DataContext;
+
     }
 }

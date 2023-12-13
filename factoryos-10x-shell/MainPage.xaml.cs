@@ -27,7 +27,7 @@ namespace factoryos_10x_shell
 
             m_startManager = App.ServiceProvider.GetRequiredService<IStartManagerService>();
 
-            // Titlebar Stuff
+            // Titlebar
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -44,17 +44,7 @@ namespace factoryos_10x_shell
         {
             if (args.VirtualKey == Windows.System.VirtualKey.LeftWindows || args.VirtualKey == Windows.System.VirtualKey.RightWindows)
             {
-                Default10xBar.startLaunched = !Default10xBar.startLaunched;
-                Default10xBar.SetStartColorOpacity();
-
-                if (Default10xBar.startLaunched)
-                {
-                    MainDesktop.OpenStartStoryboard.Begin();
-                }
-                else
-                {
-                    MainDesktop.CloseStartStoryboard.Begin();
-                }
+                m_startManager.RequestStartVisibilityChange(!m_startManager.IsStartOpen);
             }
         }
     }

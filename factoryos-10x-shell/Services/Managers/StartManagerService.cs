@@ -1,4 +1,5 @@
-﻿using factoryos_10x_shell.Library.Services.Managers;
+﻿using factoryos_10x_shell.Library.Events;
+using factoryos_10x_shell.Library.Services.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,8 +34,9 @@ namespace factoryos_10x_shell.Services.Managers
         public void RequestStartVisibilityChange(bool visible)
         {
             IsStartOpen = visible;
+            StartVisibilityChanged?.Invoke(this, new StartVisibilityChangedEventArgs(!visible, visible));
         }
 
-        public event EventHandler StartVisibilityChanged;
+        public event EventHandler<StartVisibilityChangedEventArgs> StartVisibilityChanged;
     }
 }

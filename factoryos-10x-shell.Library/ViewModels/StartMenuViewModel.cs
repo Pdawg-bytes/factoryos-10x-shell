@@ -18,6 +18,9 @@ namespace factoryos_10x_shell.Library.ViewModels
         public StartMenuViewModel(IStartManagerService startManager) 
         {
             m_startManager = startManager;
+
+            AppsListGridHeight = 310;
+            AppsListToggleContent = "Show all";
         }
 
 
@@ -36,16 +39,19 @@ namespace factoryos_10x_shell.Library.ViewModels
         [ObservableProperty]
         private string appsListToggleContent;
 
+        public event EventHandler ScrollAppsToTopRequested;
+
         [RelayCommand]
         public void AppsListToggleClicked()
         {
             m_startManager.IsAppsListExpanded = !m_startManager.IsAppsListExpanded;
+            bool expanded = m_startManager.IsAppsListExpanded;
 
             AppGridViewVerticalScrollMode = ScrollMode.Disabled;
             AppGridViewHorizontalScrollMode = ScrollMode.Disabled;
 
-            AppsListToggleContent = m_startManager.IsAppsListExpanded ? "Show less" : "Show all";
-            if (m_startManager.IsAppsListExpanded)
+            AppsListToggleContent = expanded ? "Show less" : "Show all";
+            if (expanded)
             {
                 AppsListGridHeight = 480;
                 AppGridViewVerticalScrollMode = ScrollMode.Enabled;
@@ -56,6 +62,9 @@ namespace factoryos_10x_shell.Library.ViewModels
                 AppsListGridHeight = 310;
                 AppGridViewVerticalScrollMode = ScrollMode.Disabled;
                 AppGridViewHorizontalScrollMode = ScrollMode.Disabled;
+                AppGridViewScrollVisibility = ScrollBarVisibility.Hidden;
+
+                ScrollAppsToTopRequested?.Invoke(this, EventArgs.Empty);
             }
         }
     }

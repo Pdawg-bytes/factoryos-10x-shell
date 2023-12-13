@@ -1,4 +1,5 @@
-﻿using System;
+﻿using factoryos_10x_shell.Library.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,6 @@ namespace factoryos_10x_shell.Library.Services.Managers
         /// <summary>
         /// An event that is raised when the Start Menu's visibility changes.
         /// </summary>
-        public event EventHandler StartVisibilityChanged;
+        public event EventHandler<StartVisibilityChangedEventArgs> StartVisibilityChanged;
     }
 }
