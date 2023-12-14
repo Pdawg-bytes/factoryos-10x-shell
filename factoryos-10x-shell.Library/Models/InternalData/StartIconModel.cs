@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace factoryos_10x_shell.Helpers.Models
+namespace factoryos_10x_shell.Library.Models.InternalData
 {
     public class StartIconModel : INotifyPropertyChanged
     {

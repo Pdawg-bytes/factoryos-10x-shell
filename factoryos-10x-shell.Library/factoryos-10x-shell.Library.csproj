@@ -122,16 +122,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Constants\IconConstants.cs" />
+    <Compile Include="Events\AppsListUpdatedEventArgs.cs" />
     <Compile Include="Events\StartVisibilityChangedEventArgs.cs" />
     <Compile Include="Models\Hardware\BatteryReport.cs" />
+    <Compile Include="Models\InternalData\StartIconModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Environment\IDispatcherService.cs" />
     <Compile Include="Services\Environment\IThemeService.cs" />
     <Compile Include="Services\Environment\ITimeService.cs" />
     <Compile Include="Services\Hardware\IBatteryService.cs" />
     <Compile Include="Services\Hardware\INetworkService.cs" />
+    <Compile Include="Services\Helpers\IAppHelper.cs" />
     <Compile Include="Services\Managers\INotificationManager.cs" />
     <Compile Include="Services\Managers\IStartManagerService.cs" />
+    <Compile Include="ViewModels\ActionCenterHomeViewModel.cs" />
     <Compile Include="ViewModels\Default10xBarViewModel.cs" />
     <Compile Include="ViewModels\MainDesktopViewModel.cs" />
     <Compile Include="ViewModels\StartMenuViewModel.cs" />

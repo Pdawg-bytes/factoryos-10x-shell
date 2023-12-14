@@ -1,4 +1,6 @@
-﻿using Microsoft.Toolkit.Uwp.Connectivity;
+﻿using factoryos_10x_shell.Library.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Uwp.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,6 +20,9 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
         public ActionCenterHome()
         {
             this.InitializeComponent();
+
+            DataContext = App.ServiceProvider.GetRequiredService<ActionCenterHomeViewModel>();
+
             InternetInit();
             Init();
         }

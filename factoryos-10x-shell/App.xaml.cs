@@ -32,10 +32,6 @@ namespace factoryos_10x_shell
     {
         public static MediaPlayer MediaPlayer;
 
-        private List<StartIconModel> _icons;
-        public static ObservableCollection<StartIconModel> StartIcons;
-
-        private Size _logoSize;
         public App()
         {
             this.InitializeComponent();
@@ -43,20 +39,12 @@ namespace factoryos_10x_shell
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
 
             MediaPlayer = BackgroundMediaPlayer.Current;
-
-            _icons = new List<StartIconModel>();
-            _logoSize = new Size(48, 48);
         }
 
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
             ConfigureServices();
             PreloadServices();
-
-
-            await LoadAppsAsync();
-            List<StartIconModel> sortedIcons = new List<StartIconModel>(_icons.OrderBy(icon => icon.IconName));
-            StartIcons = new ObservableCollection<StartIconModel>(sortedIcons);
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -83,46 +71,6 @@ namespace factoryos_10x_shell
             }
         }
 
-        private async Task LoadAppsAsync()
-        {
-            try
-            {
-                PackageManager packageManager = new PackageManager();
-                IEnumerable<Package> packages = packageManager.FindPackagesForUser("");
-
-                RandomAccessStreamReference logoData;
-
-                foreach (Package package in packages)
-                {
-                    if (!package.IsFramework && !package.IsResourcePackage && !package.IsStub && package.GetAppListEntries().FirstOrDefault() != null)
-                    {
-                        try
-                        {
-                            IReadOnlyList<AppListEntry> entries = package.GetAppListEntries();
-                            foreach (AppListEntry entry in entries)
-                            {
-                                logoData = null;
-                                logoData = package.GetLogoAsRandomAccessStreamReference(_logoSize);
-
-                                IRandomAccessStreamWithContentType stream = await logoData.OpenReadAsync();
-                                BitmapImage bitmapImage = new BitmapImage();
-                                await bitmapImage.SetSourceAsync(stream);
-
-                                _icons.Add(new StartIconModel { IconName = entry.DisplayInfo.DisplayName, AppId = entry.AppUserModelId, IconSource = bitmapImage });
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine($"Error accessing logo for package {package.Id.FullName}: {ex.Message}");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("LoadApps => Get: " + ex.Message);
-            }
-        }
 
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {

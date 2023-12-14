@@ -153,7 +153,6 @@
       <DependentUpon>PowerDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoundsChangedEventConverter.cs" />
-    <Compile Include="Helpers\Models\StartIconModel.cs" />
     <Compile Include="Helpers\PinSecurityManager.cs" />
     <Compile Include="Helpers\ProcessStart.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
@@ -166,6 +165,7 @@
     <Compile Include="Services\Environment\TimeService.cs" />
     <Compile Include="Services\Hardware\BatteryService.cs" />
     <Compile Include="Services\Hardware\NetworkService.cs" />
+    <Compile Include="Services\Helpers\AppHelper.cs" />
     <Compile Include="Services\Managers\NotificationManager.cs" />
     <Compile Include="Services\Managers\StartManagerService.cs" />
   </ItemGroup>

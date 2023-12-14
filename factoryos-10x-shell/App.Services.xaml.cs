@@ -40,7 +40,8 @@ namespace factoryos_10x_shell
                 .AddSingleton<IStartManagerService, StartManagerService>()
                 .AddTransient<Default10xBarViewModel>()
                 .AddTransient<MainDesktopViewModel>()
-                .AddTransient<StartMenuViewModel>();
+                .AddTransient<StartMenuViewModel>()
+                .AddTransient<ActionCenterHomeViewModel>();
 
             m_serviceProvider = collection.BuildServiceProvider(true);
         }
