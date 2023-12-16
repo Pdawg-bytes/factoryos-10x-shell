@@ -50,7 +50,7 @@
                             <Button Content="{x:Bind ViewModel.AppsListToggleContent, Mode=OneWay}" Grid.Column="1" CornerRadius="12" Width="80" Padding="3" FontSize="13" Background="{ThemeResource WhiteTintBrushStrong}" HorizontalAlignment="Right" Margin="10,0,0,0" x:Name="AppListShow" Command="{x:Bind ViewModel.AppsListToggleClickedCommand, Mode=OneWay}"/>
                         </Grid>
                     </Grid>
-                    <GridView ItemContainerStyle="{StaticResource AppsListGridItemStyle}" ItemsSource="{x:Bind StartIconCollection}" 
+                    <GridView ItemContainerStyle="{StaticResource AppsListGridItemStyle}" ItemsSource="{x:Bind ViewModel.StartIcons}" 
                               ReorderMode="Enabled" x:Name="AppListGrid" Padding="0" SelectionMode="None" 
                               HorizontalAlignment="Center" Height="{x:Bind ViewModel.AppsListGridHeight, Mode=OneWay}" 
                               ScrollViewer.VerticalScrollMode="{x:Bind ViewModel.AppGridViewVerticalScrollMode, Mode=OneWay}" ScrollViewer.HorizontalScrollMode="{x:Bind ViewModel.AppGridViewHorizontalScrollMode, Mode=OneWay}" ScrollViewer.VerticalScrollBarVisibility="{x:Bind ViewModel.AppGridViewScrollVisibility, Mode=OneWay}" 

@@ -23,12 +23,12 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
 
             DataContext = App.ServiceProvider.GetRequiredService<ActionCenterHomeViewModel>();
 
-            InternetInit();
-            Init();
+            //InternetInit();
+            //Init();
         }
 
         #region Init
-        private void Init()
+        /*private void Init()
         {
             if (Default10xBar.batteryActionCenterEnabled == true)
             {
@@ -48,7 +48,7 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
             {
                 NotifRootPanel.Visibility = Visibility.Collapsed;
             }
-        }
+        }*/
         #endregion
 
         #region Border events
@@ -105,12 +105,12 @@ namespace factoryos_10x_shell.Controls.ActionCenterControls
             IReadOnlyList<string> names = NetworkHelper.Instance.ConnectionInformation.NetworkNames;
             return names.FirstOrDefault();
         }
-        private void InternetInit()
+        /*private void InternetInit()
         {
             string[] connectionString = { "Not connected", "Ethernet", GetNetName(), "Connected" };
             NetworkStatus.Text = connectionString[Default10xBar.connectionStatus];
             InternetButton.IsChecked = connected;
-        }
+        }*/
 
         private void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {

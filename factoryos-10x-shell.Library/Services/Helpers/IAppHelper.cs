@@ -1,6 +1,8 @@
 ﻿using factoryos_10x_shell.Library.Events;
+using factoryos_10x_shell.Library.Models.InternalData;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,6 @@ namespace factoryos_10x_shell.Library.Services.Helpers
     /// </summary>
     public interface IAppHelper
     {
-        public event EventHandler<AppsListUpdatedEventArgs> AppsListUpdated;
+        public ObservableCollection<StartIconModel> StartIcons { get; set; }
     }
 }

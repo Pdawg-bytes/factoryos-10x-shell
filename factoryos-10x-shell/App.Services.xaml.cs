@@ -11,6 +11,8 @@ using factoryos_10x_shell.Library.Services.Hardware;
 using factoryos_10x_shell.Services.Hardware;
 using factoryos_10x_shell.Library.Services.Managers;
 using factoryos_10x_shell.Services.Managers;
+using factoryos_10x_shell.Library.Services.Helpers;
+using factoryos_10x_shell.Services.Helpers;
 
 namespace factoryos_10x_shell
 {
@@ -32,6 +34,7 @@ namespace factoryos_10x_shell
         {
             IServiceCollection collection = new ServiceCollection()
                 .AddSingleton<ITimeService, TimeService>()
+                .AddSingleton<IAppHelper, AppHelper>()
                 .AddSingleton<IDispatcherService, DispatcherService>()
                 .AddSingleton<IBatteryService, BatteryService>()
                 .AddSingleton<INetworkService, NetworkService>()
@@ -48,6 +51,7 @@ namespace factoryos_10x_shell
 
         private void PreloadServices()
         {
+            _ = m_serviceProvider.GetRequiredService<IAppHelper>();
             _ = m_serviceProvider.GetRequiredService<IDispatcherService>();
         }
     }

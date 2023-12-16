@@ -17,7 +17,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.System.UserProfile;
-using factoryos_10x_shell.Helpers.Models;
 using System.Collections.ObjectModel;
 
 using static factoryos_10x_shell.Helpers.VisualHelper;
@@ -32,10 +31,6 @@ namespace factoryos_10x_shell.Controls.DesktopControls
 {
     public sealed partial class StartMenu : Page
     {
-        private bool _appListExpanded;
-
-        private ObservableCollection<StartIconModel> StartIconCollection;
-
         public StartMenu()
         {
             this.InitializeComponent();
@@ -43,11 +38,6 @@ namespace factoryos_10x_shell.Controls.DesktopControls
             DataContext = App.ServiceProvider.GetRequiredService<StartMenuViewModel>();
 
             ViewModel.ScrollAppsToTopRequested += ViewModel_ScrollAppsToTopRequested;
-
-            StartIconCollection = new ObservableCollection<StartIconModel>();
-            StartIconCollection = App.StartIcons;
-
-            AppListGrid.ItemsSource = StartIconCollection;
         }
 
         private async void ViewModel_ScrollAppsToTopRequested(object sender, EventArgs e)

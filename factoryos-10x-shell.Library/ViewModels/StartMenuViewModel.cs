@@ -1,8 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using factoryos_10x_shell.Library.Models.InternalData;
+using factoryos_10x_shell.Library.Services.Helpers;
 using factoryos_10x_shell.Library.Services.Managers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,14 +17,20 @@ namespace factoryos_10x_shell.Library.ViewModels
     {
         private readonly IStartManagerService m_startManager;
 
+        private readonly IAppHelper m_appHelper;
 
-        public StartMenuViewModel(IStartManagerService startManager) 
+
+        public StartMenuViewModel(IStartManagerService startManager, IAppHelper appHelper) 
         {
             m_startManager = startManager;
+            m_appHelper = appHelper;
 
             AppsListGridHeight = 310;
             AppsListToggleContent = "Show all";
         }
+
+
+        public ObservableCollection<StartIconModel> StartIcons => m_appHelper.StartIcons;
 
 
         [ObservableProperty]
