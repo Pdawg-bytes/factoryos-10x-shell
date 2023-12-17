@@ -51,7 +51,6 @@ namespace factoryos_10x_shell
 
         private void PreloadServices()
         {
-            _ = m_serviceProvider.GetRequiredService<IAppHelper>();
             _ = m_serviceProvider.GetRequiredService<IDispatcherService>();
         }
     }

@@ -25,60 +25,58 @@ namespace factoryos_10x_shell.Services.Helpers
         private Size _logoSize;
         public ObservableCollection<StartIconModel> StartIcons { get; set; }
 
+        private List<StartIconModel> _iconCache { get; set; }
+
         public AppHelper() 
         {
             m_dispatcherQueue = DispatcherQueue.GetForCurrentThread();
 
             _logoSize = new Size(48, 48);
-            StartIcons = new ObservableCollection<StartIconModel>();
-            LoadAppsAsync().Wait();
-
-            List<StartIconModel> sortedIcons = new List<StartIconModel>(StartIcons.OrderBy(icon => icon.IconName));
-            StartIcons = new ObservableCollection<StartIconModel>(sortedIcons);
+            _iconCache = new List<StartIconModel>();
         }
 
-        private async Task LoadAppsAsync()
+        public async Task LoadAppsAsync()
         {
-            m_dispatcherQueue.TryEnqueue(async () =>
+            try
             {
-                try
+                PackageManager packageManager = new PackageManager();
+                IEnumerable<Package> packages = packageManager.FindPackagesForUser("");
+
+                RandomAccessStreamReference logoData;
+
+                foreach (Package package in packages)
                 {
-                    PackageManager packageManager = new PackageManager();
-                    IEnumerable<Package> packages = packageManager.FindPackagesForUser("");
-
-                    RandomAccessStreamReference logoData;
-
-                    foreach (Package package in packages)
+                    if (!package.IsFramework && !package.IsResourcePackage && !package.IsStub && package.GetAppListEntries().FirstOrDefault() != null)
                     {
-                        if (!package.IsFramework && !package.IsResourcePackage && !package.IsStub && package.GetAppListEntries().FirstOrDefault() != null)
+                        try
                         {
-                            try
+                            IReadOnlyList<AppListEntry> entries = package.GetAppListEntries();
+                            foreach (AppListEntry entry in entries)
                             {
-                                IReadOnlyList<AppListEntry> entries = package.GetAppListEntries();
-                                foreach (AppListEntry entry in entries)
-                                {
 
-                                    logoData = null;
-                                    logoData = entry.DisplayInfo.GetLogo(_logoSize);
+                                logoData = null;
+                                logoData = package.GetLogoAsRandomAccessStreamReference(_logoSize);
 
-                                    IRandomAccessStreamWithContentType stream = await logoData.OpenReadAsync();
-                                    BitmapImage bitmapImage = new BitmapImage();
-                                    await bitmapImage.SetSourceAsync(stream);
-                                    StartIcons.Add(new StartIconModel { IconName = entry.DisplayInfo.DisplayName, AppId = entry.AppUserModelId, IconSource = bitmapImage });
-                                }
+                                IRandomAccessStreamWithContentType stream = await logoData.OpenReadAsync();
+                                BitmapImage bitmapImage = new BitmapImage();
+                                await bitmapImage.SetSourceAsync(stream);
+                                _iconCache.Add(new StartIconModel { IconName = entry.DisplayInfo.DisplayName, AppId = entry.AppUserModelId, IconSource = bitmapImage });
                             }
-                            catch (Exception ex)
-                            {
-                                Debug.WriteLine($"Error accessing logo for package {package.Id.FullName}: {ex.Message}");
-                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine($"Error accessing logo for package {package.Id.FullName}: {ex.Message}");
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("LoadApps => Get: " + ex.Message);
-                }
-            });
+
+                StartIcons = new ObservableCollection<StartIconModel>(_iconCache.OrderBy(icon => icon.IconName));
+                _iconCache = null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("LoadApps => Get: " + ex.Message);
+            }
         }
     }
 }

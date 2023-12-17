@@ -1,4 +1,6 @@
-﻿using System;
+﻿using factoryos_10x_shell.Library.Services.Helpers;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -31,6 +33,8 @@ namespace factoryos_10x_shell
     {
         public static MediaPlayer MediaPlayer;
 
+        private IAppHelper m_appHelper;
+
         public App()
         {
             this.InitializeComponent();
@@ -44,6 +48,8 @@ namespace factoryos_10x_shell
         {
             ConfigureServices();
             PreloadServices();
+            m_appHelper = ServiceProvider.GetRequiredService<IAppHelper>();
+            await m_appHelper.LoadAppsAsync();
 
             Frame rootFrame = Window.Current.Content as Frame;
 

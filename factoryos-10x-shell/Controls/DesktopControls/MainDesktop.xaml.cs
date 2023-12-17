@@ -23,8 +23,8 @@ namespace factoryos_10x_shell.Controls.DesktopControls
 {
     public sealed partial class MainDesktop : Page
     {
-        public static Storyboard OpenStartStoryboard { get; private set; }
-        public static Storyboard CloseStartStoryboard { get; private set; }
+        private Storyboard OpenStartStoryboard { get; set; }
+        private Storyboard CloseStartStoryboard { get; set; }
 
         private readonly IStartManagerService m_startManager;
 

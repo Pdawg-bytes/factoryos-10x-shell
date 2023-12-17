@@ -15,5 +15,7 @@ namespace factoryos_10x_shell.Library.Services.Helpers
     public interface IAppHelper
     {
         public ObservableCollection<StartIconModel> StartIcons { get; set; }
+
+        public Task LoadAppsAsync();
     }
 }
