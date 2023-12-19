@@ -135,6 +135,7 @@
     <Compile Include="Services\Helpers\IAppHelper.cs" />
     <Compile Include="Services\Managers\INotificationManager.cs" />
     <Compile Include="Services\Managers\IStartManagerService.cs" />
+    <Compile Include="Services\Navigation\IDesktopNavigator.cs" />
     <Compile Include="ViewModels\ActionCenterHomeViewModel.cs" />
     <Compile Include="ViewModels\Default10xBarViewModel.cs" />
     <Compile Include="ViewModels\MainDesktopViewModel.cs" />

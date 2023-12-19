@@ -168,6 +168,7 @@
     <Compile Include="Services\Helpers\AppHelper.cs" />
     <Compile Include="Services\Managers\NotificationManager.cs" />
     <Compile Include="Services\Managers\StartManagerService.cs" />
+    <Compile Include="Services\Navigation\DesktopNavigator.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
