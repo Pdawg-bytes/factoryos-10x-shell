@@ -15,7 +15,7 @@ namespace factoryos_10x_shell.Library.Services.Navigation
 
     public interface IDesktopNavigator
     {
-        public void DesktopNavigate();
+        public void DesktopNavigate(DesktopPageType pageType);
 
         public Frame FrameContext { get; set; }
     }

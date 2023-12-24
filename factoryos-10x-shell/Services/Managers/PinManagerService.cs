@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Security.Cryptography.DataProtection;
-using Windows.Security.Cryptography;
+using factoryos_10x_shell.Library.Services.Managers;
 using Windows.Storage;
-using Windows.Storage.Streams;
-using Windows.Security.Cryptography.Core;
-using System.IO;
-using System.Diagnostics;
 
-namespace factoryos_10x_shell.Helpers
+namespace factoryos_10x_shell.Services.Managers
 {
-    internal class PinSecurityManager
+    internal class PinManagerService : IPinManagerService
     {
-        public static void SetEncryptedPin(int[] pin, string machineName)
+        public PinManagerService() 
+        {
+
+        }
+
+
+        public void SetEncryptedPin(int[] pin, string machineName)
         {
             string pinHash = CalculatePinHash(pin);
             byte[] encryptionKey = DeriveKeyFromPin(pinHash, machineName);
@@ -26,7 +27,7 @@ namespace factoryos_10x_shell.Helpers
             ApplicationData.Current.LocalSettings.Values["EncryptedPIN"] = Convert.ToBase64String(encryptedPin);
         }
 
-        public static bool CheckPin(int[] enteredPin, string machineName)
+        public bool CheckPin(int[] enteredPin, string machineName)
         {
             if (ApplicationData.Current.LocalSettings.Values.TryGetValue("EncryptedPIN", out object encryptedPinObj))
             {
@@ -39,14 +40,14 @@ namespace factoryos_10x_shell.Helpers
                     byte[] encryptionKey = DeriveKeyFromPin(pinHash, machineName);
 
                     int[] decryptedPin = DecryptArray(encryptedPin, encryptionKey);
-
+                    
                     return ArraysEqual(decryptedPin, enteredPin);
                 }
             }
             return false;
         }
 
-        private static string CalculatePinHash(int[] pin)
+        private string CalculatePinHash(int[] pin)
         {
             using (SHA256 sha256 = SHA256.Create())
             {
@@ -56,7 +57,7 @@ namespace factoryos_10x_shell.Helpers
             }
         }
 
-        private static byte[] DeriveKeyFromPin(string pinHash, string machineName)
+        private byte[] DeriveKeyFromPin(string pinHash, string machineName)
         {
             byte[] machineSalt = Encoding.UTF8.GetBytes(machineName);
             if (machineSalt.Length < 8)
@@ -75,7 +76,7 @@ namespace factoryos_10x_shell.Helpers
             }
         }
 
-        private static byte[] EncryptArray(int[] data, byte[] key)
+        private byte[] EncryptArray(int[] data, byte[] key)
         {
             using (Aes aesAlg = Aes.Create())
             {
@@ -98,7 +99,7 @@ namespace factoryos_10x_shell.Helpers
             }
         }
 
-        private static int[] DecryptArray(byte[] encryptedData, byte[] key)
+        private int[] DecryptArray(byte[] encryptedData, byte[] key)
         {
             using (Aes aesAlg = Aes.Create())
             {
@@ -119,7 +120,7 @@ namespace factoryos_10x_shell.Helpers
                                 string decryptedDataString = Encoding.UTF8.GetString(decryptedBytes);
                                 return Array.ConvertAll(decryptedDataString.Split(','), int.Parse);
                             }
-                            catch 
+                            catch
                             {
                                 return null;
                             }
@@ -129,7 +130,7 @@ namespace factoryos_10x_shell.Helpers
             }
         }
 
-        private static bool ArraysEqual(int[] arr1, int[] arr2)
+        private bool ArraysEqual(int[] arr1, int[] arr2)
         {
             if (arr1.Length != arr2.Length)
                 return false;

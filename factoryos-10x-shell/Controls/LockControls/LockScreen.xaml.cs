@@ -1,5 +1,7 @@
 ﻿using factoryos_10x_shell.Controls.DesktopControls;
 using factoryos_10x_shell.Helpers;
+using factoryos_10x_shell.Library.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -11,47 +13,16 @@ namespace factoryos_10x_shell.Controls.LockControls
 {
     public sealed partial class LockScreen : Page
     {
-        private static string machineName;
         public LockScreen()
         {
             this.InitializeComponent();
 
-            machineName = Environment.MachineName;
-            //PinSecurityManager.SetEncryptedPin(new int[4] { 1, 2, 3, 4 }, machineName);
+            this.DataContext = App.ServiceProvider.GetRequiredService<LockScreenViewModel>();
 
             InputBox.Focus(FocusState.Keyboard);
         }
 
-        private void InputBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
-        {
-            string labelText = String.Empty;
-            for (int i = 0; i <= InputBox.Text.Length - 1; i++)
-            {
-                labelText += "•";
-            }
-            PinLabel.Text = labelText;
-            bool isCorrect = false;
-            try
-            {
-                int[] enteredPin = InputBox.Text.Select(c => int.Parse(c.ToString())).ToArray();
-                isCorrect = PinSecurityManager.CheckPin(enteredPin, machineName);
-            }
-            catch
-            {
-                InputBox.Text = String.Empty;
-                PinLabel.Text = "PIN";
-            }
-
-            if (isCorrect && InputBox.Text.Length == 4)
-            {
-                MainPage.DesktopFrameP.Navigate(typeof(MainDesktop));
-            }
-            else if (InputBox.Text.Length == 0)
-            {
-                InputBox.Text = String.Empty;
-                PinLabel.Text = "PIN";
-            }
-        }
+        public LockScreenViewModel ViewModel => (LockScreenViewModel)this.DataContext;
 
         private void OtherObject_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -63,8 +34,8 @@ namespace factoryos_10x_shell.Controls.LockControls
             Button button = (Button)sender;
             string digit = button.Content.ToString();
 
-            if (int.TryParse(digit, out _)) { InputBox.Text += digit; }
-            else if (InputBox.Text.Length > 0) { InputBox.Text = InputBox.Text.Substring(0, InputBox.Text.Length - 1); }
+            if (int.TryParse(digit, out _)) { InputBox.Password += digit; }
+            else if (InputBox.Password.Length > 0) { InputBox.Password = InputBox.Password.Substring(0, InputBox.Password.Length - 1); }
         }
     }
 }

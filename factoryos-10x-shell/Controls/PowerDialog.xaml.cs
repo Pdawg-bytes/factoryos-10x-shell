@@ -1,4 +1,6 @@
 ﻿using factoryos_10x_shell.Helpers;
+using Microsoft.Extensions.DependencyInjection;
+using factoryos_10x_shell.Library.ViewModels;
 using System;
 using System.Diagnostics;
 using Windows.UI.Xaml;
@@ -11,41 +13,15 @@ namespace factoryos_10x_shell.Controls
         public PowerDialog()
         {
             this.InitializeComponent();
+
+            this.DataContext = App.ServiceProvider.GetRequiredService<PowerDialogViewModel>();
         }
+
+        public PowerDialogViewModel ViewModel => (PowerDialogViewModel)this.DataContext;
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
-        }
-
-        private async void ShutdownButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                MainDialog.Visibility = Visibility.Collapsed;
-                ShutdownAnimation.Visibility = Visibility.Visible;
-            }
-            catch(Exception shutdown)
-            {
-                this.Hide();
-                ErrorDialog shutdownError = new ErrorDialog(shutdown.Message + " Exception full message: " + shutdown.ToString());
-                shutdownError.ShowAsync();
-            }
-        }
-
-        private async void RestartButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                MainDialog.Visibility = Visibility.Collapsed;
-                RestartAnimation.Visibility = Visibility.Visible;
-            }
-            catch (Exception restart)
-            {
-                this.Hide();
-                ErrorDialog restartError = new ErrorDialog(restart.Message + " Exception full message: " + restart.ToString());
-                restartError.ShowAsync();
-            }
         }
     }
 }

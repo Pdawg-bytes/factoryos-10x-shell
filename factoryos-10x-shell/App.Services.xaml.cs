@@ -13,6 +13,8 @@ using factoryos_10x_shell.Library.Services.Managers;
 using factoryos_10x_shell.Services.Managers;
 using factoryos_10x_shell.Library.Services.Helpers;
 using factoryos_10x_shell.Services.Helpers;
+using factoryos_10x_shell.Library.Services.Navigation;
+using factoryos_10x_shell.Services.Navigation;
 
 namespace factoryos_10x_shell
 {
@@ -41,10 +43,16 @@ namespace factoryos_10x_shell
                 .AddSingleton<INotificationManager, NotificationManager>()
                 .AddSingleton<IThemeService, ThemeService>()
                 .AddSingleton<IStartManagerService, StartManagerService>()
+                .AddSingleton<IDesktopNavigator, DesktopNavigator>()
+                .AddSingleton<IEnvironmentService, EnvironmentService>()
+                .AddTransient<IPinManagerService, PinManagerService>()
                 .AddTransient<Default10xBarViewModel>()
                 .AddTransient<MainDesktopViewModel>()
                 .AddTransient<StartMenuViewModel>()
-                .AddTransient<ActionCenterHomeViewModel>();
+                .AddTransient<ActionCenterHomeViewModel>()
+                .AddTransient<LockDialogViewModel>()
+                .AddTransient<LockScreenViewModel>()
+                .AddTransient<PowerDialogViewModel>();
 
             m_serviceProvider = collection.BuildServiceProvider(true);
         }

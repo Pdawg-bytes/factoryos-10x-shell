@@ -10,13 +10,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace factoryos_10x_shell.Services.Navigation
 {
-    internal class DesktopNavigator
+    internal class DesktopNavigator : IDesktopNavigator
     {
-        private readonly IDesktopNavigator m_desktopNavigator;
-
-        public DesktopNavigator(IDesktopNavigator desktopNavigator)
+        public DesktopNavigator()
         {
-            m_desktopNavigator = desktopNavigator;
         }
 
         public Frame FrameContext { get; set; }
@@ -28,6 +25,11 @@ namespace factoryos_10x_shell.Services.Navigation
                 DesktopPageType.RootContentLockScreen => typeof(LockScreen),
                 DesktopPageType.RootContentDesktop => typeof(MainDesktop)
             };
+
+            if (FrameContext == null)
+            {
+                throw new InvalidOperationException("Frame context was accessed before initialization.");
+            }
 
             FrameContext.Navigate(navType);
         }

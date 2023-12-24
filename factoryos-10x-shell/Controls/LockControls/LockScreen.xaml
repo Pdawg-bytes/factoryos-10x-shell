@@ -14,41 +14,45 @@
         <Rectangle Opacity="0.5" Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GotFocus="OtherObject_GotFocus"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel MaxWidth="200">
-                <Ellipse Width="180" Height="180" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Ellipse Width="160" Height="160" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="ms-appx:///Assets/defaultUser.png" Stretch="UniformToFill"/>
                     </Ellipse.Fill>
                 </Ellipse>
-                <TextBlock Text="FactoryOS User" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,30" FontSize="24" FontWeight="SemiBold"/>
-                <Grid>
-                    <Border Background="Gray" Opacity="0.4" HorizontalAlignment="Stretch" Height="40" CornerRadius="3" GotFocus="OtherObject_GotFocus" MaxWidth="200"/>
-                    <TextBlock Text="PIN" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PinLabel"/>
-                    <TextBox Opacity="0" x:Name="InputBox" TextChanging="InputBox_TextChanging" IsTabStop="True" MaxWidth="200"/>
-                </Grid>
+                <TextBlock Text="FactoryOS User" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,40" FontSize="24" FontWeight="SemiBold"/>
+                <PasswordBox x:Name="InputBox" IsTabStop="True" MaxWidth="160" Height="40" MaxLength="4" PlaceholderText="PIN" Password="{x:Bind ViewModel.PasswordText, Mode=TwoWay}"/>
             </StackPanel>
 
             <StackPanel Margin="0,20,0,0">
                 <StackPanel Orientation="Horizontal">
-                    <Button Width="60" Height="60" Content="1" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
-                    <Button Width="60" Height="60" Content="2" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
-                    <Button Width="60" Height="60" Content="3" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
+                    <Button Width="60" Height="60" Content="1" FontSize="25" Background="Transparent" Click="PinButton_Click" Margin="0,0,10,10"/>
+                    <Button Width="60" Height="60" Content="2" FontSize="25" Background="Transparent" Click="PinButton_Click" Margin="0,0,0,10"/>
+                    <Button Width="60" Height="60" Content="3" FontSize="25" Background="Transparent" Click="PinButton_Click" Margin="10,0,0,10"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Width="60" Height="60" Content="4" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
-                    <Button Width="60" Height="60" Content="5" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
-                    <Button Width="60" Height="60" Content="6" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
+                    <Button Width="60" Height="60" Content="4" FontSize="25" Background="Transparent" Click="PinButton_Click" Margin="0,0,10,10"/>
+                    <Button Width="60" Height="60" Content="5" FontSize="25" Background="Transparent" Click="PinButton_Click" Margin="0,0,0,10"/>
+                    <Button Width="60" Height="60" Content="6" FontSize="25" Background="Transparent" Click="PinButton_Click" Margin="10,0,0,10"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Width="60" Height="60" Content="7" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
-                    <Button Width="60" Height="60" Content="8" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
-                    <Button Width="60" Height="60" Content="9" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
+                    <Button Width="60" Height="60" Content="7" FontSize="25" Background="Transparent" Click="PinButton_Click" Margin="0,0,10,10"/>
+                    <Button Width="60" Height="60" Content="8" FontSize="25" Background="Transparent" Click="PinButton_Click" Margin="0,0,0,10"/>
+                    <Button Width="60" Height="60" Content="9" FontSize="25" Background="Transparent" Click="PinButton_Click" Margin="10,0,0,10"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Width="60" Height="60" Opacity="0" FontSize="25" Background="Transparent"/>
-                    <Button Width="60" Height="60" Content="0" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
-                    <Button Width="60" Height="60" Content="&#xE750;" FontFamily="Segoe MDL2 Assets" FontSize="25" Background="Transparent" Click="PinButton_Click"/>
+                    <Button Width="60" Height="60" Opacity="0" FontSize="25" Background="Transparent" Margin="0,0,10,10"/>
+                    <Button Width="60" Height="60" Content="0" FontSize="25" Background="Transparent" Click="PinButton_Click"  Margin="0,0,0,10"/>
+                    <Button Width="60" Height="60" Content="&#xE750;" FontFamily="Segoe MDL2 Assets" FontSize="25" Background="Transparent" Click="PinButton_Click" Margin="10,0,0,10"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
+        <Grid Padding="0" Height="50" Width="75" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15,0,5,15">
+            <TextBlock Text="{x:Bind ViewModel.TimeText, Mode=OneWay}" HorizontalAlignment="Right" Foreground="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" FontWeight="Medium" Margin="5,5,10,5" x:Name="ClockText" VerticalAlignment="Top"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="&#xEC42;" FontFamily="Segoe MDL2 Assets" Foreground="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="NotifStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,7" Visibility="{x:Bind ViewModel.NotifIndicatorVisibility, Mode=OneWay}"/>
+                <TextBlock Text="{x:Bind ViewModel.BatteryStatusCharacter, Mode=OneWay}" FontFamily="Segoe MDL2 Assets" Foreground="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="BattStatus" FontSize="12" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,4,6" Visibility="{x:Bind ViewModel.BattStatusVisibility, Mode=OneWay}"/>
+                <TextBlock Text="{x:Bind ViewModel.NetworkStatusCharacter, Mode=OneWay}" FontFamily="Segoe MDL2 Assets" Foreground="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="WifiStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="{x:Bind ViewModel.NetworkStatusMargin, Mode=OneWay}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
