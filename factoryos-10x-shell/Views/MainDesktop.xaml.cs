@@ -10,6 +10,8 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Core;
 using Windows.Media.Playback;
+using Windows.UI.Core;
+using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -19,7 +21,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
-namespace factoryos_10x_shell.Controls.DesktopControls
+namespace factoryos_10x_shell.Views
 {
     public sealed partial class MainDesktop : Page
     {
@@ -37,6 +39,8 @@ namespace factoryos_10x_shell.Controls.DesktopControls
             m_startManager = App.ServiceProvider.GetRequiredService<IStartManagerService>();
             m_startManager.StartVisibilityChanged += StartManager_StartVisibilityChanged;
 
+            this.PointerPressed += OnPointerPressed;
+
             TaskbarFrame.Navigate(typeof(Default10xBar));
             StartMenuFrame.Navigate(typeof(StartMenu));
 
@@ -45,6 +49,21 @@ namespace factoryos_10x_shell.Controls.DesktopControls
 
             App.MediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/Sounds/BootUp.wav"));
             App.MediaPlayer.Play();
+        }
+
+        private void OnPointerPressed(object sender, PointerRoutedEventArgs args)
+        {
+            if (m_startManager.IsStartOpen)
+            {
+                PointerPoint point = args.GetCurrentPoint(BackgroundWallpaper);
+
+                Rect startMenuBounds = StartMenuFrame.TransformToVisual(null).TransformBounds(new Rect(0, 0, StartMenuFrame.ActualWidth, StartMenuFrame.ActualHeight));
+
+                if (!startMenuBounds.Contains(point.Position))
+                {
+                    m_startManager.RequestStartVisibilityChange(false);
+                }
+            }
         }
 
         public MainDesktopViewModel ViewModel => (MainDesktopViewModel)this.DataContext;

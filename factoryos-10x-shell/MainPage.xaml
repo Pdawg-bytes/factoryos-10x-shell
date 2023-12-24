@@ -11,7 +11,7 @@
 
     <Grid>
         <Frame x:Name="DesktopFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            
+
         </Frame>
     </Grid>
 </Page>

@@ -4,7 +4,6 @@ using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using factoryos_10x_shell.Controls;
 using System;
-using factoryos_10x_shell.Controls.DesktopControls;
 using Windows.Foundation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;

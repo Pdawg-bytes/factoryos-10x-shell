@@ -1,5 +1,4 @@
-﻿using factoryos_10x_shell.Controls.LockControls;
-using factoryos_10x_shell.Library.ViewModels;
+﻿using factoryos_10x_shell.Library.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

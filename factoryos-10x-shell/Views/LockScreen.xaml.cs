@@ -1,5 +1,4 @@
-﻿using factoryos_10x_shell.Controls.DesktopControls;
-using factoryos_10x_shell.Helpers;
+﻿using factoryos_10x_shell.Helpers;
 using factoryos_10x_shell.Library.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -9,7 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace factoryos_10x_shell.Controls.LockControls
+namespace factoryos_10x_shell.Views
 {
     public sealed partial class LockScreen : Page
     {

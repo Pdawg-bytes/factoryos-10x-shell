@@ -27,7 +27,7 @@ using Windows.System;
 using Microsoft.Extensions.DependencyInjection;
 using factoryos_10x_shell.Library.ViewModels;
 
-namespace factoryos_10x_shell.Controls.DesktopControls
+namespace factoryos_10x_shell.Views
 {
     public sealed partial class StartMenu : Page
     {
@@ -36,20 +36,8 @@ namespace factoryos_10x_shell.Controls.DesktopControls
             this.InitializeComponent();
 
             DataContext = App.ServiceProvider.GetRequiredService<StartMenuViewModel>();
-
-            ViewModel.ScrollAppsToTopRequested += ViewModel_ScrollAppsToTopRequested;
-        }
-
-        private async void ViewModel_ScrollAppsToTopRequested(object sender, EventArgs e)
-        {
-            await Dispatcher.TryRunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                ScrollViewer scroll = FindVisualChild<ScrollViewer>(AppListGrid);
-                scroll.ChangeView(null, 0, null);
-            });
         }
 
         public StartMenuViewModel ViewModel => (StartMenuViewModel)this.DataContext;
-
     }
 }

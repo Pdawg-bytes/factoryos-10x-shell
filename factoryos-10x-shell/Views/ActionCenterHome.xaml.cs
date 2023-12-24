@@ -1,4 +1,5 @@
 ﻿using factoryos_10x_shell.Library.ViewModels;
+using factoryos_10x_shell.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Uwp.Connectivity;
 using System;
@@ -11,7 +12,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
-namespace factoryos_10x_shell.Controls.ActionCenterControls
+namespace factoryos_10x_shell.Views
 {
     public sealed partial class ActionCenterHome : Page
     {

@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="factoryos_10x_shell.Controls.DesktopControls.StartMenu"
+    x:Class="factoryos_10x_shell.Views.StartMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:factoryos_10x_shell.Controls.DesktopControls"
+    xmlns:local="using:factoryos_10x_shell.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -33,27 +33,33 @@
 
         <Grid Grid.Row="1" Background="{ThemeResource WhiteTintBrushNormal}">
             <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <ScrollViewer HorizontalScrollMode="Disabled" VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="40,25,40,0" MaxWidth="640">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <TextBlock Text="My apps and websites" FontWeight="SemiBold" Margin="0,0,10,0" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <Button Content="{x:Bind ViewModel.AppsListToggleContent, Mode=OneWay}" Grid.Column="1" CornerRadius="12" Width="80" Padding="3" FontSize="13" Background="{ThemeResource WhiteTintBrushStrong}" HorizontalAlignment="Right" Margin="10,0,0,0" x:Name="AppListShow" Command="{x:Bind ViewModel.AppsListToggleClickedCommand, Mode=OneWay}"/>
+                </Grid>
+            </Grid>
+            <ScrollViewer HorizontalScrollMode="Disabled" VerticalAlignment="Stretch" Margin="0,51,0,0">
                 <StackPanel>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Margin="40,25,40,0" MaxWidth="640">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                <TextBlock Text="My apps and websites" FontWeight="SemiBold" Margin="0,0,10,0" VerticalAlignment="Top"/>
-                            </StackPanel>
-                            <Button Content="{x:Bind ViewModel.AppsListToggleContent, Mode=OneWay}" Grid.Column="1" CornerRadius="12" Width="80" Padding="3" FontSize="13" Background="{ThemeResource WhiteTintBrushStrong}" HorizontalAlignment="Right" Margin="10,0,0,0" x:Name="AppListShow" Command="{x:Bind ViewModel.AppsListToggleClickedCommand, Mode=OneWay}"/>
-                        </Grid>
-                    </Grid>
                     <GridView ItemContainerStyle="{StaticResource AppsListGridItemStyle}" ItemsSource="{x:Bind ViewModel.StartIcons}" 
-                              ReorderMode="Enabled" x:Name="AppListGrid" Padding="0" SelectionMode="None" 
-                              HorizontalAlignment="Center" Height="{x:Bind ViewModel.AppsListGridHeight, Mode=OneWay}" 
-                              ScrollViewer.VerticalScrollMode="{x:Bind ViewModel.AppGridViewVerticalScrollMode, Mode=OneWay}" ScrollViewer.HorizontalScrollMode="{x:Bind ViewModel.AppGridViewHorizontalScrollMode, Mode=OneWay}" ScrollViewer.VerticalScrollBarVisibility="{x:Bind ViewModel.AppGridViewScrollVisibility, Mode=OneWay}" 
+                              ReorderMode="Enabled" 
+                              x:Name="AppListGrid" 
+                              Padding="0" 
+                              SelectionMode="None" 
+                              HorizontalAlignment="Center" 
+                              Height="{x:Bind ViewModel.AppsListGridHeight, Mode=OneWay}" 
+                              ScrollViewer.VerticalScrollMode="Disabled" 
+                              ScrollViewer.HorizontalScrollMode="Disabled" 
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                               Margin="5,20,5,4">
                         <GridView.ItemTemplate>
                             <DataTemplate>

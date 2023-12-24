@@ -128,31 +128,30 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ActionCenterControls\ActionCenterHome.xaml.cs">
+    <Compile Include="Views\ActionCenterHome.xaml.cs">
       <DependentUpon>ActionCenterHome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DesktopControls\Default10xBar.xaml.cs">
+    <Compile Include="Views\Default10xBar.xaml.cs">
       <DependentUpon>Default10xBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DesktopControls\MainDesktop.xaml.cs">
+    <Compile Include="Views\MainDesktop.xaml.cs">
       <DependentUpon>MainDesktop.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DesktopControls\StartMenu.xaml.cs">
+    <Compile Include="Views\StartMenu.xaml.cs">
       <DependentUpon>StartMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ErrorDialog.xaml.cs">
       <DependentUpon>ErrorDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LockControls\LockDialog.xaml.cs">
+    <Compile Include="Controls\LockDialog.xaml.cs">
       <DependentUpon>LockDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LockControls\LockScreen.xaml.cs">
+    <Compile Include="Views\LockScreen.xaml.cs">
       <DependentUpon>LockScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PowerDialog.xaml.cs">
       <DependentUpon>PowerDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BoundsChangedEventConverter.cs" />
     <Compile Include="Helpers\ProcessStart.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -209,19 +208,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\ActionCenterControls\ActionCenterHome.xaml">
+    <Page Include="Views\ActionCenterHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DesktopControls\Default10xBar.xaml">
+    <Page Include="Views\Default10xBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DesktopControls\MainDesktop.xaml">
+    <Page Include="Views\MainDesktop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DesktopControls\StartMenu.xaml">
+    <Page Include="Views\StartMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,11 +228,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LockControls\LockDialog.xaml">
+    <Page Include="Controls\LockDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LockControls\LockScreen.xaml">
+    <Page Include="Views\LockScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -275,6 +274,7 @@
       <Name>factoryos-10x-shell.Library</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

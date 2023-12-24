@@ -1,6 +1,5 @@
-﻿using factoryos_10x_shell.Controls.DesktopControls;
-using factoryos_10x_shell.Controls.LockControls;
-using factoryos_10x_shell.Library.Services.Navigation;
+﻿using factoryos_10x_shell.Library.Services.Navigation;
+using factoryos_10x_shell.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
