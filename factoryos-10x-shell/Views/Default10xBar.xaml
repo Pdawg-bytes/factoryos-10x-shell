@@ -96,14 +96,7 @@
             </Button>
         </StackPanel>
         <StackPanel x:Name="RightControls" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button HorizontalAlignment="Right" Height="50" Padding="0" Width="75" Style="{StaticResource TaskbarButtonStyle}" ToolTipService.ToolTip="Action Center" x:Name="ActionCenterButton" Click="ActionCenterButton_Click">
-                <Button.Flyout>
-                    <Flyout FlyoutPresenterStyle="{StaticResource ActionCenterFlyout}" Placement="BottomEdgeAlignedLeft">
-                        <Grid>
-                            <Frame x:Name="ActionCenterFrame" Width="320" MinHeight="50"/>
-                        </Grid>
-                    </Flyout>
-                </Button.Flyout>
+            <Button HorizontalAlignment="Right" Height="50" Padding="0" Width="75" Style="{StaticResource TaskbarButtonStyle}" ToolTipService.ToolTip="Action Center" x:Name="ActionCenterButton" Command="{x:Bind ViewModel.ActionCenterButtonClickedCommand, Mode=OneWay}">
                 <Button.Content>
                     <Grid Padding="0" Height="50" Width="75">
                         <TextBlock Text="{x:Bind ViewModel.TimeText, Mode=OneWay}" HorizontalAlignment="Right" Foreground="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" FontWeight="Medium" Margin="5,5,10,5" x:Name="ClockText" VerticalAlignment="Top"/>

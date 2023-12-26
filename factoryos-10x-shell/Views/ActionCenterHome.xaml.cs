@@ -62,7 +62,7 @@ namespace factoryos_10x_shell.Views
         private void ExpnanderControlButton_Click(object sender, RoutedEventArgs e)
         {
             isExpaneded = !isExpaneded;
-            if(isExpaneded)
+            /*if(isExpaneded)
             {
                 ControlPanel.Height = 250;
                 ExpanderIcon.Text = "\uE09D";
@@ -71,7 +71,7 @@ namespace factoryos_10x_shell.Views
             {
                 ControlPanel.Height = 80;
                 ExpanderIcon.Text = "\uE09C";
-            }
+            }*/
         }
 
         private async void BatteryButton_Click(object sender, RoutedEventArgs e)
@@ -98,33 +98,6 @@ namespace factoryos_10x_shell.Views
             NotifCount.Text = "0";
             NotifRootPanel.Visibility = Visibility.Collapsed;
         }
-        #endregion
-
-        #region Control events
-        private string GetNetName()
-        {
-            IReadOnlyList<string> names = NetworkHelper.Instance.ConnectionInformation.NetworkNames;
-            return names.FirstOrDefault();
-        }
-        /*private void InternetInit()
-        {
-            string[] connectionString = { "Not connected", "Ethernet", GetNetName(), "Connected" };
-            NetworkStatus.Text = connectionString[Default10xBar.connectionStatus];
-            InternetButton.IsChecked = connected;
-        }*/
-
-        private void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            if(VolumeSlider.Value == 0)
-            {
-                SndStatus.Text = "\uE198";
-            }
-            else
-            {
-                SndStatus.Text = "\uE15D";
-            }
-        }
-
         #endregion
     }
 }

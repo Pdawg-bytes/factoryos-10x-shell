@@ -128,6 +128,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\Managers\ActionCenterManagerService.cs" />
     <Compile Include="Views\ActionCenterHome.xaml.cs">
       <DependentUpon>ActionCenterHome.xaml</DependentUpon>
     </Compile>

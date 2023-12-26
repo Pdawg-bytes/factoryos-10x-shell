@@ -43,6 +43,7 @@ namespace factoryos_10x_shell
                 .AddSingleton<INotificationManager, NotificationManager>()
                 .AddSingleton<IThemeService, ThemeService>()
                 .AddSingleton<IStartManagerService, StartManagerService>()
+                .AddSingleton<IActionCenterManagerService, ActionCenterManagerService>()
                 .AddSingleton<IDesktopNavigator, DesktopNavigator>()
                 .AddSingleton<IEnvironmentService, EnvironmentService>()
                 .AddTransient<IPinManagerService, PinManagerService>()

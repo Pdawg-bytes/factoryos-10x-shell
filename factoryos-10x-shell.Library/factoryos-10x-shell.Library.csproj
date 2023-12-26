@@ -122,6 +122,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Constants\IconConstants.cs" />
+    <Compile Include="Events\ActionCenterVisibilityChangedEventArgs.cs" />
     <Compile Include="Events\AppsListUpdatedEventArgs.cs" />
     <Compile Include="Events\StartVisibilityChangedEventArgs.cs" />
     <Compile Include="Models\Hardware\BatteryReport.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Services\Hardware\IBatteryService.cs" />
     <Compile Include="Services\Hardware\INetworkService.cs" />
     <Compile Include="Services\Helpers\IAppHelper.cs" />
+    <Compile Include="Services\Managers\IActionCenterManagerService.cs" />
     <Compile Include="Services\Managers\INotificationManager.cs" />
     <Compile Include="Services\Managers\IPinManagerService.cs" />
     <Compile Include="Services\Managers\IStartManagerService.cs" />

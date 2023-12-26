@@ -30,6 +30,7 @@ namespace factoryos_10x_shell.Library.ViewModels
 
         private readonly INotificationManager m_notifManager;
         private readonly IStartManagerService m_startManager;
+        private readonly IActionCenterManagerService m_actionManager;
 
         public Default10xBarViewModel(
             ITimeService timeService, 
@@ -38,7 +39,8 @@ namespace factoryos_10x_shell.Library.ViewModels
             INetworkService netService,
             INotificationManager notifManager,
             IThemeService themeService,
-            IStartManagerService startManager)
+            IStartManagerService startManager,
+            IActionCenterManagerService actionManager)
         {
             m_timeService = timeService;
             m_dispatcherService = dispatcherService;
@@ -47,6 +49,7 @@ namespace factoryos_10x_shell.Library.ViewModels
             m_notifManager = notifManager;
             m_themeService = themeService;
             m_startManager = startManager;
+            m_actionManager = actionManager;
 
 
             m_timeService.UpdateClockBinding += TimeService_UpdateClockBinding;
@@ -238,6 +241,13 @@ namespace factoryos_10x_shell.Library.ViewModels
         private void StartButtonClicked()
         {
             m_startManager.RequestStartVisibilityChange(!m_startManager.IsStartOpen);
+        }
+
+
+        [RelayCommand]
+        private void ActionCenterButtonClicked()
+        {
+            m_actionManager.RequestActionVisibilityChange(!m_actionManager.IsActionCenterOpen);
         }
     }
 }

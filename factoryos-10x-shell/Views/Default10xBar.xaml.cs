@@ -15,12 +15,5 @@ namespace factoryos_10x_shell.Views
         }
 
         public Default10xBarViewModel ViewModel => (Default10xBarViewModel)this.DataContext;
-
-        #region Bar events
-        private void ActionCenterButton_Click(object sender, RoutedEventArgs e)
-        {
-            ActionCenterFrame.Navigate(typeof(ActionCenterHome));
-        }
-        #endregion
     }
 }
