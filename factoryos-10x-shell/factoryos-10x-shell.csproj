@@ -132,6 +132,9 @@
     <Compile Include="Views\ActionCenterHome.xaml.cs">
       <DependentUpon>ActionCenterHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DebugMenu.xaml.cs">
+      <DependentUpon>DebugMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Default10xBar.xaml.cs">
       <DependentUpon>Default10xBar.xaml</DependentUpon>
     </Compile>
@@ -210,6 +213,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Views\ActionCenterHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DebugMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -69,7 +69,7 @@ namespace factoryos_10x_shell.Views
 
             if (m_actionManager.IsActionCenterOpen)
             {
-                Rect actionCenterBounds = StartMenuFrame.TransformToVisual(null).TransformBounds(new Rect(0, 0, ActionCenterFrame.ActualWidth, ActionCenterFrame.ActualHeight));
+                Rect actionCenterBounds = ActionCenterFrame.TransformToVisual(null).TransformBounds(new Rect(0, 0, ActionCenterFrame.ActualWidth, ActionCenterFrame.ActualHeight));
 
                 if (!actionCenterBounds.Contains(point.Position))
                 {

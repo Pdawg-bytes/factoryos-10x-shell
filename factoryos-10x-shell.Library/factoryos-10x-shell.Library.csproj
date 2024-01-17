@@ -141,6 +141,7 @@
     <Compile Include="Services\Managers\IStartManagerService.cs" />
     <Compile Include="Services\Navigation\IDesktopNavigator.cs" />
     <Compile Include="ViewModels\ActionCenterHomeViewModel.cs" />
+    <Compile Include="ViewModels\DebugMenuViewModel.cs" />
     <Compile Include="ViewModels\Default10xBarViewModel.cs" />
     <Compile Include="ViewModels\LockDialogViewModel.cs" />
     <Compile Include="ViewModels\LockScreenViewModel.cs" />

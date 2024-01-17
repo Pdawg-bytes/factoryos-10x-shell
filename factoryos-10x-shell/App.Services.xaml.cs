@@ -53,7 +53,8 @@ namespace factoryos_10x_shell
                 .AddTransient<ActionCenterHomeViewModel>()
                 .AddTransient<LockDialogViewModel>()
                 .AddTransient<LockScreenViewModel>()
-                .AddTransient<PowerDialogViewModel>();
+                .AddTransient<PowerDialogViewModel>()
+                .AddTransient<DebugMenuViewModel>();
 
             m_serviceProvider = collection.BuildServiceProvider(true);
         }
