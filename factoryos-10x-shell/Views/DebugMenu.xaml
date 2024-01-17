@@ -12,5 +12,6 @@
     Title="Debug">
 
     <Grid>
+        <ToggleButton Style="{StaticResource CustomToggleButtonStyle}"/>
     </Grid>
 </ContentDialog>

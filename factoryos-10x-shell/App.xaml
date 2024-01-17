@@ -307,7 +307,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
             <!--Start app background style-->
             <Style TargetType="Button" x:Key="AppIconBackgroundStyle">
                 <Setter Property="Background" Value="Transparent"/>
@@ -337,6 +337,57 @@
                                 <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}" BorderThickness="0">
                                     <ContentPresenter CornerRadius="4" x:Name="ContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--Action Center ToggleButton style-->
+            <Style x:Key="CustomToggleButtonStyle" TargetType="ToggleButton">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"/>
+                <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+                <Setter Property="Padding" Value="8,4"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+                <Setter Property="FontWeight" Value="Semibold"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="#34AAAAAA"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}" BorderThickness="0" CornerRadius="4">
+                                    <ContentPresenter CornerRadius="4" x:Name="ContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                                <StackPanel Orientation="Horizontal">
+                                    <SymbolIcon x:Name="Icon" Symbol="Accept" VerticalAlignment="Center" Margin="10,5,4,5"/>
+                                    <Border x:Name="Separator" Grid.Column="1" BorderBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" Margin="20,0,0,0" BorderThickness="0,0,1,0"/>
+                                    <SymbolIcon x:Name="Icon2" Symbol="TouchPointer" VerticalAlignment="Center" Margin="10,0,4,0"/>
+                                </StackPanel>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
