@@ -15,32 +15,32 @@
 
     <Grid>
         <StackPanel>
-            <StackPanel Width="320" Background="{ThemeResource TaskbarAcrylicBrush}" x:Name="NotifRootPanel" Margin="0,0,0,10" CornerRadius="4" Visibility="Visible">
-                <StackPanel Orientation="Horizontal" Width="320" Height="36">
+            <StackPanel Width="360" Background="{ThemeResource TaskbarAcrylicBrush}" x:Name="NotifRootPanel" Margin="0,0,0,10" CornerRadius="4" Visibility="Visible">
+                <StackPanel Orientation="Horizontal" Width="360" Height="36">
                     <TextBlock Text="Notifications" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="12"/>
-                    <Grid Margin="8,0,145,0">
-                        <Ellipse Height="24" Width="24" Fill="#aa505050" Margin="0,0,0,0"/>
+                    <Grid Margin="8,0,175,0">
+                        <Ellipse Height="24" Width="24" Fill="{ThemeResource ButtonPointerOverBackgroundThemeBrush}" Margin="0,0,0,0"/>
                         <TextBlock Text="0" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="NotifCount" Margin="0,0,0,0"/>
                     </Grid>
-                    <Button CornerRadius="12" Content="Clear all" FontSize="10" Height="26" Background="#aa505050" x:Name="ClearNotifs" Click="ClearNotifs_Click"/>
+                    <Button CornerRadius="10" Padding="0" Content="Clear all" FontSize="11" Width="60" Height="22" Background="{ThemeResource ButtonPointerOverBackgroundThemeBrush}" x:Name="ClearNotifs" Click="ClearNotifs_Click"/>
                 </StackPanel>
-                <StackPanel Width="320" Height="100" Background="{ThemeResource WhiteTintBrushNormal}">
+                <StackPanel Width="400" Height="100" Background="{ThemeResource WhiteTintBrushNormal}">
                     <GridView>
 
                     </GridView>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Width="320" Background="{ThemeResource TaskbarAcrylicBrush}" CornerRadius="4">
-                <StackPanel Orientation="Horizontal" Width="320" Height="36" Background="Transparent">
-                    <TextBlock Text="Quick Settings" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,200,0" FontSize="12"/>
-                    <Button x:Name="ExpnanderControlButton" CornerRadius="25" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" Padding="0" Margin="0,0,0,0" Click="ExpnanderControlButton_Click">
+            <StackPanel Width="360" Background="{ThemeResource TaskbarAcrylicBrush}" CornerRadius="4">
+                <StackPanel Orientation="Horizontal" Width="360" Height="36" Background="Transparent">
+                    <TextBlock Text="Quick Settings" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,240,0" FontSize="12"/>
+                    <Button Background="{ThemeResource ButtonPointerOverBackgroundThemeBrush}" x:Name="ExpnanderControlButton" CornerRadius="25" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" Padding="0" Margin="0,0,0,0" Click="ExpnanderControlButton_Click">
                         <Button.Content>
                             <TextBlock Text="&#xE09C;" FontFamily="Segoe MDL2 Assets" FontSize="12" x:Name="ExpanderIcon"/>
                         </Button.Content>
                     </Button>
                 </StackPanel>
-                <Border Background="{ThemeResource WhiteTintBrushStrong}" Height="1" Width="320" Margin="-60,0,-60,0" Opacity="0.8"/>
-                <StackPanel Background="{ThemeResource WhiteTintBrushNormal}" Orientation="Horizontal" x:Name="BottomControlsCenter" Width="320" Height="42" HorizontalAlignment="Right">
+                <Border Background="{ThemeResource WhiteTintBrushStrong}" Height="1" Width="360" Margin="-60,0,-60,0" Opacity="0.8"/>
+                <StackPanel Background="{ThemeResource WhiteTintBrushNormal}" Orientation="Horizontal" x:Name="BottomControlsCenter" Width="360" Height="42" HorizontalAlignment="Right">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80"/>
@@ -51,7 +51,7 @@
                         </Button>
                         <Grid HorizontalAlignment="Right" Grid.Column="1">
                             <StackPanel Orientation="Horizontal">
-                                <Button x:Name="OSKButton" Height="42" Width="42" Margin="72,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="0" Padding="0" Background="Transparent" Click="OSKButton_Click" ToolTipService.ToolTip="Touch keyboard">
+                                <Button x:Name="OSKButton" Height="42" Width="42" Margin="112,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="0" Padding="0" Background="Transparent" Click="OSKButton_Click" ToolTipService.ToolTip="Touch keyboard">
                                     <Button.Content>
                                         <TextBlock Text="&#xE144;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
                                     </Button.Content>

@@ -350,6 +350,8 @@
                 <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"/>
                 <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
                 <Setter Property="Padding" Value="8,4"/>
+                <Setter Property="Width" Value="105"/>
+                <Setter Property="Height" Value="40"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
@@ -369,6 +371,9 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="#34AAAAAA"/>
                                                 </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonSecondHalfBackground" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="#34AAAAAA"/>
+                                                </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
                                         <VisualState x:Name="Checked">
@@ -376,17 +381,23 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
                                                 </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonSecondHalfBackground" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
-                                <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}" BorderThickness="0" CornerRadius="4">
+                                <Border Background="Transparent" BorderThickness="0" CornerRadius="3">
                                     <ContentPresenter CornerRadius="4" x:Name="ContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </Border>
-                                <StackPanel Orientation="Horizontal">
-                                    <SymbolIcon x:Name="Icon" Symbol="Accept" VerticalAlignment="Center" Margin="10,5,4,5"/>
-                                    <Border x:Name="Separator" Grid.Column="1" BorderBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" Margin="20,0,0,0" BorderThickness="0,0,1,0"/>
-                                    <SymbolIcon x:Name="Icon2" Symbol="TouchPointer" VerticalAlignment="Center" Margin="10,0,4,0"/>
+                                <StackPanel Orientation="Horizontal" CornerRadius="3">
+                                    <Grid Width="65" Height="40" x:Name="ButtonBackground">
+                                    </Grid>
+                                    <Border x:Name="Separator" Grid.Column="1" BorderBrush="Transparent" BorderThickness="0,0,1,0"/>
+                                    <Grid Width="40" Height="40" x:Name="ButtonSecondHalfBackground">
+                                        <TextBlock Text="&#xE76C;" FontFamily="Segoe MDL2 Assets" Margin="13,13,0,0" FontWeight="Thin"/>
+                                    </Grid>
                                 </StackPanel>
                             </Grid>
                         </ControlTemplate>
