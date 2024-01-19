@@ -343,7 +343,7 @@
                 </Setter>
             </Style>
 
-            <!--Action Center ToggleButton style-->
+            <!--Action Center Segmented ToggleButton style-->
             <Style x:Key="CustomToggleButtonStyle" TargetType="ToggleButton">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
@@ -393,10 +393,11 @@
                                 </Border>
                                 <StackPanel Orientation="Horizontal" CornerRadius="3">
                                     <Grid Width="65" Height="40" x:Name="ButtonBackground">
+                                        <TextBlock Text="&#xE701;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,4" FontWeight="Thin" FontSize="16"/>
                                     </Grid>
                                     <Border x:Name="Separator" Grid.Column="1" BorderBrush="Transparent" BorderThickness="0,0,1,0"/>
                                     <Grid Width="40" Height="40" x:Name="ButtonSecondHalfBackground">
-                                        <TextBlock Text="&#xE76C;" FontFamily="Segoe MDL2 Assets" Margin="13,13,0,0" FontWeight="Thin"/>
+                                        <TextBlock Text="&#xE76C;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Thin" FontSize="12"/>
                                     </Grid>
                                 </StackPanel>
                             </Grid>
