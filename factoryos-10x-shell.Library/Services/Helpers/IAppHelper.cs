@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
+using Windows.Management.Deployment;
 
 namespace factoryos_10x_shell.Library.Services.Helpers
 {
@@ -17,5 +19,7 @@ namespace factoryos_10x_shell.Library.Services.Helpers
         public ObservableCollection<StartIconModel> StartIcons { get; set; }
 
         public Task LoadAppsAsync();
+
+        public Package PackageFromAumid(string aumid);
     }
 }

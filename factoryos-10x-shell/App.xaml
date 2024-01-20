@@ -308,6 +308,21 @@
                 </Setter>
             </Style>
 
+            <!--Notif list style-->
+            <Style TargetType="ListViewItem" x:Key="NotifListGridItemStyle">
+                <Setter Property="IsHitTestVisible" Value="True"/>
+                <Setter Property="Margin" Value="28,8,28,8"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewItem">
+                            <Grid Background="{TemplateBinding Background}">
+                                <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Background="Transparent" ToolTipService.ToolTip="{Binding IconName}" Padding="0"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <!--Start app background style-->
             <Style TargetType="Button" x:Key="AppIconBackgroundStyle">
                 <Setter Property="Background" Value="Transparent"/>
@@ -337,69 +352,6 @@
                                 <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}" BorderThickness="0">
                                     <ContentPresenter CornerRadius="4" x:Name="ContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <!--Action Center Segmented ToggleButton style-->
-            <Style x:Key="CustomToggleButtonStyle" TargetType="ToggleButton">
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-                <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"/>
-                <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
-                <Setter Property="Padding" Value="8,4"/>
-                <Setter Property="Width" Value="105"/>
-                <Setter Property="Height" Value="40"/>
-                <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
-                <Setter Property="FontWeight" Value="Semibold"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ToggleButton">
-                            <Grid>
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup x:Name="CommonStates">
-                                        <VisualState x:Name="Normal">
-                                        </VisualState>
-                                        <VisualState x:Name="PointerOver">
-                                        </VisualState>
-                                        <VisualState x:Name="Pressed">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="#34AAAAAA"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonSecondHalfBackground" Storyboard.TargetProperty="Background">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="#34AAAAAA"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="Checked">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonSecondHalfBackground" Storyboard.TargetProperty="Background">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-                                <Border Background="Transparent" BorderThickness="0" CornerRadius="3">
-                                    <ContentPresenter CornerRadius="4" x:Name="ContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Border>
-                                <StackPanel Orientation="Horizontal" CornerRadius="3">
-                                    <Grid Width="65" Height="40" x:Name="ButtonBackground">
-                                        <TextBlock Text="&#xE701;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,4" FontWeight="Thin" FontSize="16"/>
-                                    </Grid>
-                                    <Border x:Name="Separator" Grid.Column="1" BorderBrush="Transparent" BorderThickness="0,0,1,0"/>
-                                    <Grid Width="40" Height="40" x:Name="ButtonSecondHalfBackground">
-                                        <TextBlock Text="&#xE76C;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Thin" FontSize="12"/>
-                                    </Grid>
-                                </StackPanel>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>

@@ -23,81 +23,8 @@ namespace factoryos_10x_shell.Views
             this.InitializeComponent();
 
             DataContext = App.ServiceProvider.GetRequiredService<ActionCenterHomeViewModel>();
-
-            //InternetInit();
-            //Init();
         }
 
-        #region Init
-        /*private void Init()
-        {
-            if (Default10xBar.batteryActionCenterEnabled == true)
-            {
-                BatteryPercent.Text = Default10xBar.batteryActionCenter;
-            }
-            else
-            {
-                BatteryPercent.Text = "";
-            }
-
-            if (Default10xBar.notifcationCount > 0)
-            {
-                NotifCount.Text = Default10xBar.notifcationCount.ToString();
-                NotifRootPanel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                NotifRootPanel.Visibility = Visibility.Collapsed;
-            }
-        }*/
-        #endregion
-
-        #region Border events
-        private async void PowerButton_Click(object sender, RoutedEventArgs e)
-        {
-            ContentDialog powerDialog = new PowerDialog();
-            await powerDialog.ShowAsync();
-        }
-
-        private void ExpnanderControlButton_Click(object sender, RoutedEventArgs e)
-        {
-            isExpaneded = !isExpaneded;
-            /*if(isExpaneded)
-            {
-                ControlPanel.Height = 250;
-                ExpanderIcon.Text = "\uE09D";
-            }
-            else
-            {
-                ControlPanel.Height = 80;
-                ExpanderIcon.Text = "\uE09C";
-            }*/
-        }
-
-        private async void BatteryButton_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("ms-settings:batterysaver"));
-        }
-        private async void LockButton_Click(object sender, RoutedEventArgs e)
-        {
-            ContentDialog lockDialog = new LockDialog();
-            await lockDialog.ShowAsync();
-        }
-
-        private async void SettingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("ms-settings:"));
-        }
-
-        private async void OSKButton_Click(object sender, RoutedEventArgs e)
-        {
-            // todo: IMPLEMENT OPENING OSK
-        }
-        private void ClearNotifs_Click(object sender, RoutedEventArgs e)
-        {
-            NotifCount.Text = "0";
-            NotifRootPanel.Visibility = Visibility.Collapsed;
-        }
-        #endregion
+        public ActionCenterHomeViewModel ViewModel => (ActionCenterHomeViewModel)this.DataContext;
     }
 }

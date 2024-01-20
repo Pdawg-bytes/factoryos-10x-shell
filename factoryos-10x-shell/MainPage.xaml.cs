@@ -15,13 +15,16 @@ using factoryos_10x_shell.Library.Services.Navigation;
 using factoryos_10x_shell.Views;
 using Windows.System;
 using System.Diagnostics;
+using factoryos_10x_shell.Library.Services.Helpers;
 
 namespace factoryos_10x_shell
 {
     public sealed partial class MainPage : Page
     {
         private readonly IStartManagerService m_startManager;
+        private readonly IActionCenterManagerService m_actionManager;
         private readonly IDesktopNavigator m_desktopNavigator;
+        private readonly IDialogService m_dialogService;
 
         private readonly DebugMenu m_debugMenu;
 
@@ -30,7 +33,9 @@ namespace factoryos_10x_shell
             this.InitializeComponent();
 
             m_startManager = App.ServiceProvider.GetRequiredService<IStartManagerService>();
+            m_actionManager = App.ServiceProvider.GetService<IActionCenterManagerService>();
             m_desktopNavigator = App.ServiceProvider.GetRequiredService<IDesktopNavigator>();
+            m_dialogService = App.ServiceProvider.GetService<IDialogService>();
 
 
             // Titlebar
@@ -59,8 +64,7 @@ namespace factoryos_10x_shell
                     switch (args.VirtualKey)
                     {
                         case VirtualKey.Insert:
-                            m_debugMenu.Hide();
-                            m_debugMenu.ShowAsync();
+                            m_dialogService.OpenDebugMenu();
                             break;
                     }
                 }
@@ -72,11 +76,8 @@ namespace factoryos_10x_shell
             if (args.VirtualKey == Windows.System.VirtualKey.LeftWindows || args.VirtualKey == Windows.System.VirtualKey.RightWindows)
             {
                 m_startManager.RequestStartVisibilityChange(!m_startManager.IsStartOpen);
-            }
-
-            var ctrl = Window.Current.CoreWindow.GetKeyState(VirtualKey.Control);
-            if (ctrl.HasFlag(CoreVirtualKeyStates.Down) && args.VirtualKey == VirtualKey.NumberKeyLock)
-            {
+                if (m_actionManager.IsActionCenterOpen)
+                    m_actionManager.RequestActionVisibilityChange(false);
             }
         }
     }

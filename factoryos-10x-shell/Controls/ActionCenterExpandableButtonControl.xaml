@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Class="factoryos_10x_shell.Controls.ActionCenterExpandableButtonControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:factoryos_10x_shell.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="60"
+    d:DesignWidth="104"
+    Width="104"
+    Height="60">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="WhiteTintBrushStrong" Color="Gray" Opacity="0.18" />
+    </UserControl.Resources>
+    
+    <Grid x:Name="RootGrid" CornerRadius="3" Width="104" Height="60">
+        <StackPanel Height="60">
+            <Button CornerRadius="3" Width="104" Height="40" x:Name="ButtonSection" Background="{StaticResource WhiteTintBrushStrong}">
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="&#xE76C;" FontFamily="Segoe MDL2 Assets" FontWeight="Thin" FontSize="12" Margin="65,2,0,0"/>
+                    <TextBlock Text="{x:Bind Icon, Mode=OneWay}" FontFamily="Segoe MDL2 Assets" FontWeight="Thin" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Button>
+            <TextBlock Text="{x:Bind Subtext, Mode=OneWay}" HorizontalAlignment="Center" Margin="0,4,0,0" FontSize="12"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

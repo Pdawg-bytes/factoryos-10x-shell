@@ -14,7 +14,7 @@ namespace factoryos_10x_shell.Services.Managers
     {
         public PinManagerService() 
         {
-
+            SetEncryptedPin(new int[] { 1, 2, 3, 4 }, System.Environment.MachineName);
         }
 
 

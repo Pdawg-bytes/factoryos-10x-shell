@@ -47,6 +47,7 @@ namespace factoryos_10x_shell
                 .AddSingleton<IDesktopNavigator, DesktopNavigator>()
                 .AddSingleton<IEnvironmentService, EnvironmentService>()
                 .AddTransient<IPinManagerService, PinManagerService>()
+                .AddSingleton<IDialogService, DialogService>()
                 .AddTransient<Default10xBarViewModel>()
                 .AddTransient<MainDesktopViewModel>()
                 .AddTransient<StartMenuViewModel>()

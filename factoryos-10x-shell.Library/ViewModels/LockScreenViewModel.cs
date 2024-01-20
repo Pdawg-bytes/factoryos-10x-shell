@@ -63,7 +63,7 @@ namespace factoryos_10x_shell.Library.ViewModels
             m_netService.InternetStatusChanged += NetworkService_InternetStatusChanged;
             UpdateNetworkStatus();
 
-            m_notifManager.NotifcationChanged += NotificationManager_NotificationChanged;
+            m_notifManager.NotificationChanged += NotificationManager_NotificationChanged;
             Task.Run(UpdateNotifications).Wait();
 
             m_themeService.GlobalThemeChanged += ThemeService_GlobalThemeChanged;
@@ -219,7 +219,7 @@ namespace factoryos_10x_shell.Library.ViewModels
         [ObservableProperty]
         private Visibility notifIndicatorVisibility;
 
-        private void NotificationManager_NotificationChanged(object sender, EventArgs e)
+        private void NotificationManager_NotificationChanged(object sender, UserNotificationChangedEventArgs e)
         {
             UpdateNotifications().Wait();
         }

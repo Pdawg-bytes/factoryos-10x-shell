@@ -5,6 +5,7 @@
     xmlns:local="using:factoryos_10x_shell.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:factoryos_10x_shell.Controls"
     mc:Ignorable="d"
     Background="Transparent">
 
@@ -15,34 +16,55 @@
 
     <Grid>
         <StackPanel>
-            <StackPanel Width="360" Background="{ThemeResource TaskbarAcrylicBrush}" x:Name="NotifRootPanel" Margin="0,0,0,10" CornerRadius="4" Visibility="Visible">
+            <StackPanel Width="360" Background="{ThemeResource TaskbarAcrylicBrush}" x:Name="NotifRootPanel" Margin="0,0,0,5" CornerRadius="4" Visibility="{x:Bind ViewModel.NotifWindowVisibility, Mode=OneWay}">
                 <StackPanel Orientation="Horizontal" Width="360" Height="36">
                     <TextBlock Text="Notifications" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="12"/>
                     <Grid Margin="8,0,175,0">
                         <Ellipse Height="24" Width="24" Fill="{ThemeResource ButtonPointerOverBackgroundThemeBrush}" Margin="0,0,0,0"/>
-                        <TextBlock Text="0" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="NotifCount" Margin="0,0,0,0"/>
+                        <TextBlock Text="{x:Bind ViewModel.NotifCount, Mode=OneWay}" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="NotifCount" Margin="0,0,0,0"/>
                     </Grid>
-                    <Button CornerRadius="10" Padding="0" Content="Clear all" FontSize="11" Width="60" Height="22" Background="{ThemeResource ButtonPointerOverBackgroundThemeBrush}" x:Name="ClearNotifs" Click="ClearNotifs_Click"/>
+                    <Button CornerRadius="10" Padding="0" Content="Clear all" FontSize="11" Width="60" Height="22" Background="{ThemeResource ButtonPointerOverBackgroundThemeBrush}" x:Name="ClearNotifs" Command="{x:Bind ViewModel.ClearNotificationsCommand, Mode=OneWay}"/>
                 </StackPanel>
-                <StackPanel Width="400" Height="100" Background="{ThemeResource WhiteTintBrushNormal}">
-                    <GridView>
-
-                    </GridView>
-                </StackPanel>
+                <ScrollViewer MaxHeight="440">
+                    <StackPanel Width="360" Background="{ThemeResource WhiteTintBrushNormal}">
+                        <ListView x:Name="NotifListView" ItemsSource="{x:Bind ViewModel.Notifications}" SelectionMode="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Height="110">
+                                        <Border x:Name="NotificationBackground">
+                                            <StackPanel Orientation="Vertical" x:Name="NotificationStack">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Source="{Binding IconSource}" Height="28" Width="28" Margin="0,8,0,0"/>
+                                                    <TextBlock Text="{Binding AppName}" FontSize="13" Margin="8,12,0,0"/>
+                                                    <TextBlock Text="{Binding NotificationTime}" FontSize="13" Margin="8,12,0,0" Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"/>
+                                                </StackPanel>
+                                                <StackPanel Margin="5,8,0,0">
+                                                    <TextBlock Text="{Binding NotificationMainContent}"/>
+                                                    <TextBlock Text="{Binding NotificationSecondaryContent}" Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}" Width="360" TextWrapping="WrapWholeWords" MaxLines="2"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </ScrollViewer>
             </StackPanel>
+            
             <StackPanel Width="360" Background="{ThemeResource TaskbarAcrylicBrush}" CornerRadius="4">
-                <StackPanel Orientation="Horizontal" Width="360" Height="36" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Width="360" Height="40" Background="Transparent">
                     <TextBlock Text="Quick Settings" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,240,0" FontSize="12"/>
-                    <Button Background="{ThemeResource ButtonPointerOverBackgroundThemeBrush}" x:Name="ExpnanderControlButton" CornerRadius="25" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" Padding="0" Margin="0,0,0,0" Click="ExpnanderControlButton_Click">
+                    <Button Command="{x:Bind ViewModel.ToggleExpanderClickedCommand, Mode=OneWay}" Background="{ThemeResource ButtonPointerOverBackgroundThemeBrush}" x:Name="ExpnanderControlButton" CornerRadius="25" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" Padding="0" Margin="0,0,0,0">
                         <Button.Content>
-                            <TextBlock Text="&#xE09C;" FontFamily="Segoe MDL2 Assets" FontSize="12" x:Name="ExpanderIcon"/>
+                            <TextBlock Text="{x:Bind ViewModel.ExpanderText, Mode=OneWay}" FontFamily="Segoe MDL2 Assets" FontSize="12" x:Name="ExpanderIcon"/>
                         </Button.Content>
                     </Button>
                 </StackPanel>
                 <StackPanel Background="{ThemeResource WhiteTintBrushNormal}">
                     <StackPanel Orientation="Horizontal" Width="360" Height="48">
-                        <TextBlock Text="&#xE15D;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="14,0,0,0" x:Name="SndStatus"/>
-                        <Slider x:Name="VolumeSlider" Width="280" VerticalAlignment="Center" Margin="10,0,0,0" CornerRadius="2"/>
+                        <TextBlock Text="&#xE15D;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="17,0,0,0" x:Name="SndStatus" FontSize="15"/>
+                        <Slider x:Name="VolumeSlider" Width="272" VerticalAlignment="Center" Margin="10,0,0,0" CornerRadius="2"/>
                         <Button x:Name="SoundSettings" Width="24" Height="24" CornerRadius="4" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,0,0" Padding="0" Style="{StaticResource TaskbarButtonStyle}">
                             <Button.Content>
                                 <TextBlock Text="&#xE00F;" FontFamily="Segoe MDL2 Assets" FontSize="12"/>
@@ -50,45 +72,57 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Width="360" Orientation="Vertical" Height="80" x:Name="ControlPanel" Background="{ThemeResource WhiteTintBrushNormal}">
+                <StackPanel Width="360" Orientation="Vertical" Height="{x:Bind ViewModel.ToggleSectionHeight, Mode=OneWay}" x:Name="ControlPanel" Background="{ThemeResource WhiteTintBrushNormal}">
                     <ScrollViewer>
                         <StackPanel>
-                            <StackPanel x:Name="FirstRowControls" Width="360" Orientation="Horizontal" Height="70" Margin="0,10,0,0">
-                                
+                            <StackPanel x:Name="FirstRowControls" Width="360" Orientation="Horizontal" Height="60" Margin="0,12,0,0">
+                                <controls:ActionCenterSegmentedToggleControl Icon="&#xE701;" Subtext="WiFi" Margin="16,0,8,0"/>
+                                <controls:ActionCenterSegmentedToggleControl Icon="&#xE702;" Subtext="Not connected" Margin="0,0,8,0"/>
+                                <controls:ActionCenterSegmentedToggleControl Icon="&#xEA14;" Subtext="Wired display" Margin="0,0,16,0"/>
+                            </StackPanel>
+                            <StackPanel x:Name="SecondRowControls" Width="360" Orientation="Horizontal" Height="60" Margin="0,28,0,0">
+                                <controls:ActionCenterExpandableButtonControl Icon="&#xE775;" Subtext="Keyboard layout" Margin="16,0,8,0"/>
+                                <controls:ActionCenterStandardToggleControl Icon="&#xE708;" Subtext="Do not disturb" Margin="0,0,8,0"/>
+                                <controls:ActionCenterStandardToggleControl Icon="&#xE709;" Subtext="Airplane mode" Margin="0,0,16,0"/>
+                            </StackPanel>
+                            <StackPanel x:Name="ThirdRowControls" Width="360" Orientation="Horizontal" Height="60" Margin="0,28,0,0">
+                                <controls:ActionCenterStandardToggleControl Icon="&#xE707;" Subtext="Location" Margin="16,0,8,0"/>
+                                <controls:ActionCenterExpandableButtonControl Icon="&#xE776;" Subtext="Ease of Access" Margin="0,0,8,0"/>
+                                <controls:ActionCenterStandardToggleControl Icon="&#xE8BE;" Subtext="Battery saver" Margin="0,0,16,0"/>
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
                 </StackPanel>
                 <Border Background="Gray" Height="1" Width="360" Margin="-60,0,-60,0" Opacity="0.3"/>
-                <StackPanel Background="{ThemeResource WhiteTintBrushNormal}" Orientation="Horizontal" x:Name="BottomControlsCenter" Width="360" Height="42" HorizontalAlignment="Right">
+                <StackPanel Background="{ThemeResource WhiteTintBrushNormal}" Orientation="Horizontal" x:Name="BottomControlsCenter" Width="360" Height="40" HorizontalAlignment="Right">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="BatteryButton" CornerRadius="0" Padding="0" Background="Transparent" Height="42" Click="BatteryButton_Click" ToolTipService.ToolTip="Battery">
-                            <TextBlock Text="0%" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" x:Name="BatteryPercent" Margin="12,0,12,0" Grid.Column="0"/>
+                        <Button Command="{x:Bind ViewModel.BatteryStatusClickedCommand, Mode=OneWay}" x:Name="BatteryButton" CornerRadius="0" Padding="0" Background="Transparent" Height="42" ToolTipService.ToolTip="Battery" Visibility="{x:Bind ViewModel.BatteryStatusVisibility, Mode=OneWay}">
+                            <TextBlock Text="{x:Bind ViewModel.BatteryStatusText, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" x:Name="BatteryPercent" Margin="12,0,12,0" Grid.Column="0"/>
                         </Button>
                         <Grid HorizontalAlignment="Right" Grid.Column="1">
                             <StackPanel Orientation="Horizontal">
-                                <Button x:Name="OSKButton" Height="42" Width="42" Margin="112,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="0" Padding="0" Background="Transparent" Click="OSKButton_Click" ToolTipService.ToolTip="Touch keyboard">
+                                <Button x:Name="OSKButton" Height="42" Width="42" Margin="112,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="0" Padding="0" Background="Transparent" Command="{x:Bind ViewModel.OSKClickedCommand, Mode=OneWay}" ToolTipService.ToolTip="Touch keyboard">
                                     <Button.Content>
                                         <TextBlock Text="&#xE144;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
                                     </Button.Content>
                                 </Button>
-                                <Button x:Name="SettingsButton" Height="42" Width="42" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="0" Padding="0" Background="Transparent" Click="SettingsButton_Click" ToolTipService.ToolTip="All settings">
+                                <Button x:Name="SettingsButton" Height="42" Width="42" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="0" Padding="0" Background="Transparent" Command="{x:Bind ViewModel.SettingsClickedCommand, Mode=OneWay}" ToolTipService.ToolTip="All settings">
                                     <Button.Content>
                                         <TextBlock Text="&#xE115;" FontFamily="Segoe MDL2 Assets" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Button.Content>
                                 </Button>
-                                <Button x:Name="PowerButton" Height="42" Width="42" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="0" Padding="0" Background="Transparent" Click="PowerButton_Click" ToolTipService.ToolTip="Power">
+                                <Button x:Name="PowerButton" Height="42" Width="42" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="0" Padding="0" Background="Transparent" Command="{x:Bind ViewModel.PowerOptionsClickedCommand, Mode=OneWay}" ToolTipService.ToolTip="Power">
                                     <Button.Content>
                                         <TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
                                     </Button.Content>
                                 </Button>
-                                <Button x:Name="LockButton" Height="42" Width="42" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Right" Background="Transparent" CornerRadius="0" Padding="0" ToolTipService.ToolTip="Lock your screen" Click="LockButton_Click">
+                                <Button x:Name="LockButton" Height="42" Width="42" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Right" Background="Transparent" CornerRadius="0" Padding="0" Command="{x:Bind ViewModel.LockScreenClickedCommand, Mode=OneWay}" ToolTipService.ToolTip="Lock your screen">
                                     <Button.Content>
-                                        <Ellipse Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTipService.ToolTip="Lock your screen">
+                                        <Ellipse Width="24" Height="24" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTipService.ToolTip="Lock your screen">
                                             <Ellipse.Fill>
                                                 <ImageBrush ImageSource="ms-appx:///Assets/defaultUser.png" Stretch="UniformToFill"/>
                                             </Ellipse.Fill>

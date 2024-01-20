@@ -6,12 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:controls="using:factoryos_10x_shell.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlAcrylicElementBrush}"
     CornerRadius="8"
     Title="Debug">
 
     <Grid>
-        <ToggleButton Style="{StaticResource CustomToggleButtonStyle}"/>
+        <controls:ActionCenterSegmentedToggleControl Icon="&#xED56;" Subtext="cooked"/>
+        <controls:ActionCenterExpandableButtonControl Icon="&#xED56;" Subtext="cooked" Margin="0,200,0,0"/>
     </Grid>
 </ContentDialog>

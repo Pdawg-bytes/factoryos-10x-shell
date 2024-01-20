@@ -53,6 +53,7 @@ namespace factoryos_10x_shell.Library.Models.InternalData
             }
         }
 
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

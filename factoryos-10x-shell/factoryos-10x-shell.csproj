@@ -128,6 +128,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ActionCenterExpandableButtonControl.xaml.cs">
+      <DependentUpon>ActionCenterExpandableButtonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ActionCenterSegmentedToggle.xaml.cs">
+      <DependentUpon>ActionCenterSegmentedToggle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ActionCenterStandardToggleControl.xaml.cs">
+      <DependentUpon>ActionCenterStandardToggleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Helpers\DialogService.cs" />
     <Compile Include="Services\Managers\ActionCenterManagerService.cs" />
     <Compile Include="Views\ActionCenterHome.xaml.cs">
       <DependentUpon>ActionCenterHome.xaml</DependentUpon>
@@ -212,6 +222,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ActionCenterExpandableButtonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ActionCenterSegmentedToggle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ActionCenterStandardToggleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ActionCenterHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

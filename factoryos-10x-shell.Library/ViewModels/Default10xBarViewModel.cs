@@ -60,7 +60,7 @@ namespace factoryos_10x_shell.Library.ViewModels
             m_netService.InternetStatusChanged += NetworkService_InternetStatusChanged;
             UpdateNetworkStatus();
 
-            m_notifManager.NotifcationChanged += NotificationManager_NotificationChanged;
+            m_notifManager.NotificationChanged += NotificationManager_NotificationChanged;
             Task.Run(UpdateNotifications).Wait();
 
             m_themeService.GlobalThemeChanged += ThemeService_GlobalThemeChanged;
@@ -188,7 +188,7 @@ namespace factoryos_10x_shell.Library.ViewModels
         [ObservableProperty]
         private Visibility notifIndicatorVisibility;
 
-        private void NotificationManager_NotificationChanged(object sender, EventArgs e)
+        private void NotificationManager_NotificationChanged(object sender, UserNotificationChangedEventArgs e)
         {
             UpdateNotifications().Wait();
         }
@@ -241,6 +241,8 @@ namespace factoryos_10x_shell.Library.ViewModels
         private void StartButtonClicked()
         {
             m_startManager.RequestStartVisibilityChange(!m_startManager.IsStartOpen);
+            if (m_actionManager.IsActionCenterOpen)
+                m_actionManager.RequestActionVisibilityChange(false);
         }
 
 
@@ -248,6 +250,8 @@ namespace factoryos_10x_shell.Library.ViewModels
         private void ActionCenterButtonClicked()
         {
             m_actionManager.RequestActionVisibilityChange(!m_actionManager.IsActionCenterOpen);
+            if (m_startManager.IsStartOpen)
+                m_startManager.RequestStartVisibilityChange(false);
         }
     }
 }

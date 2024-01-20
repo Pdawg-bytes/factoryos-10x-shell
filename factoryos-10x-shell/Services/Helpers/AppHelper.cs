@@ -24,14 +24,19 @@ namespace factoryos_10x_shell.Services.Helpers
 
         private Size _logoSize;
         public ObservableCollection<StartIconModel> StartIcons { get; set; }
-
         private List<StartIconModel> _iconCache { get; set; }
+
+        public PackageManager PackageManager { get; set; }
+
+        private Dictionary<string, string> m_pkgFamilyMap;
 
         public AppHelper() 
         {
             m_dispatcherQueue = DispatcherQueue.GetForCurrentThread();
+            PackageManager = new PackageManager();
+            m_pkgFamilyMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-            _logoSize = new Size(48, 48);
+            _logoSize = new Size(176, 176);
             _iconCache = new List<StartIconModel>();
         }
 
@@ -48,6 +53,7 @@ namespace factoryos_10x_shell.Services.Helpers
                 {
                     if (!package.IsFramework && !package.IsResourcePackage && !package.IsStub && package.GetAppListEntries().FirstOrDefault() != null)
                     {
+                        m_pkgFamilyMap[package.Id.FamilyName] = package.Id.FullName;
                         try
                         {
                             IReadOnlyList<AppListEntry> entries = package.GetAppListEntries();
@@ -61,6 +67,10 @@ namespace factoryos_10x_shell.Services.Helpers
                                 BitmapImage bitmapImage = new BitmapImage();
                                 await bitmapImage.SetSourceAsync(stream);
                                 _iconCache.Add(new StartIconModel { IconName = entry.DisplayInfo.DisplayName, AppId = entry.AppUserModelId, IconSource = bitmapImage });
+                                if (entry.AppUserModelId.Contains("Visualizer"))
+                                {
+                                    Debug.WriteLine(package.Id.FullName);
+                                }
                             }
                         }
                         catch (Exception ex)
@@ -77,6 +87,18 @@ namespace factoryos_10x_shell.Services.Helpers
             {
                 Debug.WriteLine("LoadApps => Get: " + ex.Message);
             }
+        }
+
+        public Package PackageFromAumid(string aumid)
+        {
+            string[] aumidParts = aumid.Split('!');
+            string packageFamilyName = aumidParts[0];
+
+            if (m_pkgFamilyMap.TryGetValue(packageFamilyName, out string packageFullName))
+            {
+                return PackageManager.FindPackageForUser(string.Empty, packageFullName);
+            }
+            return null;
         }
     }
 }

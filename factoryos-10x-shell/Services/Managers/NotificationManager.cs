@@ -7,14 +7,30 @@ using Windows.Foundation.Metadata;
 using Windows.UI.Notifications.Management;
 using Windows.UI.Notifications;
 using factoryos_10x_shell.Library.Services.Managers;
+using factoryos_10x_shell.Library.Models.InternalData;
+using System.Collections.ObjectModel;
+using Windows.Foundation;
+using System.IO;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.Storage.Streams;
+using Windows.ApplicationModel;
+using Windows.System;
+using factoryos_10x_shell.Library.Services.Helpers;
+using Microsoft.Extensions.DependencyInjection;
+using Windows.ApplicationModel.Core;
 
 namespace factoryos_10x_shell.Services.Managers
 {
     internal class NotificationManager : INotificationManager, IDisposable
     {
         public UserNotificationListener NotificationListener { get; set; }
-
         public UserNotificationListenerAccessStatus NotificationAccessStatus { get; set; }
+
+        public ObservableCollection<UserNotificationModel> UserNotifications { get; set; }
+
+        private readonly IAppHelper m_appHelper;
+        private readonly Size _logoSize;
+        private DispatcherQueue _dispatcherQueue;
 
         public NotificationManager()
         {
@@ -23,6 +39,11 @@ namespace factoryos_10x_shell.Services.Managers
                 NotificationAccessStatus = UserNotificationListenerAccessStatus.Unspecified;
                 return;
             }
+
+            _logoSize = new Size(64, 64);
+            m_appHelper = App.ServiceProvider.GetRequiredService<IAppHelper>();
+            _dispatcherQueue = DispatcherQueue.GetForCurrentThread();
+            UserNotifications = new ObservableCollection<UserNotificationModel>();
 
             NotificationListener = UserNotificationListener.Current;
             if (Task.Run(async () => await InitializeEventAsync()).Result)
@@ -47,11 +68,51 @@ namespace factoryos_10x_shell.Services.Managers
             NotificationAccessStatus = await NotificationListener.RequestAccessAsync();
         }
 
-        public event EventHandler NotifcationChanged;
+        public event EventHandler<UserNotificationChangedEventArgs> NotificationChanged;
 
-        private void NotificationManager_NotificationChanged(UserNotificationListener sender, UserNotificationChangedEventArgs args)
+        private async void NotificationManager_NotificationChanged(UserNotificationListener sender, UserNotificationChangedEventArgs args)
         {
-            NotifcationChanged?.Invoke(this, EventArgs.Empty);
+            UserNotification notif = NotificationListener.GetNotification(args.UserNotificationId);
+            if (notif != null && args.ChangeKind == UserNotificationChangedKind.Added)
+            {
+                _dispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, async () =>
+                {
+                    Package notifPackage = m_appHelper.PackageFromAumid(notif.AppInfo.AppUserModelId);
+                    IRandomAccessStreamWithContentType stream = await notifPackage.GetLogoAsRandomAccessStreamReference(_logoSize).OpenReadAsync();
+                    AppListEntry entry = notifPackage.GetAppListEntries().FirstOrDefault();
+                    BitmapImage bitmapImage = new BitmapImage();
+                    await bitmapImage.SetSourceAsync(stream);
+
+                    string mainContent = notif.Notification.Visual.Bindings.FirstOrDefault().GetTextElements().FirstOrDefault().Text;
+                    string secondaryContent = notif.Notification.Visual.Bindings.FirstOrDefault().GetTextElements().Skip(1).FirstOrDefault().Text;
+
+                    UserNotifications.Add(new UserNotificationModel
+                    {
+                        AppName = entry.DisplayInfo.DisplayName,
+                        IconSource = bitmapImage,
+                        NotificationId = notif.Id,
+                        NotificationTime = DateTime.Now.ToString("t"),
+                        NotificationMainContent = mainContent,
+                        NotificationSecondaryContent = secondaryContent
+                    });
+                    stream.Dispose();
+                    mainContent = null;
+                    secondaryContent = null;
+                });
+            }
+            else if (notif != null)
+            {
+                _dispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, () =>
+                {
+                    UserNotifications.Remove(UserNotifications.First(param => param.NotificationId == notif.Id));
+                });
+            }
+            NotificationChanged?.Invoke(this, args);
+        }
+
+        public void ClearUserNotifications()
+        {
+            NotificationListener.ClearNotifications();
         }
 
 
