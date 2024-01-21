@@ -1,4 +1,5 @@
-﻿using factoryos_10x_shell.Library.Services.Helpers;
+﻿using factoryos_10x_shell.Library.Services.Hardware;
+using factoryos_10x_shell.Library.Services.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -33,8 +34,6 @@ namespace factoryos_10x_shell
     {
         public static MediaPlayer MediaPlayer;
 
-        private IAppHelper m_appHelper;
-
         public App()
         {
             this.InitializeComponent();
@@ -48,8 +47,11 @@ namespace factoryos_10x_shell
         {
             ConfigureServices();
             PreloadServices();
-            m_appHelper = ServiceProvider.GetRequiredService<IAppHelper>();
-            await m_appHelper.LoadAppsAsync();
+            IAppHelper appHelper = ServiceProvider.GetRequiredService<IAppHelper>();
+            IBluetoothService btService = ServiceProvider.GetRequiredService<IBluetoothService>();
+
+            await btService.InitializeAsync();
+            await appHelper.LoadAppsAsync();
 
             Frame rootFrame = Window.Current.Content as Frame;
 

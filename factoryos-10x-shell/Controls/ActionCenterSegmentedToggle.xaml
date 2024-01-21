@@ -34,7 +34,7 @@
 
         <StackPanel Height="70">
             <StackPanel Orientation="Horizontal" CornerRadius="3">
-                <ToggleButton Width="65" Height="40" x:Name="ToggleSection" CornerRadius="0" Click="ToggleSection_Click" Background="{ThemeResource WhiteTintBrushStrong}">
+                <ToggleButton Width="65" Height="40" x:Name="ToggleSection" CornerRadius="0" IsChecked="{x:Bind IsChecked, Mode=TwoWay}" Background="{ThemeResource WhiteTintBrushStrong}">
                     <TextBlock Text="{x:Bind Icon, Mode=OneWay}" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" FontWeight="Thin" FontSize="16"/>
                 </ToggleButton>
                 <Border x:Name="Separator" BorderBrush="Transparent" BorderThickness="0,0,1,0"/>

@@ -31,6 +31,7 @@ namespace factoryos_10x_shell.Library.ViewModels
 
         private readonly IBatteryService m_powerService;
         private readonly INetworkService m_netService;
+        private readonly IBluetoothService m_btService;
 
         private readonly IDialogService m_dialogService;
 
@@ -47,7 +48,8 @@ namespace factoryos_10x_shell.Library.ViewModels
             IActionCenterManagerService actionManager,
             IDialogService dialogService,
             IAppHelper appHelper,
-            INetworkService netService) 
+            INetworkService netService,
+            IBluetoothService btService) 
         {
             m_powerService = powerService;
             m_dispatcherService = dispatcherService;
@@ -56,6 +58,7 @@ namespace factoryos_10x_shell.Library.ViewModels
             m_dialogService = dialogService;
             m_appHelper = appHelper;
             m_netService = netService;
+            m_btService = btService;
 
             m_powerService.BatteryStatusChanged += PowerService_BatteryStatusChanged;
 
@@ -211,16 +214,21 @@ namespace factoryos_10x_shell.Library.ViewModels
                 if (m_netService.IsInternetAvailable) 
                 { 
                     NetworkName = m_netService.ConnectionName;
-                    NetworkIsConnected = true;
+                    //NetworkIsConnected = true;
                 } 
                 else 
                 { 
                     NetworkName = "Not connected";
-                    NetworkIsConnected = false;
+                    //NetworkIsConnected = false;
                 }
+
+                NetworkIsConnected = m_netService.IsAdapterEnabled;
+
                 NetworkStatusCharacter = statusTextBuf;
             });
         }
         #endregion
+
+        public bool IsBluetoothEnabled => m_btService.IsBluetoothEnabled;
     }
 }

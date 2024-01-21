@@ -134,6 +134,7 @@
     <Compile Include="Services\Environment\IThemeService.cs" />
     <Compile Include="Services\Environment\ITimeService.cs" />
     <Compile Include="Services\Hardware\IBatteryService.cs" />
+    <Compile Include="Services\Hardware\IBluetoothService.cs" />
     <Compile Include="Services\Hardware\INetworkService.cs" />
     <Compile Include="Services\Helpers\IAppHelper.cs" />
     <Compile Include="Services\Helpers\IDialogService.cs" />

@@ -19,13 +19,16 @@ using Windows.UI.Xaml.Navigation;
 
 namespace factoryos_10x_shell.Controls
 {
-    public sealed partial class ActionCenterSegmentedToggleControl : UserControl
+    public partial class ActionCenterSegmentedToggleControl : UserControl, INotifyPropertyChanged
     {
         public static readonly DependencyProperty IconProperty =
             DependencyProperty.Register("Icon", typeof(string), typeof(ActionCenterSegmentedToggleControl), null);
 
         public static readonly DependencyProperty SubtextProperty =
             DependencyProperty.Register("Subtext", typeof(string), typeof (ActionCenterSegmentedToggleControl), null);
+
+        public static readonly DependencyProperty CheckedProperty =
+            DependencyProperty.Register("IsChecked", typeof(bool), typeof(ActionCenterSegmentedToggleControl), null);
 
 
         public ActionCenterSegmentedToggleControl()
@@ -35,26 +38,32 @@ namespace factoryos_10x_shell.Controls
 
         public string Icon
         {
-            get { return (string)GetValue(IconProperty); }
-            set { SetValue(IconProperty, value); }
+            get => (string)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
         public string Subtext
         {
-            get { return (string)GetValue(SubtextProperty); }
-            set { SetValue(SubtextProperty, value); }
+            get => (string)GetValue(SubtextProperty);
+            set => SetValue(SubtextProperty, value);
         }
 
-        private void ToggleSection_Click(object sender, RoutedEventArgs e)
+        public bool IsChecked
         {
-            if (ToggleSection.IsChecked == true)
+            get => (bool)GetValue(CheckedProperty);
+            set
             {
-                VisualStateManager.GoToState(this, "Checked", true);
+                SetValue(CheckedProperty, value);
+                if (value) { VisualStateManager.GoToState(this, "Checked", true); }
+                else { VisualStateManager.GoToState(this, "Unchecked", true); }
+                OnPropertyChanged();
             }
-            else
-            {
-                VisualStateManager.GoToState(this, "Unchecked", true);
-            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

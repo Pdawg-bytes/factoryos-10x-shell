@@ -76,8 +76,8 @@
                     <ScrollViewer>
                         <StackPanel>
                             <StackPanel x:Name="FirstRowControls" Width="360" Orientation="Horizontal" Height="60" Margin="0,12,0,0">
-                                <controls:ActionCenterSegmentedToggleControl Icon="{x:Bind ViewModel.NetworkStatusCharacter}" Subtext="{x:Bind ViewModel.NetworkName, Mode=OneWay}" Margin="16,0,8,0"/>
-                                <controls:ActionCenterSegmentedToggleControl Icon="&#xE702;" Subtext="Not connected" Margin="0,0,8,0"/>
+                                <controls:ActionCenterSegmentedToggleControl Icon="{x:Bind ViewModel.NetworkStatusCharacter, Mode=OneWay}" Subtext="{x:Bind ViewModel.NetworkName, Mode=OneWay}" IsChecked="{x:Bind ViewModel.NetworkIsConnected, Mode=OneWay}" Margin="16,0,8,0"/>
+                                <controls:ActionCenterSegmentedToggleControl Icon="&#xE702;" Subtext="Not connected" IsChecked="{x:Bind ViewModel.IsBluetoothEnabled, Mode=OneWay}" Margin="0,0,8,0"/>
                                 <controls:ActionCenterSegmentedToggleControl Icon="&#xEA14;" Subtext="Wired display" Margin="0,0,16,0"/>
                             </StackPanel>
                             <StackPanel x:Name="SecondRowControls" Width="360" Orientation="Horizontal" Height="60" Margin="0,28,0,0">

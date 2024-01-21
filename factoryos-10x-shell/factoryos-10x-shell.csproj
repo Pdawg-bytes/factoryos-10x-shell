@@ -137,6 +137,7 @@
     <Compile Include="Controls\ActionCenterStandardToggleControl.xaml.cs">
       <DependentUpon>ActionCenterStandardToggleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\Hardware\BluetoothService.cs" />
     <Compile Include="Services\Helpers\DialogService.cs" />
     <Compile Include="Services\Managers\ActionCenterManagerService.cs" />
     <Compile Include="Views\ActionCenterHome.xaml.cs">

@@ -185,6 +185,7 @@ namespace factoryos_10x_shell.Library.ViewModels
             else
             {
                 statusTextBuf = "\uEB55";
+                statusBackgroundBuf = "\uEB55";
             }
             m_dispatcherService.DispatcherQueue.TryEnqueue(() =>
             {

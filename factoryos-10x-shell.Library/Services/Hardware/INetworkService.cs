@@ -55,6 +55,8 @@ namespace factoryos_10x_shell.Library.Services.Hardware
         /// <remarks>Returns 0 on wired or unknown connections.</remarks>
         public byte SignalStrength { get; }
 
+        public bool IsAdapterEnabled { get; set; }
+
         /// <summary>
         /// An event raised when the network's status changes.
         /// </summary>

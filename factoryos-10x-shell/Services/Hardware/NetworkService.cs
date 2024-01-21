@@ -61,6 +61,16 @@ namespace factoryos_10x_shell.Services.Hardware
             }
         }
 
+        public bool IsAdapterEnabled
+        { 
+            get
+            {
+                ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
+                return profile != null && profile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.None;
+            }
+            set { }
+        }
+
         public event EventHandler InternetStatusChanged;
 
         public NetworkService()
