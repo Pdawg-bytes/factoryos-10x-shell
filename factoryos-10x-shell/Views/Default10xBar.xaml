@@ -103,7 +103,10 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="&#xEC42;" FontFamily="Segoe MDL2 Assets" Foreground="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="NotifStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,7" Visibility="{x:Bind ViewModel.NotifIndicatorVisibility, Mode=OneWay}"/>
                             <TextBlock Text="{x:Bind ViewModel.BatteryStatusCharacter, Mode=OneWay}" FontFamily="Segoe MDL2 Assets" Foreground="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="BattStatus" FontSize="12" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,4,6" Visibility="{x:Bind ViewModel.BattStatusVisibility, Mode=OneWay}"/>
-                            <TextBlock Text="{x:Bind ViewModel.NetworkStatusCharacter, Mode=OneWay}" FontFamily="Segoe MDL2 Assets" Foreground="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="WifiStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="{x:Bind ViewModel.NetworkStatusMargin, Mode=OneWay}"/>
+                            <Grid>
+                                <TextBlock Text="{x:Bind ViewModel.NetworkStatusBackground, Mode=OneWay}" FontFamily="Segoe MDL2 Assets" Foreground="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" Opacity="0.4" x:Name="WifiStatusBackground" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="{x:Bind ViewModel.NetworkStatusMargin, Mode=OneWay}"/>
+                                <TextBlock Text="{x:Bind ViewModel.NetworkStatusCharacter, Mode=OneWay}" FontFamily="Segoe MDL2 Assets" Foreground="{x:Bind ViewModel.ThemedIconBrush, Mode=OneWay}" x:Name="WifiStatus" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="{x:Bind ViewModel.NetworkStatusMargin, Mode=OneWay}"/>
+                            </Grid>
                         </StackPanel>
                     </Grid>
                 </Button.Content>

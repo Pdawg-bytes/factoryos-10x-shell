@@ -147,6 +147,9 @@ namespace factoryos_10x_shell.Library.ViewModels
         [ObservableProperty]
         private string networkStatusCharacter;
 
+        [ObservableProperty]
+        private string networkStatusBackground;
+
         private void NetworkService_InternetStatusChanged(object sender, EventArgs e)
         {
             UpdateNetworkStatus();
@@ -154,22 +157,27 @@ namespace factoryos_10x_shell.Library.ViewModels
         private void UpdateNetworkStatus()
         {
             string statusTextBuf = "\uE774";
+            string statusBackgroundBuf = "\uE774";
             if (m_netService.IsInternetAvailable)
             {
                 switch (m_netService.InternetType)
                 {
                     case InternetConnection.Wired:
+                        statusBackgroundBuf = "\uE839";
                         statusTextBuf = "\uE839";
                         OnPropertyChanged(nameof(NetworkStatusMargin));
                         break;
                     case InternetConnection.Wireless:
+                        statusBackgroundBuf = "\uE701";
                         statusTextBuf = IconConstants.WiFiIcons[m_netService.SignalStrength];
                         break;
                     case InternetConnection.Data:
+                        statusBackgroundBuf = "\uEC3B";
                         statusTextBuf = IconConstants.DataIcons[m_netService.SignalStrength];
                         break;
                     case InternetConnection.Unknown:
                     default:
+                        statusBackgroundBuf = "\uE774";
                         statusTextBuf = "\uE774";
                         break;
                 }
@@ -180,6 +188,7 @@ namespace factoryos_10x_shell.Library.ViewModels
             }
             m_dispatcherService.DispatcherQueue.TryEnqueue(() =>
             {
+                NetworkStatusBackground = statusBackgroundBuf;
                 NetworkStatusCharacter = statusTextBuf;
             });
         }

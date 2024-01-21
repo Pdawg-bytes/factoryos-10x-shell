@@ -40,6 +40,11 @@ namespace factoryos_10x_shell.Library.Services.Hardware
         public InternetConnection InternetType { get; }
 
         /// <summary>
+        /// The name of the current connection.
+        /// </summary>
+        public string ConnectionName { get; }
+
+        /// <summary>
         /// Checks if an internet connection is available.
         /// </summary>
         public bool IsInternetAvailable { get; }

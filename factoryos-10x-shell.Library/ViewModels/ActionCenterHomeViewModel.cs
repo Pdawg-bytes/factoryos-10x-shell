@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using factoryos_10x_shell.Library.Constants;
 using factoryos_10x_shell.Library.Models.InternalData;
 using factoryos_10x_shell.Library.Services.Environment;
 using factoryos_10x_shell.Library.Services.Hardware;
@@ -29,6 +30,7 @@ namespace factoryos_10x_shell.Library.ViewModels
         private readonly IAppHelper m_appHelper;
 
         private readonly IBatteryService m_powerService;
+        private readonly INetworkService m_netService;
 
         private readonly IDialogService m_dialogService;
 
@@ -44,7 +46,8 @@ namespace factoryos_10x_shell.Library.ViewModels
             INotificationManager notifManager,
             IActionCenterManagerService actionManager,
             IDialogService dialogService,
-            IAppHelper appHelper) 
+            IAppHelper appHelper,
+            INetworkService netService) 
         {
             m_powerService = powerService;
             m_dispatcherService = dispatcherService;
@@ -52,6 +55,7 @@ namespace factoryos_10x_shell.Library.ViewModels
             m_actionManager = actionManager;
             m_dialogService = dialogService;
             m_appHelper = appHelper;
+            m_netService = netService;
 
             m_powerService.BatteryStatusChanged += PowerService_BatteryStatusChanged;
 
@@ -59,6 +63,9 @@ namespace factoryos_10x_shell.Library.ViewModels
             NotificationModels = new ObservableCollection<UserNotificationModel>();
             m_notifManager.NotificationChanged += NotificationManager_NotificationChanged;
             Task.Run(UpdateNotifications).Wait();
+
+            m_netService.InternetStatusChanged += NetworkService_InternetStatusChanged;
+            UpdateNetworkStatus();
 
             ToggleSectionHeight = 100;
             ExpanderText = "\uE70E";
@@ -156,6 +163,64 @@ namespace factoryos_10x_shell.Library.ViewModels
         }
         [ObservableProperty]
         private string batteryStatusText;
+        #endregion
+
+
+        #region Network status
+        [ObservableProperty]
+        private string networkStatusCharacter;
+
+        [ObservableProperty]
+        private string networkName;
+
+        [ObservableProperty]
+        private bool networkIsConnected;
+
+        private void NetworkService_InternetStatusChanged(object sender, EventArgs e)
+        {
+            UpdateNetworkStatus();
+        }
+        private void UpdateNetworkStatus()
+        {
+            string statusTextBuf = "\uE774";
+            if (m_netService.IsInternetAvailable)
+            {
+                switch (m_netService.InternetType)
+                {
+                    case InternetConnection.Wired:
+                        statusTextBuf = "\uE839";
+                        break;
+                    case InternetConnection.Wireless:
+                        statusTextBuf = "\uE701";
+                        break;
+                    case InternetConnection.Data:
+                        statusTextBuf = "\uEC3B";
+                        break;
+                    case InternetConnection.Unknown:
+                    default:
+                        statusTextBuf = "\uE774";
+                        break;
+                }
+            }
+            else
+            {
+                statusTextBuf = "\uEB55";
+            }
+            m_dispatcherService.DispatcherQueue.TryEnqueue(() =>
+            {
+                if (m_netService.IsInternetAvailable) 
+                { 
+                    NetworkName = m_netService.ConnectionName;
+                    NetworkIsConnected = true;
+                } 
+                else 
+                { 
+                    NetworkName = "Not connected";
+                    NetworkIsConnected = false;
+                }
+                NetworkStatusCharacter = statusTextBuf;
+            });
+        }
         #endregion
     }
 }

@@ -32,15 +32,15 @@
                                 <DataTemplate>
                                     <Grid Height="110">
                                         <Border x:Name="NotificationBackground">
-                                            <StackPanel Orientation="Vertical" x:Name="NotificationStack">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Image Source="{Binding IconSource}" Height="28" Width="28" Margin="0,8,0,0"/>
-                                                    <TextBlock Text="{Binding AppName}" FontSize="13" Margin="8,12,0,0"/>
-                                                    <TextBlock Text="{Binding NotificationTime}" FontSize="13" Margin="8,12,0,0" Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"/>
+                                            <StackPanel Orientation="Vertical" x:Name="NotificationStack" Width="350">
+                                                <StackPanel Orientation="Horizontal" Width="350">
+                                                    <Image Source="{Binding IconSource}" Height="28" Width="28" Margin="0,6,0,0"/>
+                                                    <TextBlock Text="{Binding AppName}" FontSize="13" Margin="8,10,0,0"/>
+                                                    <TextBlock Text="{Binding NotificationTime}" FontSize="13" Margin="8,10,0,0" Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"/>
                                                 </StackPanel>
-                                                <StackPanel Margin="5,8,0,0">
+                                                <StackPanel Margin="5,8,5,0" Width="350">
                                                     <TextBlock Text="{Binding NotificationMainContent}"/>
-                                                    <TextBlock Text="{Binding NotificationSecondaryContent}" Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}" Width="360" TextWrapping="WrapWholeWords" MaxLines="2"/>
+                                                    <TextBlock Text="{Binding NotificationSecondaryContent}" Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}" Width="350" TextWrapping="WrapWholeWords" MaxLines="2"/>
                                                 </StackPanel>
                                             </StackPanel>
                                         </Border>
@@ -76,7 +76,7 @@
                     <ScrollViewer>
                         <StackPanel>
                             <StackPanel x:Name="FirstRowControls" Width="360" Orientation="Horizontal" Height="60" Margin="0,12,0,0">
-                                <controls:ActionCenterSegmentedToggleControl Icon="&#xE701;" Subtext="WiFi" Margin="16,0,8,0"/>
+                                <controls:ActionCenterSegmentedToggleControl Icon="{x:Bind ViewModel.NetworkStatusCharacter}" Subtext="{x:Bind ViewModel.NetworkName, Mode=OneWay}" Margin="16,0,8,0"/>
                                 <controls:ActionCenterSegmentedToggleControl Icon="&#xE702;" Subtext="Not connected" Margin="0,0,8,0"/>
                                 <controls:ActionCenterSegmentedToggleControl Icon="&#xEA14;" Subtext="Wired display" Margin="0,0,16,0"/>
                             </StackPanel>

@@ -52,6 +52,15 @@ namespace factoryos_10x_shell.Services.Hardware
             }
         }
 
+        public string ConnectionName
+        {
+            get
+            {
+                ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
+                return profile.GetNetworkNames().FirstOrDefault();
+            }
+        }
+
         public event EventHandler InternetStatusChanged;
 
         public NetworkService()

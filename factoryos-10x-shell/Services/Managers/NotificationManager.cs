@@ -75,16 +75,16 @@ namespace factoryos_10x_shell.Services.Managers
             UserNotification notif = NotificationListener.GetNotification(args.UserNotificationId);
             if (notif != null && args.ChangeKind == UserNotificationChangedKind.Added)
             {
+                Package notifPackage = m_appHelper.PackageFromAumid(notif.AppInfo.AppUserModelId);
+                IRandomAccessStreamWithContentType stream = await notifPackage.GetLogoAsRandomAccessStreamReference(_logoSize).OpenReadAsync();
+                AppListEntry entry = notifPackage.GetAppListEntries().FirstOrDefault();
                 _dispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, async () =>
                 {
-                    Package notifPackage = m_appHelper.PackageFromAumid(notif.AppInfo.AppUserModelId);
-                    IRandomAccessStreamWithContentType stream = await notifPackage.GetLogoAsRandomAccessStreamReference(_logoSize).OpenReadAsync();
-                    AppListEntry entry = notifPackage.GetAppListEntries().FirstOrDefault();
                     BitmapImage bitmapImage = new BitmapImage();
                     await bitmapImage.SetSourceAsync(stream);
 
-                    string mainContent = notif.Notification.Visual.Bindings.FirstOrDefault().GetTextElements().FirstOrDefault().Text;
-                    string secondaryContent = notif.Notification.Visual.Bindings.FirstOrDefault().GetTextElements().Skip(1).FirstOrDefault().Text;
+                    string mainContent = /*notif.Notification.Visual.Bindings?.FirstOrDefault().GetTextElements().FirstOrDefault()?.Text*/ "Fake title";
+                    string secondaryContent = /*notif.Notification.Visual.Bindings?.FirstOrDefault().GetTextElements().Skip(1).FirstOrDefault()?.Text;*/ "Sorry! The WinRT Notifications API is currently broken, so we can't display content right now.";
 
                     UserNotifications.Add(new UserNotificationModel
                     {
@@ -95,9 +95,6 @@ namespace factoryos_10x_shell.Services.Managers
                         NotificationMainContent = mainContent,
                         NotificationSecondaryContent = secondaryContent
                     });
-                    stream.Dispose();
-                    mainContent = null;
-                    secondaryContent = null;
                 });
             }
             else if (notif != null)
