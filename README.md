@@ -26,7 +26,7 @@ FactoryOS 10x shell is a UWP app that aims to accurately recreate the Windows 10
 To build the 10X shell, you're gonna need a few things.
 1. Install Microsoft Visual Studio 2022 (any edition works)
 2. Make sure you've installed the `.NET Desktop Development` workload, along with the `Universal Windows Platform` workload.
-3. Open the GyroShell project by clicking the `factoryos-10x-shell.sln` file in your file explorer.
+3. Open the 10x-shell project by clicking the `factoryos-10x-shell.sln` file in your file explorer.
 4. At the top of Visual Studio, click the `Local Machine` button to compile and start the shell in Debug mode.
 
 ## 💿 Installing
