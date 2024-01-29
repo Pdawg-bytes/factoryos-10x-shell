@@ -12,19 +12,6 @@ namespace factoryos_10x_shell.Services.Hardware
 {
     internal class BluetoothService : IBluetoothService
     {
-        public bool IsBluetoothEnabled 
-        {
-            get
-            {
-                //return GetBluetoothIsEnabledAsync().Wait();
-                return true;
-            }
-            set
-            {
-
-            }
-        }
-
         public string ConnectedDeviceName { get; }
 
         private BluetoothAdapter _bluetoothAdapter;
@@ -38,6 +25,18 @@ namespace factoryos_10x_shell.Services.Hardware
         {
             _bluetoothAdapter = await BluetoothAdapter.GetDefaultAsync();
             return;
+        }
+
+        public bool IsBluetoothEnabled
+        {
+            get
+            {
+                return Task.Run(() => GetBluetoothIsEnabledAsync()).Result;
+            }
+            set 
+            {
+
+            }
         }
 
         private async Task<bool> GetBluetoothIsEnabledAsync()

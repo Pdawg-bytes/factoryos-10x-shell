@@ -66,11 +66,7 @@ namespace factoryos_10x_shell.Services.Helpers
                                 IRandomAccessStreamWithContentType stream = await logoData.OpenReadAsync();
                                 BitmapImage bitmapImage = new BitmapImage();
                                 await bitmapImage.SetSourceAsync(stream);
-                                _iconCache.Add(new StartIconModel { IconName = entry.DisplayInfo.DisplayName, AppId = entry.AppUserModelId, IconSource = bitmapImage });
-                                if (entry.AppUserModelId.Contains("Visualizer"))
-                                {
-                                    Debug.WriteLine(package.Id.FullName);
-                                }
+                                _iconCache.Add(new StartIconModel { IconName = entry.DisplayInfo.DisplayName, AppId = entry.AppUserModelId, IconSource = bitmapImage, Data = entry });
                             }
                         }
                         catch (Exception ex)

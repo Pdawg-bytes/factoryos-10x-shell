@@ -13,7 +13,33 @@
     Title="Debug">
 
     <Grid>
-        <controls:ActionCenterSegmentedToggleControl Icon="&#xED56;" Subtext="cooked"/>
-        <controls:ActionCenterExpandableButtonControl Icon="&#xED56;" Subtext="cooked" Margin="0,200,0,0"/>
+        <Button VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-36,0,0" Height="30" Width="30" Padding="0" ToolTipService.ToolTip="Close" Click="CloseButton_Click">
+            <TextBlock Text="&#xECC9;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+
+        <Pivot Height="400">
+            <PivotItem Header="Controls">
+                <StackPanel Margin="0,20,0,0">
+                    <controls:ActionCenterStandardToggleControl Subtext="Testing" Icon="&#xED56;" HorizontalAlignment="Left"/>
+                    <controls:ActionCenterExpandableButtonControl Subtext="Testing" Icon="&#xED56;" HorizontalAlignment="Left" Margin="0,20,0,0"/>
+                    <controls:ActionCenterSegmentedToggleControl Subtext="Testing" Icon="&#xED56;" HorizontalAlignment="Left" Margin="0,20,0,0"/>
+                </StackPanel>
+            </PivotItem>
+            <PivotItem Header="Security"></PivotItem>
+            <PivotItem Header="Diagnostics">
+                <StackPanel Margin="0,20,0,0">
+                    <TextBlock Text="Memory Usage Statistics" FontWeight="SemiBold" FontSize="20"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock Text="Working Set (MB): " FontWeight="SemiBold" Margin="0,0,10,0"/>
+                        <TextBlock Text="{x:Bind ViewModel.WorkingSet, Mode=OneWay}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock Text="Page count: " FontWeight="SemiBold" Margin="0,0,10,0"/>
+                        <TextBlock Text="{x:Bind ViewModel.PageCount, Mode=OneWay}"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </PivotItem>
+        </Pivot>
     </Grid>
 </ContentDialog>

@@ -27,5 +27,10 @@ namespace factoryos_10x_shell.Views
         }
 
         DebugMenuViewModel ViewModel => (DebugMenuViewModel)this.DataContext;
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

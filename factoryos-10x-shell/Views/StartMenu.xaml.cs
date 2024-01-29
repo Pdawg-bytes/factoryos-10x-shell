@@ -26,6 +26,8 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.System;
 using Microsoft.Extensions.DependencyInjection;
 using factoryos_10x_shell.Library.ViewModels;
+using factoryos_10x_shell.Library.Models.InternalData;
+using Windows.ApplicationModel.Core;
 
 namespace factoryos_10x_shell.Views
 {
@@ -39,5 +41,14 @@ namespace factoryos_10x_shell.Views
         }
 
         public StartMenuViewModel ViewModel => (StartMenuViewModel)this.DataContext;
+
+        private async void AppButton_Click(object sender, RoutedEventArgs e)
+        {
+            StartIconModel model = ((FrameworkElement)sender).DataContext as StartIconModel;
+            if (model != null)
+            {
+                await (model.Data as AppListEntry).LaunchAsync();
+            }
+        }
     }
 }

@@ -8,10 +8,10 @@ namespace factoryos_10x_shell.Library.Services.Hardware
 {
     public interface IBluetoothService
     {
-        public bool IsBluetoothEnabled { get; set; }
-
         public string ConnectedDeviceName { get; }
 
         public Task InitializeAsync();
+
+        public bool IsBluetoothEnabled { get; set; }
     }
 }

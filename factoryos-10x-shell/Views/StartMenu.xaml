@@ -50,11 +50,11 @@
             </Grid>
             <ScrollViewer HorizontalScrollMode="Disabled" VerticalAlignment="Stretch" Margin="0,51,0,0">
                 <StackPanel>
-                    <GridView ItemContainerStyle="{StaticResource AppsListGridItemStyle}" ItemsSource="{x:Bind ViewModel.StartIcons}" 
+                    <GridView ItemContainerStyle="{StaticResource AppsListGridItemStyle}" 
+                              ItemsSource="{x:Bind ViewModel.StartIcons}" 
                               ReorderMode="Enabled" 
                               x:Name="AppListGrid" 
                               Padding="0" 
-                              SelectionMode="None" 
                               HorizontalAlignment="Center" 
                               Height="{x:Bind ViewModel.AppsListGridHeight, Mode=OneWay}" 
                               ScrollViewer.VerticalScrollMode="Disabled" 
@@ -64,7 +64,7 @@
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Button Height="90" Width="90" Style="{StaticResource AppIconBackgroundStyle}">
+                                    <Button Height="90" Width="90" Style="{StaticResource AppIconBackgroundStyle}" x:Name="AppButton" Click="AppButton_Click">
                                         <Button.ContextFlyout>
                                             <MenuFlyout>
                                                 <MenuFlyoutItem Text="Pin to taskbar">
